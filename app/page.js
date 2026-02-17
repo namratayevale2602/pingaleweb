@@ -1,9 +1,10 @@
 import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
-import Hero from "./home/Hero";
-import HeroStory from "./home/StorySection";
-import ThreeDProtection from "./home/ThreeDProtection";
+import Hero from "./home/component/Hero";
+import HeroStory from "./home/component/StorySection";
+import ThreeDProtection from "./home/component/ThreeDProtection";
+import WhyTrustUs from "./home/component/WhyTrustUs";
 
 export default async function Home() {
 
@@ -25,6 +26,7 @@ export default async function Home() {
        <Hero />
        <HeroStory />
        <ThreeDProtection />
+       <WhyTrustUs />
       </main>
 
     </>

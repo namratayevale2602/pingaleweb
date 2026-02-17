@@ -55,11 +55,11 @@ const Navbar = () => {
     },
     {
       title: 'About Us',
-      link: '/about'
+      link: '/aboutus'
     },
     {
       title: 'Contact',
-      link: '/contact'
+      link: '/contactus'
     }
   ];
 
