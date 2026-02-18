@@ -68,38 +68,30 @@ export default async function CalculatorPage({ params }) {
         <JsonLd key={index} data={data} />
       ))}
       
-      <main className="min-h-screen bg-gray-50 py-12 px-4">
+      <main className="min-h-screen py-12 px-4">
         <div className="max-w-7xl mx-auto">
           {/* Breadcrumb navigation */}
           <nav className="mb-8 text-sm" aria-label="Breadcrumb">
             <ol className="flex items-center space-x-2">
               <li>
-                <a href="/" className="text-blue-600 hover:underline">Home</a>
+                <a href="/" className="text-[#074a6b] hover:underline">Home</a>
               </li>
               <li>
                 <span className="mx-2 text-gray-400">/</span>
               </li>
               <li>
-                <a href="/calculators" className="text-blue-600 hover:underline">Calculators</a>
+                <a href="/calculators" className="text-[#074a6b] hover:underline">Calculators</a>
               </li>
               <li>
                 <span className="mx-2 text-gray-400">/</span>
               </li>
-              <li className="text-gray-600 capitalize">
+              <li className="text-[#1a729e] capitalize">
                 {calculatorConfig?.title?.replace(' Calculator', '') || slug.replace('-', ' ')}
               </li>
             </ol>
           </nav>
           
-          {/* Calculator title from config */}
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">
-            {calculatorConfig?.title || `${slug.replace('-', ' ')} Calculator`}
-          </h1>
-          
-          {/* Calculator description from config */}
-          <p className="text-gray-600 mb-8">
-            {calculatorConfig?.description || `Calculate your ${slug.replace('-', ' ')} easily with our free online tool.`}
-          </p>
+         
           
           {/* Calculator component */}
           <CalculatorComponent />

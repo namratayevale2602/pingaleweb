@@ -1,339 +1,407 @@
-// FutureWealthCalculator.jsx - CORRECTED VERSION with Indian Number Format
+// FutureWealthCalculator.jsx - SIMPLE FIX for Next.js JavaScript
 "use client";
 import { useState, useEffect, useCallback } from 'react';
 
 const FutureWealthCalculator = () => {
-  // Default values - Updated to match your example
+  // Default values
   const [formData, setFormData] = useState({
-    currentPortfolio: 2500000,    // ₹25 lakhs
-    lumpSum: 300000,              // ₹3 lakhs ANNUAL lumpsum
-    monthlySIP: 20000,            // ₹20,000 monthly
-    portfolioReturn: 13,          // 13% annual return
+    currentPortfolio: 2500000,
+    lumpSum: 300000,
+    monthlySIP: 20000,
+    portfolioReturn: 13,
     years: 20
+  });
+
+  // Separate state for input fields to prevent re-renders during typing
+  const [inputFields, setInputFields] = useState({
+    currentPortfolio: '2500000',
+    lumpSum: '300000',
+    monthlySIP: '20000',
+    portfolioReturn: '13',
+    years: '20'
   });
 
   const [futureValue, setFutureValue] = useState(0);
   const [totalInvested, setTotalInvested] = useState(0);
   const [wealthGained, setWealthGained] = useState(0);
+  const [errors, setErrors] = useState({});
 
   // Validation limits
   const limits = {
     currentPortfolio: { min: 0, max: 1000000000, default: 2500000 },
-    lumpSum: { min: 0, max: 10000000, default: 300000 }, // Up to ₹1 crore annual
+    lumpSum: { min: 0, max: 10000000, default: 300000 },
     monthlySIP: { min: 0, max: 5000000, default: 20000 },
     portfolioReturn: { min: 5, max: 20, default: 13 },
     years: { min: 5, max: 60, default: 20 }
   };
 
-  // UPDATED: Format currency in Indian numbering system without Cr/L/K
-  const formatCurrency = (value, currency = '₹') => {
-    // Handle very small values
-    if (Math.abs(value) < 0.01) return `${currency}0`;
-    
-    // Format with Indian numbering system (lakhs and crores separators)
+  // Format currency
+  const formatCurrency = (value) => {
+    if (Math.abs(value) < 0.01) return '₹0';
     const formatter = new Intl.NumberFormat('en-IN', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0
     });
-    
-    return `${currency}${formatter.format(Math.round(value))}`;
+    return `₹${formatter.format(Math.round(value))}`;
   };
 
-  // Handle input changes
-  const handleInputChange = useCallback((field, value) => {
-    let parsedValue = value;
+  // Handle input change - SIMPLE AND SMOOTH
+  const handleInputChange = (field, value) => {
+    // Update input field immediately (this doesn't trigger calculation)
+    setInputFields(prev => ({
+      ...prev,
+      [field]: value
+    }));
+
+    // Clear error for this field
+    setErrors(prev => ({
+      ...prev,
+      [field]: ''
+    }));
+  };
+
+  // Handle input blur - validate and update formData
+  const handleInputBlur = (field) => {
+    const value = inputFields[field];
     
-    if (typeof value === 'string') {
-      parsedValue = parseFloat(value.replace(/[^0-9.-]+/g, '')) || 0;
+    // If empty, reset to current formData value
+    if (value === '') {
+      setInputFields(prev => ({
+        ...prev,
+        [field]: formData[field].toString()
+      }));
+      return;
+    }
+
+    // Convert to number
+    const numValue = Number(value);
+    
+    // Check if valid number
+    if (isNaN(numValue)) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: 'Please enter a valid number'
+      }));
+      return;
+    }
+
+    // Check limits
+    const limit = limits[field];
+    if (numValue < limit.min) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: `Minimum value is ${field.includes('return') ? '' : '₹'}${limit.min}${field.includes('return') ? '%' : ''}`
+      }));
+      return;
     }
     
-    const limit = limits[field];
-    
-    if (parsedValue < limit.min) parsedValue = limit.min;
-    if (parsedValue > limit.max) parsedValue = limit.max;
+    if (numValue > limit.max) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: `Maximum value is ${field.includes('return') ? '' : '₹'}${limit.max}${field.includes('return') ? '%' : ''}`
+      }));
+      return;
+    }
 
+    // Valid value - update formData (this triggers calculation)
     setFormData(prev => ({
       ...prev,
-      [field]: parsedValue
+      [field]: numValue
     }));
-  }, [limits]);
+  };
+
+  // Handle slider change
+  const handleSliderChange = (field, value) => {
+    const numValue = Number(value);
+    
+    // Update both states
+    setFormData(prev => ({
+      ...prev,
+      [field]: numValue
+    }));
+    
+    setInputFields(prev => ({
+      ...prev,
+      [field]: numValue.toString()
+    }));
+
+    // Clear error
+    setErrors(prev => ({
+      ...prev,
+      [field]: ''
+    }));
+  };
 
   // Reset to defaults
-  const handleReset = useCallback(() => {
-    setFormData({
+  const handleReset = () => {
+    const defaults = {
       currentPortfolio: limits.currentPortfolio.default,
       lumpSum: limits.lumpSum.default,
       monthlySIP: limits.monthlySIP.default,
       portfolioReturn: limits.portfolioReturn.default,
       years: limits.years.default
+    };
+    
+    setFormData(defaults);
+    setInputFields({
+      currentPortfolio: defaults.currentPortfolio.toString(),
+      lumpSum: defaults.lumpSum.toString(),
+      monthlySIP: defaults.monthlySIP.toString(),
+      portfolioReturn: defaults.portfolioReturn.toString(),
+      years: defaults.years.toString()
     });
-  }, [limits]);
+    setErrors({});
+  };
 
-  // CORRECTED: Calculate future value with annual lumpsum
-  const calculateWealth = useCallback(() => {
-    const { 
-      currentPortfolio, 
-      lumpSum, 
-      monthlySIP, 
-      portfolioReturn, 
-      years 
-    } = formData;
+  // Calculate wealth
+  useEffect(() => {
+    const { currentPortfolio, lumpSum, monthlySIP, portfolioReturn, years } = formData;
 
     const months = years * 12;
     const annualRate = portfolioReturn / 100;
     const monthlyRate = Math.pow(1 + annualRate, 1/12) - 1;
 
-    // 1. Future value of current portfolio
+    // Future value calculations
     const fvCurrentPortfolio = currentPortfolio * Math.pow(1 + annualRate, years);
-
-    // 2. Future value of ANNUAL lumpsum (beginning of each year)
+    
     const annualGrowthFactor = Math.pow(1 + annualRate, years);
     const fvAnnualLumpsum = lumpSum * (1 + annualRate) * 
       (annualGrowthFactor - 1) / annualRate;
 
-    // 3. Future value of monthly SIP (beginning of each month)
     const monthlyGrowthFactor = Math.pow(1 + monthlyRate, months);
     const fvMonthlySIP = monthlySIP * (1 + monthlyRate) * 
       (monthlyGrowthFactor - 1) / monthlyRate;
 
-    // Total future value
     const totalFV = fvCurrentPortfolio + fvAnnualLumpsum + fvMonthlySIP;
+    const totalInvestment = currentPortfolio + (lumpSum * years) + (monthlySIP * months);
     
-    // Total amount invested
-    const totalInvestment = currentPortfolio + 
-      (lumpSum * years) + 
-      (monthlySIP * months);
-    
-    const gain = totalFV - totalInvestment;
-
     setFutureValue(totalFV);
     setTotalInvested(totalInvestment);
-    setWealthGained(gain);
+    setWealthGained(totalFV - totalInvestment);
   }, [formData]);
 
-  // Calculate on mount and when formData changes
-  useEffect(() => {
-    calculateWealth();
-  }, [calculateWealth]);
-
-  // UPDATED: Slider display format function for smaller numbers
-  const formatSliderValue = (value, format = 'currency', prefix = '₹') => {
-    if (format === 'currency') {
-      // For slider display, show compact format for readability
-      const absValue = Math.abs(value);
-      if (absValue >= 10000000) {
-        return `${prefix}${(value / 10000000).toFixed(2)} Cr`;
-      } else if (absValue >= 100000) {
-        return `${prefix}${(value / 100000).toFixed(2)} L`;
-      } else if (absValue >= 1000) {
-        return `${prefix}${(value / 1000).toFixed(1)} K`;
-      }
-      return `${prefix}${value.toLocaleString('en-IN', { minimumFractionDigits: 0 })}`;
-    } else if (format === 'percent') {
-      return `${value}%`;
-    } else if (format === 'years') {
-      return `${value} years`;
-    }
-    return value;
+  // Format display value
+  const formatDisplayValue = (value, field) => {
+    if (field === 'portfolioReturn') return `${value}%`;
+    if (field === 'years') return `${value} years`;
+    
+    const absValue = Math.abs(value);
+    if (absValue >= 10000000) return `₹${(value / 10000000).toFixed(2)} Cr`;
+    if (absValue >= 100000) return `₹${(value / 100000).toFixed(2)} L`;
+    if (absValue >= 1000) return `₹${(value / 1000).toFixed(1)} K`;
+    return `₹${value.toLocaleString('en-IN')}`;
   };
 
-  // Slider input component
-  const SliderInput = ({ label, field, value, min, max, step = 1, format = 'currency', prefix = '₹' }) => (
-    <div className="mb-6">
-      <div className="flex justify-between items-center mb-2">
-        <label className="text-gray-700 font-medium">{label}</label>
-        <div className="text-lg font-semibold text-blue-600">
-          {formatSliderValue(value, format, prefix)}
-        </div>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => handleInputChange(field, parseFloat(e.target.value))}
-        className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-      />
-      <div className="flex justify-between text-sm text-gray-500 mt-1">
-        <span>{formatSliderValue(min, format, prefix)}</span>
-        <span>{formatSliderValue(max, format, prefix)}</span>
-      </div>
-    </div>
-  );
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-6">
+    <div className="p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">
-            Future Wealth Calculator
-          </h1>
-          <p className="text-gray-600">
-            Calculate your potential future wealth based on current investments, annual lumpsum, and SIP contributions
-          </p>
-        </div>
+       
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Inputs */}
-          <div className="lg:col-span-2 bg-white rounded-2xl shadow-xl p-6">
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">Investment Parameters</h2>
-              
-              <SliderInput
-                label="Current Portfolio Value"
-                field="currentPortfolio"
-                value={formData.currentPortfolio}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Section */}
+          <div className="lg:col-span-2 bg-gray-100 rounded-2xl shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-[#074a6b] mb-6">Investment Parameters</h2>
+            
+            {/* Current Portfolio */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-gray-700 font-medium">Current Portfolio Value</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputFields.currentPortfolio}
+                    onChange={(e) => handleInputChange('currentPortfolio', e.target.value)}
+                    onBlur={() => handleInputBlur('currentPortfolio')}
+                    className={`w-36 px-3 py-2 pl-7 border rounded-lg focus:outline-none focus:ring-2 ${
+                      errors.currentPortfolio ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                    }`}
+                    placeholder="Amount"
+                  />
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
+                    {formatDisplayValue(formData.currentPortfolio, 'currentPortfolio')}
+                  </span>
+                </div>
+              </div>
+              {errors.currentPortfolio && (
+                <p className="text-red-500 text-sm mb-2">{errors.currentPortfolio}</p>
+              )}
+              <input
+                type="range"
                 min={limits.currentPortfolio.min}
                 max={limits.currentPortfolio.max}
                 step={100000}
+                value={formData.currentPortfolio}
+                onChange={(e) => handleSliderChange('currentPortfolio', e.target.value)}
+                className="w-full accent-[#1a729e]"
               />
+            </div>
 
-              <SliderInput
-                label="Annual Lump Sum Investment"
-                field="lumpSum"
-                value={formData.lumpSum}
+            {/* Annual Lump Sum */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-gray-700 font-medium">Annual Lump Sum</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputFields.lumpSum}
+                    onChange={(e) => handleInputChange('lumpSum', e.target.value)}
+                    onBlur={() => handleInputBlur('lumpSum')}
+                    className={`w-36 px-3 py-2 pl-7 border rounded-lg focus:outline-none focus:ring-2 ${
+                      errors.lumpSum ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                    }`}
+                    placeholder="Amount"
+                  />
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
+                    {formatDisplayValue(formData.lumpSum, 'lumpSum')}
+                  </span>
+                </div>
+              </div>
+              {errors.lumpSum && (
+                <p className="text-red-500 text-sm mb-2">{errors.lumpSum}</p>
+              )}
+              <input
+                type="range"
                 min={limits.lumpSum.min}
                 max={limits.lumpSum.max}
                 step={50000}
+                value={formData.lumpSum}
+                onChange={(e) => handleSliderChange('lumpSum', e.target.value)}
+                className="w-full accent-[#1a729e]"
               />
+            </div>
 
-              <SliderInput
-                label="Monthly SIP"
-                field="monthlySIP"
-                value={formData.monthlySIP}
+            {/* Monthly SIP */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-gray-700 font-medium">Monthly SIP</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputFields.monthlySIP}
+                    onChange={(e) => handleInputChange('monthlySIP', e.target.value)}
+                    onBlur={() => handleInputBlur('monthlySIP')}
+                    className={`w-36 px-3 py-2 pl-7 border rounded-lg focus:outline-none focus:ring-2 ${
+                      errors.monthlySIP ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                    }`}
+                    placeholder="Amount"
+                  />
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
+                    {formatDisplayValue(formData.monthlySIP, 'monthlySIP')}
+                  </span>
+                </div>
+              </div>
+              {errors.monthlySIP && (
+                <p className="text-red-500 text-sm mb-2">{errors.monthlySIP}</p>
+              )}
+              <input
+                type="range"
                 min={limits.monthlySIP.min}
                 max={limits.monthlySIP.max}
                 step={10000}
+                value={formData.monthlySIP}
+                onChange={(e) => handleSliderChange('monthlySIP', e.target.value)}
+                className="w-full accent-[#1a729e]"
               />
-
-              <SliderInput
-                label="Assumed Annual Portfolio Return"
-                field="portfolioReturn"
-                value={formData.portfolioReturn}
-                min={limits.portfolioReturn.min}
-                max={limits.portfolioReturn.max}
-                step={0.5}
-                format="percent"
-              />
-
-              <SliderInput
-                label="Investment Period (Years)"
-                field="years"
-                value={formData.years}
-                min={limits.years.min}
-                max={limits.years.max}
-                step={1}
-                format="years"
-              />
-
-              <div className="mt-8 pt-6 border-t border-gray-200">
-                <button
-                  onClick={handleReset}
-                  className="w-full py-3 px-4 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors duration-200"
-                >
-                  Reset to Default Values
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Results */}
-          <div className="space-y-6">
-            {/* Total Future Value - UPDATED: Full number format */}
-            <div className="bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-6 text-white">
-              <div className="mb-4">
-                <h3 className="text-lg font-medium opacity-90">
-                  Future Value After {formData.years} Years
-                </h3>
-              </div>
-              <div className="text-3xl md:text-4xl font-bold mb-2">
-                {formatCurrency(futureValue)}
-              </div>
-              <p className="opacity-90 text-sm">
-                Total amount after {formData.years} years of investment
-              </p>
             </div>
 
-            {/* Total Invested */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Total Amount Invested</h3>
-              </div>
-              <div className="text-3xl md:text-4xl font-bold text-green-600 mb-2">
-                {formatCurrency(totalInvested)}
-              </div>
-              <p className="text-gray-600 text-sm">
-                Sum of all your contributions over {formData.years} years
-              </p>
-            </div>
-
-            {/* Wealth Gained */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <div className="mb-4">
-                <h3 className="text-lg font-semibold text-gray-800">Wealth Gained</h3>
-              </div>
-              <div className="text-3xl md:text-4xl font-bold text-purple-600 mb-2">
-                {formatCurrency(wealthGained)}
-              </div>
-              <p className="text-gray-600 text-sm">
-                Returns generated through compounding
-              </p>
-            </div>
-
-            {/* Summary Stats */}
-            <div className="bg-white rounded-2xl shadow-xl p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-4">Investment Summary</h3>
-              
-              <div className="space-y-4">
-                <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                  <span className="text-gray-600">Monthly Rate</span>
-                  <span className="font-semibold">
-                    {((Math.pow(1 + formData.portfolioReturn / 100, 1/12) - 1) * 100).toFixed(4)}%
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                  <span className="text-gray-600">Total Annual Lumpsum</span>
-                  <span className="font-semibold">
-                    {formatCurrency(formData.lumpSum * formData.years)}
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-center pb-3 border-b border-gray-100">
-                  <span className="text-gray-600">Total SIP Payments</span>
-                  <span className="font-semibold">
-                    {formatCurrency(formData.monthlySIP * formData.years * 12)}
-                  </span>
-                </div>
-                
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Annual Return</span>
-                  <span className="font-semibold text-blue-600">
+            {/* Portfolio Return */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-gray-700 font-medium">Annual Return (%)</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputFields.portfolioReturn}
+                    onChange={(e) => handleInputChange('portfolioReturn', e.target.value)}
+                    onBlur={() => handleInputBlur('portfolioReturn')}
+                    className={`w-36 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                      errors.portfolioReturn ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                    }`}
+                    placeholder="%"
+                  />
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.portfolioReturn}%
                   </span>
                 </div>
               </div>
+              {errors.portfolioReturn && (
+                <p className="text-red-500 text-sm mb-2">{errors.portfolioReturn}</p>
+              )}
+              <input
+                type="range"
+                min={limits.portfolioReturn.min}
+                max={limits.portfolioReturn.max}
+                step={0.5}
+                value={formData.portfolioReturn}
+                onChange={(e) => handleSliderChange('portfolioReturn', e.target.value)}
+                className="w-full accent-[#1a729e]"
+              />
+            </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex justify-between text-sm text-gray-500">
-                  <span>ROI Multiple</span>
-                  <span className="font-semibold text-gray-800">
-                    {totalInvested > 0 ? (futureValue / totalInvested).toFixed(2) + 'x' : 'N/A'}
+            {/* Years */}
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-gray-700 font-medium">Investment Period (Years)</label>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="text"
+                    value={inputFields.years}
+                    onChange={(e) => handleInputChange('years', e.target.value)}
+                    onBlur={() => handleInputBlur('years')}
+                    className={`w-36 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                      errors.years ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                    }`}
+                    placeholder="Years"
+                  />
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
+                    {formData.years} years
                   </span>
                 </div>
               </div>
+              {errors.years && (
+                <p className="text-red-500 text-sm mb-2">{errors.years}</p>
+              )}
+              <input
+                type="range"
+                min={limits.years.min}
+                max={limits.years.max}
+                step={1}
+                value={formData.years}
+                onChange={(e) => handleSliderChange('years', e.target.value)}
+                className="w-full accent-[#1a729e]"
+              />
             </div>
-          </div>
-        </div>
 
-        {/* Footer Note */}
-        <div className="mt-8 text-center text-gray-500 text-sm">
-          <p>
-            Note: Calculations assume annual lumpsum invested at beginning of each year 
-            and monthly SIP at beginning of each month. Returns are for illustrative purposes only.
-          </p>
+            <button
+              onClick={handleReset}
+              className="w-full py-3 bg-[#1a729e] text-white font-semibold rounded-lg "
+            >
+              Reset to Default Values
+            </button>
+          </div>
+
+          {/* Results Section */}
+          <div className="space-y-6">
+            <div className="bg-[#1a729e] rounded-2xl shadow-xl p-6 text-white">
+              <h3 className="text-lg opacity-90 mb-2">Future Value After {formData.years} Years</h3>
+              <div className="text-3xl md:text-4xl font-bold mb-2">{formatCurrency(futureValue)}</div>
+              <p className="opacity-90 text-sm">Total amount after {formData.years} years</p>
+            </div>
+
+            <div className="bg-[#1a729e] rounded-2xl text-white shadow-xl p-6">
+              <h3 className="text-lg font-semibold mb-2">Total Amount Invested</h3>
+              <div className="text-3xl md:text-4xl font-bold mb-2">{formatCurrency(totalInvested)}</div>
+              <p className="text-sm">Sum of all your contributions</p>
+            </div>
+
+            <div className="bg-[#1a729e] text-white rounded-2xl shadow-xl p-6">
+              <h3 className="text-lg font-semibold mb-2">Wealth Gained</h3>
+              <div className="text-3xl md:text-4xl font-bold mb-2">{formatCurrency(wealthGained)}</div>
+              <p className="text-sm">Returns through compounding</p>
+            </div>
+
+           
+          </div>
         </div>
       </div>
     </div>

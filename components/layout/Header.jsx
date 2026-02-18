@@ -80,7 +80,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo Section */}
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <Link href="/" className="flex items-center space-x-2">
               {/* Replace with your actual exported image */}
               <div className="relative w-20 h-20">
@@ -118,7 +118,7 @@ const Navbar = () => {
 
                     {/* Mega Dropdown */}
                     {activeDropdown === index && (
-                      <div className="absolute left-0 w-[600px] bg-white rounded-lg shadow-xl border border-gray-100 py-6 px-4 grid grid-cols-3 gap-6 animate-fadeIn">
+                      <div className="absolute left-0 w-150 bg-white rounded-lg shadow-xl border border-gray-100 py-6 px-4 grid grid-cols-3 gap-6 animate-fadeIn">
                         {item.dropdown.map((category, catIndex) => (
                           <div key={catIndex} className="space-y-3">
                             <h3 className="text-sm font-semibold text-[#074a6b] uppercase tracking-wider">

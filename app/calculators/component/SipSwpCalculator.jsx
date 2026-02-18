@@ -1,50 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Calculator,
-  PieChart,
   TrendingUp,
   IndianRupee,
   Calendar,
   Percent,
-  BarChart3,
   Target,
-  Zap,
   ArrowUp,
   ArrowDown,
-  Banknote,
-  Coins,
   Wallet,
+  Coins,
   Landmark,
 } from "lucide-react";
-import { Pie, Bar, Line } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title,
-} from "chart.js";
-
-ChartJS.register(
-  ArcElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  Title
-);
 
 const SIPtoSWPCalculator = () => {
+  // Default values
   const [formData, setFormData] = useState({
     monthlySIP: 5000,
     sipPeriod: 20,
@@ -53,144 +24,55 @@ const SIPtoSWPCalculator = () => {
     swpReturn: 8,
   });
 
+  // Separate state for input fields to prevent re-renders during typing
+  const [inputFields, setInputFields] = useState({
+    monthlySIP: "5000",
+    sipPeriod: "20",
+    withdrawalPeriod: "20",
+    sipReturn: "12",
+    swpReturn: "8",
+  });
+
   const [results, setResults] = useState(null);
-  const [pieChartData, setPieChartData] = useState(null);
-  const [growthChartData, setGrowthChartData] = useState(null);
-  const [withdrawalChartData, setWithdrawalChartData] = useState(null);
-  const [isCalculating, setIsCalculating] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  useEffect(() => {
-    calculateResults();
-  }, [formData]);
+  // Validation limits
+  const limits = {
+    monthlySIP: { min: 500, max: 10000000, default: 5000 },
+    sipPeriod: { min: 1, max: 50, default: 20 },
+    withdrawalPeriod: { min: 1, max: 50, default: 20 },
+    sipReturn: { min: 4, max: 18, default: 12 },
+    swpReturn: { min: 4, max: 18, default: 8 },
+  };
 
-  useEffect(() => {
-    if (results) {
-      // Pie Chart Data
-      setPieChartData({
-        labels: ["Total Invested", "Wealth Gained"],
-        datasets: [
-          {
-            data: [results.investedAmount, results.estimatedReturn],
-            backgroundColor: ["#3b82f6", "#10b981"],
-            borderColor: ["#2563eb", "#059669"],
-            borderWidth: 2,
-          },
-        ],
-      });
+  // Format currency
+  const formatCurrency = (value) => {
+    if (Math.abs(value) < 0.01) return '₹0';
+    const formatter = new Intl.NumberFormat('en-IN', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+    return `₹${formatter.format(Math.round(value))}`;
+  };
 
-      // Growth Chart Data (SIP Accumulation)
-      const growthData = generateGrowthData();
-      setGrowthChartData({
-        labels: growthData.labels,
-        datasets: [
-          {
-            label: "Accumulated Corpus",
-            data: growthData.values,
-            borderColor: "#3b82f6",
-            backgroundColor: "rgba(59, 130, 246, 0.1)",
-            borderWidth: 3,
-            fill: true,
-            tension: 0.4,
-          },
-        ],
-      });
-
-      // Withdrawal Chart Data (SWP Phase)
-      const withdrawalData = generateWithdrawalData();
-      setWithdrawalChartData({
-        labels: withdrawalData.labels,
-        datasets: [
-          {
-            label: "Remaining Corpus",
-            data: withdrawalData.corpusValues,
-            borderColor: "#10b981",
-            backgroundColor: "rgba(16, 185, 129, 0.1)",
-            borderWidth: 3,
-            fill: true,
-          },
-          {
-            label: "Monthly Withdrawal",
-            data: withdrawalData.withdrawalValues,
-            borderColor: "#ef4444",
-            borderWidth: 2,
-            borderDash: [5, 5],
-            fill: false,
-          },
-        ],
-      });
-    }
-  }, [results]);
-
-  // Calculate monthly rate using Excel's method: (1 + annual rate)^(1/12) - 1
+  // Calculate monthly rate
   const calculateMonthlyRate = (annualRate) => {
     return Math.pow(1 + annualRate / 100, 1 / 12) - 1;
   };
 
-  const calculateResults = () => {
-    setIsCalculating(true);
-
-    setTimeout(() => {
-      const { monthlySIP, sipPeriod, withdrawalPeriod, sipReturn, swpReturn } =
-        formData;
-
-      // Calculate monthly rates using Excel's method
-      const rSipMonthly = calculateMonthlyRate(sipReturn);
-      const sipMonths = sipPeriod * 12;
-
-      // Future Value calculation for SIP (beginning of period)
-      const futureValue = calculateFutureValue(
-        rSipMonthly,
-        sipMonths,
-        -monthlySIP,
-        0,
-        1
-      );
-
-      const investedAmount = monthlySIP * sipMonths;
-      const estimatedReturn = futureValue - investedAmount;
-
-      // Calculate SWP monthly withdrawal
-      const rSwpMonthly = calculateMonthlyRate(swpReturn);
-      const withdrawalMonths = withdrawalPeriod * 12;
-      const monthlyWithdrawal = calculateMonthlyWithdrawal(
-        rSwpMonthly,
-        withdrawalMonths,
-        futureValue
-      );
-
-      setResults({
-        investedAmount,
-        estimatedReturn,
-        totalValue: futureValue,
-        swpMonthly: monthlyWithdrawal,
-        sipPeriod: formData.sipPeriod,
-        withdrawalPeriod: formData.withdrawalPeriod,
-      });
-      setIsCalculating(false);
-    }, 300);
-  };
-
-  // Equivalent to Excel FV function
-  const calculateFutureValue = (rate, nper, pmt, pv, type) => {
+  // Future Value calculation for SIP (beginning of period)
+  const calculateFutureValue = (rate, nper, pmt) => {
     if (rate === 0) {
-      return -pmt * nper - pv;
+      return pmt * nper;
     }
 
     const factor = Math.pow(1 + rate, nper);
-    let fv;
-
-    if (type === 1) {
-      // Payments at beginning of period
-      fv = -pmt * (1 + rate) * ((factor - 1) / rate) - pv * factor;
-    } else {
-      // Payments at end of period
-      fv = -pmt * ((factor - 1) / rate) - pv * factor;
-    }
-
-    return Math.abs(fv);
+    // Payments at beginning of period
+    const fv = pmt * (1 + rate) * ((factor - 1) / rate);
+    return fv;
   };
 
-  // Equivalent to Excel PMT function for withdrawals
+  // Calculate monthly withdrawal for SWP
   const calculateMonthlyWithdrawal = (rate, nper, pv) => {
     if (rate === 0) {
       return pv / nper;
@@ -198,568 +80,442 @@ const SIPtoSWPCalculator = () => {
 
     const factor = Math.pow(1 + rate, nper);
     const pmt = (pv * rate * factor) / (factor - 1);
-
     return pmt;
   };
 
-  // Generate growth data for the accumulation phase
-  const generateGrowthData = () => {
-    const { monthlySIP, sipPeriod, sipReturn } = formData;
-    const labels = [];
-    const values = [];
+  // Calculate results automatically
+  useEffect(() => {
+    // Check if there are any errors before calculating
+    const hasErrors = Object.values(errors).some(error => error !== '');
+    if (!hasErrors) {
+      calculateResults();
+    }
+  }, [formData]);
+
+  // Handle input change - SIMPLE AND SMOOTH
+  const handleInputChange = (field, value) => {
+    setInputFields(prev => ({
+      ...prev,
+      [field]: value
+    }));
+
+    setErrors(prev => ({
+      ...prev,
+      [field]: ''
+    }));
+  };
+
+  // Handle input blur - validate and update formData
+  const handleInputBlur = (field) => {
+    const value = inputFields[field];
+    
+    if (value === '') {
+      setInputFields(prev => ({
+        ...prev,
+        [field]: formData[field].toString()
+      }));
+      return;
+    }
+
+    const numValue = Number(value);
+    
+    if (isNaN(numValue)) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: 'Please enter a valid number'
+      }));
+      return;
+    }
+
+    const limit = limits[field];
+    if (numValue < limit.min) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: `Minimum value is ${field.includes('Return') ? '' : '₹'}${limit.min}${field.includes('Return') ? '%' : ''}`
+      }));
+      return;
+    }
+    
+    if (numValue > limit.max) {
+      setErrors(prev => ({
+        ...prev,
+        [field]: `Maximum value is ${field.includes('Return') ? '' : '₹'}${limit.max}${field.includes('Return') ? '%' : ''}`
+      }));
+      return;
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      [field]: numValue
+    }));
+  };
+
+  // Handle slider change
+  const handleSliderChange = (field, value) => {
+    const numValue = Number(value);
+    
+    setFormData(prev => ({
+      ...prev,
+      [field]: numValue
+    }));
+    
+    setInputFields(prev => ({
+      ...prev,
+      [field]: numValue.toString()
+    }));
+
+    setErrors(prev => ({
+      ...prev,
+      [field]: ''
+    }));
+  };
+
+  // Reset to defaults
+  const handleReset = () => {
+    const defaults = {
+      monthlySIP: limits.monthlySIP.default,
+      sipPeriod: limits.sipPeriod.default,
+      withdrawalPeriod: limits.withdrawalPeriod.default,
+      sipReturn: limits.sipReturn.default,
+      swpReturn: limits.swpReturn.default
+    };
+    
+    setFormData(defaults);
+    setInputFields({
+      monthlySIP: defaults.monthlySIP.toString(),
+      sipPeriod: defaults.sipPeriod.toString(),
+      withdrawalPeriod: defaults.withdrawalPeriod.toString(),
+      sipReturn: defaults.sipReturn.toString(),
+      swpReturn: defaults.swpReturn.toString()
+    });
+    setErrors({});
+  };
+
+  // Calculate results
+  const calculateResults = () => {
+    const { monthlySIP, sipPeriod, withdrawalPeriod, sipReturn, swpReturn } = formData;
+
+    // SIP Phase Calculations
+    const sipMonths = sipPeriod * 12;
     const rSipMonthly = calculateMonthlyRate(sipReturn);
+    const totalCorpus = calculateFutureValue(rSipMonthly, sipMonths, monthlySIP);
+    const totalInvested = monthlySIP * sipMonths;
+    const wealthGained = totalCorpus - totalInvested;
 
-    for (let year = 1; year <= sipPeriod; year++) {
-      const months = year * 12;
-      const fv = calculateFutureValue(rSipMonthly, months, -monthlySIP, 0, 1);
-      labels.push(`Year ${year}`);
-      values.push(fv);
-    }
-
-    return { labels, values };
-  };
-
-  // Generate data for the withdrawal phase
-  const generateWithdrawalData = () => {
-    const { withdrawalPeriod, swpReturn } = formData;
-    const labels = [];
-    const corpusValues = [];
-    const withdrawalValues = [];
-    const rSwpMonthly = calculateMonthlyRate(swpReturn);
+    // SWP Phase Calculations
     const withdrawalMonths = withdrawalPeriod * 12;
-    const monthlyWithdrawal = results.swpMonthly;
-    let remainingCorpus = results.totalValue;
+    const rSwpMonthly = calculateMonthlyRate(swpReturn);
+    const monthlyWithdrawal = calculateMonthlyWithdrawal(rSwpMonthly, withdrawalMonths, totalCorpus);
 
-    for (let year = 0; year <= withdrawalPeriod; year++) {
-      const months = year * 12;
-      labels.push(`Year ${year}`);
-      corpusValues.push(remainingCorpus);
-      withdrawalValues.push(monthlyWithdrawal);
-
-      // Calculate remaining corpus after this year's withdrawals
-      if (year < withdrawalPeriod) {
-        for (let month = 0; month < 12; month++) {
-          remainingCorpus =
-            remainingCorpus * (1 + rSwpMonthly) - monthlyWithdrawal;
-        }
-      }
-    }
-
-    return { labels, corpusValues, withdrawalValues };
+    setResults({
+      totalCorpus,
+      totalInvested,
+      wealthGained,
+      monthlyWithdrawal,
+      sipPeriod,
+      withdrawalPeriod,
+      sipReturn,
+      swpReturn
+    });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: parseFloat(value) || 0 });
+  // Format display value
+  const formatDisplayValue = (value, field) => {
+    if (field.includes('Return')) return `${value}%`;
+    if (field === 'sipPeriod' || field === 'withdrawalPeriod') return `${value} years`;
+    
+    const absValue = Math.abs(value);
+    if (absValue >= 10000000) return `₹${(value / 10000000).toFixed(2)} Cr`;
+    if (absValue >= 100000) return `₹${(value / 100000).toFixed(2)} L`;
+    if (absValue >= 1000) return `₹${(value / 1000).toFixed(1)} K`;
+    return `₹${value.toLocaleString('en-IN')}`;
   };
 
-  const formatCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN", {
-      style: "currency",
-      currency: "INR",
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
-
-  const formatNumber = (num) => {
-    if (num >= 10000000) {
-      return (num / 10000000).toFixed(1) + " Cr";
-    } else if (num >= 100000) {
-      return (num / 100000).toFixed(1) + " L";
-    } else if (num >= 1000) {
-      return (num / 1000).toFixed(1) + " K";
-    }
-    return new Intl.NumberFormat("en-IN").format(num);
-  };
-
-  const formatShortCurrency = (amount) => {
-    return new Intl.NumberFormat("en-IN").format(Math.round(amount));
-  };
+  // Calculate additional metrics
+  const roi = results ? ((results.wealthGained / results.totalInvested) * 100).toFixed(1) : 0;
+  const multiple = results ? (results.totalCorpus / results.totalInvested).toFixed(2) : 0;
+  const withdrawalRate = results ? ((results.monthlyWithdrawal * 12 / results.totalCorpus) * 100).toFixed(1) : 0;
 
   return (
-    <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-2xl">
-      <motion.div
-        className="flex flex-col items-center justify-center gap-3 mb-10"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="flex items-center gap-3">
-          <Landmark className="w-10 h-10 text-blue-600" />
-          <h1 className="text-4xl font-bold text-gray-800">
-            SIP to SWP Calculator
-          </h1>
-          <Coins className="w-10 h-10 text-green-600" />
-        </div>
-        <p className="text-gray-600 text-center max-w-2xl">
-          Calculate your Systematic Investment Plan (SIP) accumulation and Systematic Withdrawal Plan (SWP) distribution
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-10">
-        {/* Input Section */}
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100"
-        >
-          <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center gap-3 border-b border-blue-100 pb-4">
-            <Calculator className="w-7 h-7 text-blue-500" />
-            Investment Parameters
-          </h2>
-
-          <div className="space-y-8">
-            {/* Monthly SIP Amount */}
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <Wallet className="w-5 h-5 text-blue-500" />
-                  Monthly SIP Amount (₹)
-                </label>
-                <div className="flex items-center gap-2 bg-blue-100 px-4 py-2 rounded-full">
-                  <IndianRupee className="w-4 h-4 text-blue-600" />
-                  <span className="font-bold text-blue-700 text-lg">
-                    {formatNumber(formData.monthlySIP)}
-                  </span>
-                </div>
-              </div>
-              <input
-                type="range"
-                name="monthlySIP"
-                min="5000"
-                max="10000000"
-                step="5000"
-                value={formData.monthlySIP}
-                onChange={handleChange}
-                className="w-full h-3 bg-gradient-to-r from-blue-200 to-blue-400 rounded-lg appearance-none cursor-pointer slider"
-              />
-              <div className="flex justify-between text-sm text-gray-600 mt-3">
-                <span className="font-medium">₹5,000</span>
-                <span className="font-medium">₹1 Cr</span>
-              </div>
-            </div>
-
-            {/* SIP Period */}
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-green-500" />
-                  SIP Period (Years)
-                </label>
-                <div className="flex items-center gap-2 bg-green-100 px-4 py-2 rounded-full">
-                  <Calendar className="w-4 h-4 text-green-600" />
-                  <span className="font-bold text-green-700 text-lg">
-                    {formData.sipPeriod}
-                  </span>
-                </div>
-              </div>
-              <input
-                type="range"
-                name="sipPeriod"
-                min="1"
-                max="50"
-                step="1"
-                value={formData.sipPeriod}
-                onChange={handleChange}
-                className="w-full h-3 bg-gradient-to-r from-green-200 to-green-400 rounded-lg appearance-none cursor-pointer slider"
-              />
-              <div className="flex justify-between text-sm text-gray-600 mt-3">
-                <span className="font-medium">1 Year</span>
-                <span className="font-medium">50 Years</span>
-              </div>
-            </div>
-
-            {/* Withdrawal Period */}
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <Calendar className="w-5 h-5 text-purple-500" />
-                  Withdrawal Period (Years)
-                </label>
-                <div className="flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full">
-                  <Calendar className="w-4 h-4 text-purple-600" />
-                  <span className="font-bold text-purple-700 text-lg">
-                    {formData.withdrawalPeriod}
-                  </span>
-                </div>
-              </div>
-              <input
-                type="range"
-                name="withdrawalPeriod"
-                min="5"
-                max="50"
-                step="1"
-                value={formData.withdrawalPeriod}
-                onChange={handleChange}
-                className="w-full h-3 bg-gradient-to-r from-purple-200 to-purple-400 rounded-lg appearance-none cursor-pointer slider"
-              />
-              <div className="flex justify-between text-sm text-gray-600 mt-3">
-                <span className="font-medium">5 Years</span>
-                <span className="font-medium">50 Years</span>
-              </div>
-            </div>
-
-            {/* SIP Return */}
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-orange-500" />
-                  Assumed Return During SIP Period (%)
-                </label>
-                <div className="flex items-center gap-2 bg-orange-100 px-4 py-2 rounded-full">
-                  <Percent className="w-4 h-4 text-orange-600" />
-                  <span className="font-bold text-orange-700 text-lg">
-                    {formData.sipReturn}%
-                  </span>
-                </div>
-              </div>
-              <input
-                type="range"
-                name="sipReturn"
-                min="4"
-                max="18"
-                step="0.5"
-                value={formData.sipReturn}
-                onChange={handleChange}
-                className="w-full h-3 bg-gradient-to-r from-orange-200 to-orange-400 rounded-lg appearance-none cursor-pointer slider"
-              />
-              <div className="flex justify-between text-sm text-gray-600 mt-3">
-                <span className="font-medium">4%</span>
-                <span className="font-medium">18%</span>
-              </div>
-            </div>
-
-            {/* SWP Return */}
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <label className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-red-500" />
-                  Assumed Return During Withdrawal Period (%)
-                </label>
-                <div className="flex items-center gap-2 bg-red-100 px-4 py-2 rounded-full">
-                  <Percent className="w-4 h-4 text-red-600" />
-                  <span className="font-bold text-red-700 text-lg">
-                    {formData.swpReturn}%
-                  </span>
-                </div>
-              </div>
-              <input
-                type="range"
-                name="swpReturn"
-                min="4"
-                max="18"
-                step="0.5"
-                value={formData.swpReturn}
-                onChange={handleChange}
-                className="w-full h-3 bg-gradient-to-r from-red-200 to-red-400 rounded-lg appearance-none cursor-pointer slider"
-              />
-              <div className="flex justify-between text-sm text-gray-600 mt-3">
-                <span className="font-medium">4%</span>
-                <span className="font-medium">18%</span>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Results Section */}
-        <AnimatePresence mode="wait">
-          {results ? (
-            <motion.div
-              key="results"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100"
-            >
-              <h2 className="text-2xl font-bold text-gray-800 mb-8 border-b border-blue-200 pb-4 flex items-center gap-3">
-                <Target className="w-7 h-7 text-blue-500" />
-                Investment Results
-              </h2>
-
-              <div className="space-y-8">
-                {/* Corpus Result */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <Banknote className="w-6 h-6 text-blue-600" />
-                    <h3 className="text-lg font-semibold text-gray-700">
-                      Your Accumulated Corpus will be
-                    </h3>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-4xl font-bold text-blue-700 mb-2">
-                      {formatShortCurrency(results.totalValue)}
-                    </p>
-                    <p className="text-gray-600 font-medium">
-                      after {results.sipPeriod} years
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Withdrawal Result */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl border border-green-200"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <Coins className="w-6 h-6 text-green-600" />
-                    <h3 className="text-lg font-semibold text-gray-700">
-                      You will receive
-                    </h3>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-4xl font-bold text-green-700 mb-2">
-                      ₹ {formatShortCurrency(results.swpMonthly)} Monthly
-                    </p>
-                    <p className="text-gray-600 font-medium">
-                      for {results.withdrawalPeriod} years
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Additional Stats */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="grid grid-cols-2 gap-4"
-                >
-                  <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <p className="text-sm text-gray-600 font-medium">
-                      Total Invested
-                    </p>
-                    <p className="text-xl font-bold text-blue-700 mt-1">
-                      {formatCurrency(results.investedAmount)}
-                    </p>
-                  </div>
-
-                  <div className="p-4 bg-green-50 rounded-lg border border-green-200">
-                    <p className="text-sm text-gray-600 font-medium">
-                      Wealth Gained
-                    </p>
-                    <p className="text-xl font-bold text-green-700 mt-1">
-                      {formatCurrency(results.estimatedReturn)}
-                    </p>
-                  </div>
-                </motion.div>
-
-                {/* Timeline */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="p-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white shadow-lg"
-                >
-                  <h3 className="text-lg font-semibold mb-4 text-center">
-                    Investment Journey
-                  </h3>
-                  <div className="flex justify-between items-center">
-                    <div className="text-center">
-                      <p className="text-3xl font-bold">{results.sipPeriod}</p>
-                      <p className="text-sm opacity-90">SIP Years</p>
-                    </div>
-                    <div className="text-center">
-                      <ArrowUp className="w-8 h-8 mx-auto mb-2" />
-                      <p className="text-sm font-medium">Accumulation</p>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-3xl font-bold">{results.withdrawalPeriod}</p>
-                      <p className="text-sm opacity-90">SWP Years</p>
-                    </div>
-                    <div className="text-center">
-                      <ArrowDown className="w-8 h-8 mx-auto mb-2" />
-                      <p className="text-sm font-medium">Withdrawal</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          ) : (
-            <motion.div
-              key="placeholder"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="bg-white p-8 rounded-2xl shadow-lg border border-blue-100 flex items-center justify-center"
-            >
-              <div className="text-center">
-                <Calculator className="w-16 h-16 mx-auto text-blue-300 mb-6" />
-                <h3 className="text-xl font-medium text-gray-500 mb-2">
-                  Adjust parameters to calculate
-                </h3>
-                <p className="text-gray-400">
-                  Your SIP to SWP plan will appear here
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* Charts Section */}
-      {results && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
-        >
-          {/* Pie Chart */}
-          <div className="bg-white p-6 rounded-xl shadow-lg border border-blue-100">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
-              <PieChart className="w-5 h-5 text-blue-500" />
-              Investment Breakdown
-            </h3>
-            {pieChartData && (
-              <div className="h-64">
-                <Pie
-                  data={pieChartData}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: {
-                        position: "bottom",
-                      },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const label = context.label || "";
-                            const value = context.raw || 0;
-                            return `${label}: ${formatCurrency(value)}`;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Growth Chart */}
-          <div className="bg-white p-6 rounded-xl shadow-lg border border-blue-100">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-green-500" />
-              Corpus Growth During SIP
-            </h3>
-            {growthChartData && (
-              <div className="h-64">
-                <Line
-                  data={growthChartData}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: {
-                        display: false,
-                      },
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            return `Corpus: ${formatCurrency(context.raw)}`;
-                          },
-                        },
-                      },
-                    },
-                    scales: {
-                      y: {
-                        beginAtZero: true,
-                        ticks: {
-                          callback: function (value) {
-                            if (value >= 10000000) {
-                              return "₹" + (value / 10000000).toFixed(1) + " Cr";
-                            } else if (value >= 100000) {
-                              return "₹" + (value / 100000).toFixed(1) + " L";
-                            }
-                            return "₹" + value;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>
-            )}
-          </div>
-
-          {/* Withdrawal Chart */}
-          <div className="bg-white p-6 rounded-xl shadow-lg border border-blue-100 lg:col-span-2">
-            <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-purple-500" />
-              SWP Phase - Corpus & Withdrawals
-            </h3>
-            {withdrawalChartData && (
-              <div className="h-64">
-                <Line
-                  data={withdrawalChartData}
-                  options={{
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      tooltip: {
-                        callbacks: {
-                          label: function (context) {
-                            const datasetLabel = context.dataset.label || "";
-                            return `${datasetLabel}: ${formatCurrency(
-                              context.raw
-                            )}`;
-                          },
-                        },
-                      },
-                    },
-                    scales: {
-                      y: {
-                        beginAtZero: true,
-                        ticks: {
-                          callback: function (value) {
-                            if (value >= 10000000) {
-                              return "₹" + (value / 10000000).toFixed(1) + " Cr";
-                            } else if (value >= 100000) {
-                              return "₹" + (value / 100000).toFixed(1) + " L";
-                            }
-                            return "₹" + value;
-                          },
-                        },
-                      },
-                    },
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        </motion.div>
-      )}
-
-      {/* CSS for custom slider */}
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background: #3b82f6;
-          cursor: pointer;
-          border: 3px solid white;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        }
+    <div className=" p-4">
+      <div className="max-w-6xl mx-auto">
         
-        .slider::-moz-range-thumb {
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          background: #3b82f6;
-          cursor: pointer;
-          border: 3px solid white;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-        }
-      `}</style>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Input Section */}
+          <div className="lg:col-span-2 bg-gray-100 rounded-2xl shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-[#074a6b] mb-6 flex items-center gap-2">
+              Investment Parameters
+            </h2>
+            
+            {/* SIP Phase */}
+            <div className="mb-8 pb-6 border-b border-gray-200">
+              <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <ArrowUp className="w-5 h-5 text-green-600" />
+                Accumulation Phase (SIP)
+              </h3>
+
+              {/* Monthly SIP */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-gray-700 font-medium flex items-center gap-2">
+                    Monthly SIP Amount
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={inputFields.monthlySIP}
+                      onChange={(e) => handleInputChange('monthlySIP', e.target.value)}
+                      onBlur={() => handleInputBlur('monthlySIP')}
+                      className={`w-36 px-3 py-2 pl-7 border rounded-lg focus:outline-none focus:ring-2 ${
+                        errors.monthlySIP ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                      }`}
+                      placeholder="Amount"
+                    />
+                    <span className="text-[#1a729e] font-semibold w-20 text-right">
+                      {formatDisplayValue(formData.monthlySIP, 'monthlySIP')}
+                    </span>
+                  </div>
+                </div>
+                {errors.monthlySIP && (
+                  <p className="text-red-500 text-sm mb-2">{errors.monthlySIP}</p>
+                )}
+                <input
+                  type="range"
+                  min={limits.monthlySIP.min}
+                  max={limits.monthlySIP.max}
+                  step={500}
+                  value={formData.monthlySIP}
+                  onChange={(e) => handleSliderChange('monthlySIP', e.target.value)}
+                  className="w-full accent-[#1a729e]"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>₹500</span>
+                  <span>₹1 Cr</span>
+                </div>
+              </div>
+
+              {/* SIP Period */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-gray-700 font-medium flex items-center gap-2">
+                    SIP Period (Years)
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={inputFields.sipPeriod}
+                      onChange={(e) => handleInputChange('sipPeriod', e.target.value)}
+                      onBlur={() => handleInputBlur('sipPeriod')}
+                      className={`w-36 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                        errors.sipPeriod ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                      }`}
+                      placeholder="Years"
+                    />
+                    <span className="text-[#1a729e] font-semibold w-20 text-right">
+                      {formData.sipPeriod} years
+                    </span>
+                  </div>
+                </div>
+                {errors.sipPeriod && (
+                  <p className="text-red-500 text-sm mb-2">{errors.sipPeriod}</p>
+                )}
+                <input
+                  type="range"
+                  min={limits.sipPeriod.min}
+                  max={limits.sipPeriod.max}
+                  step={1}
+                  value={formData.sipPeriod}
+                  onChange={(e) => handleSliderChange('sipPeriod', e.target.value)}
+                  className="w-full accent-[#1a729e]"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1 Year</span>
+                  <span>50 Years</span>
+                </div>
+              </div>
+
+              {/* SIP Return */}
+              <div className="mb-2">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-gray-700 font-medium flex items-center gap-2">
+                    Expected Return During SIP (%)
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={inputFields.sipReturn}
+                      onChange={(e) => handleInputChange('sipReturn', e.target.value)}
+                      onBlur={() => handleInputBlur('sipReturn')}
+                      className={`w-36 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                        errors.sipReturn ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                      }`}
+                      placeholder="%"
+                    />
+                    <span className="text-[#1a729e] font-semibold w-20 text-right">
+                      {formData.sipReturn}%
+                    </span>
+                  </div>
+                </div>
+                {errors.sipReturn && (
+                  <p className="text-red-500 text-sm mb-2">{errors.sipReturn}</p>
+                )}
+                <input
+                  type="range"
+                  min={limits.sipReturn.min}
+                  max={limits.sipReturn.max}
+                  step={0.5}
+                  value={formData.sipReturn}
+                  onChange={(e) => handleSliderChange('sipReturn', e.target.value)}
+                  className="w-full accent-[#1a729e]"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>4%</span>
+                  <span>18%</span>
+                </div>
+              </div>
+            </div>
+
+            {/* SWP Phase */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-gray-700 mb-4 flex items-center gap-2">
+                <ArrowDown className="w-5 h-5 text-red-600" />
+                Withdrawal Phase (SWP)
+              </h3>
+
+              {/* Withdrawal Period */}
+              <div className="mb-6">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-gray-700 font-medium flex items-center gap-2">
+                    Withdrawal Period (Years)
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={inputFields.withdrawalPeriod}
+                      onChange={(e) => handleInputChange('withdrawalPeriod', e.target.value)}
+                      onBlur={() => handleInputBlur('withdrawalPeriod')}
+                      className={`w-36 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                        errors.withdrawalPeriod ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                      }`}
+                      placeholder="Years"
+                    />
+                    <span className="text-[#1a729e] font-semibold w-20 text-right">
+                      {formData.withdrawalPeriod} years
+                    </span>
+                  </div>
+                </div>
+                {errors.withdrawalPeriod && (
+                  <p className="text-red-500 text-sm mb-2">{errors.withdrawalPeriod}</p>
+                )}
+                <input
+                  type="range"
+                  min={limits.withdrawalPeriod.min}
+                  max={limits.withdrawalPeriod.max}
+                  step={1}
+                  value={formData.withdrawalPeriod}
+                  onChange={(e) => handleSliderChange('withdrawalPeriod', e.target.value)}
+                  className="w-full accent-[#1a729e]"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1 Year</span>
+                  <span>50 Years</span>
+                </div>
+              </div>
+
+              {/* SWP Return */}
+              <div className="mb-2">
+                <div className="flex justify-between items-center mb-2">
+                  <label className="text-gray-700 font-medium flex items-center gap-2">
+                    Expected Return During Withdrawal (%)
+                  </label>
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="text"
+                      value={inputFields.swpReturn}
+                      onChange={(e) => handleInputChange('swpReturn', e.target.value)}
+                      onBlur={() => handleInputBlur('swpReturn')}
+                      className={`w-36 px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 ${
+                        errors.swpReturn ? 'border-red-500' : 'border-gray-300 focus:ring-blue-200'
+                      }`}
+                      placeholder="%"
+                    />
+                    <span className="text-[#1a729e] font-semibold w-20 text-right">
+                      {formData.swpReturn}%
+                    </span>
+                  </div>
+                </div>
+                {errors.swpReturn && (
+                  <p className="text-red-500 text-sm mb-2">{errors.swpReturn}</p>
+                )}
+                <input
+                  type="range"
+                  min={limits.swpReturn.min}
+                  max={limits.swpReturn.max}
+                  step={0.5}
+                  value={formData.swpReturn}
+                  onChange={(e) => handleSliderChange('swpReturn', e.target.value)}
+                  className="w-full accent-[#1a729e]"
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>4%</span>
+                  <span>18%</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleReset}
+              className="w-full py-3 bg-[#1a729e] text-white font-semibold rounded-lg"
+            >
+              Reset to Default Values
+            </button>
+          </div>
+
+          {/* Results Section */}
+          <div className="space-y-6">
+            {results ? (
+              <>
+                {/* Total Corpus */}
+                <div className="bg-[#1a729e] rounded-2xl shadow-xl p-6 text-white">
+                  <h3 className="text-lg opacity-90 mb-2 flex items-center gap-2">
+                    <Landmark className="w-5 h-5" />
+                    Total Accumulated Corpus
+                  </h3>
+                  <div className="text-3xl md:text-4xl font-bold mb-2">{formatCurrency(results.totalCorpus)}</div>
+                  <p className="opacity-90 text-sm">After {results.sipPeriod} years of SIP</p>
+                </div>
+
+                {/* Monthly Withdrawal */}
+                <div className="bg-[#1a729e] rounded-2xl shadow-xl p-6 text-white">
+                  <h3 className="text-lg opacity-90 mb-2 flex items-center gap-2">
+                    <Coins className="w-5 h-5" />
+                    Monthly SWP Withdrawal
+                  </h3>
+                  <div className="text-3xl md:text-4xl font-bold mb-2">{formatCurrency(results.monthlyWithdrawal)}</div>
+                  <p className="opacity-90 text-sm">For {results.withdrawalPeriod} years</p>
+                </div>
+
+            
+              </>
+            ) : (
+              <div className="bg-white rounded-2xl shadow-xl p-8 flex items-center justify-center min-h-[400px]">
+                <div className="text-center">
+                  <Calculator className="w-16 h-16 mx-auto text-blue-300 mb-4" />
+                  <h3 className="text-lg font-medium text-gray-500 mb-2">
+                    No Results Yet
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    Adjust the parameters to see your SIP to SWP journey
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+      
+      </div>
     </div>
   );
 };
