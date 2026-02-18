@@ -60,6 +60,10 @@ const Navbar = () => {
     {
       title: 'Contact',
       link: '/contactus'
+    },
+    {
+      title: 'Calculators',
+      link: '/calculators'
     }
   ];
 

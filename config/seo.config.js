@@ -33,6 +33,84 @@ export const seoConfig = {
     priority: 0.8,
     changeFrequency: 'monthly',
   },
+   // About Us page
+  calculator: {
+    title: 'Calculator - Calculate your profit',
+    description: 'Learn about Pingle Web - our mission, vision, and the team behind your digital success. We are passionate about creating exceptional web experiences.',
+    keywords: ['about Pingle Web', 'web development team', 'digital agency', 'our mission'],
+    image: '/about-og-image.jpg',
+    type: 'website',  
+    path: '/calculators',
+    priority: 0.8,
+    changeFrequency: 'monthly',
+  },
+
+  // Individual calculator pages (add after your existing calculator entry)
+'calculator-future-wealth': {
+  title: 'Future Wealth Calculator - Project Your Investment Growth',
+  description: 'Calculate your potential future wealth based on current investments and regular contributions. Plan your financial future with our free wealth calculator.',
+  keywords: ['future wealth calculator', 'wealth projection', 'investment growth calculator', 'long-term wealth planning'],
+  image: '/future-wealth-og-image.jpg',
+  type: 'website',
+  path: '/calculators/future-wealth',
+  priority: 0.7,
+  changeFrequency: 'monthly',
+},
+
+'calculator-sip': {
+  title: 'SIP Calculator - Systematic Investment Plan Returns',
+  description: 'Plan your SIP investments with our free calculator. Estimate returns, calculate monthly investments needed, and achieve your financial goals with SIP planning.',
+  keywords: ['SIP calculator', 'systematic investment plan', 'mutual fund SIP', 'SIP returns calculator', 'monthly investment planner'],
+  image: '/sip-og-image.jpg',
+  type: 'website',
+  path: '/calculators/sip',
+  priority: 0.7,
+  changeFrequency: 'monthly',
+},
+
+'calculator-swpm': {
+  title: 'SWP Calculator - Systematic Withdrawal Plan Income',
+  description: 'Calculate monthly income from Systematic Withdrawal Plans. Plan your regular income from mutual funds with our free SWP calculator.',
+  keywords: ['SWP calculator', 'systematic withdrawal plan', 'monthly income calculator', 'mutual fund withdrawal', 'retirement income'],
+  image: '/swp-og-image.jpg',
+  type: 'website',
+  path: '/calculators/swp',
+  priority: 0.7,
+  changeFrequency: 'monthly',
+},
+
+'calculator-goal': {
+  title: 'Goal Calculator - Plan Your Financial Goals',
+  description: 'Calculate the amount needed to achieve your financial goals. Plan for education, marriage, vacation, or any financial target with our goal planner.',
+  keywords: ['financial goal calculator', 'goal planning', 'target amount calculator', 'savings goal', 'investment target'],
+  image: '/goal-og-image.jpg',
+  type: 'website',
+  path: '/calculators/goal',
+  priority: 0.7,
+  changeFrequency: 'monthly',
+},
+
+'calculator-home-loan-recovery': {
+  title: 'Home Loan Recovery Calculator - Pay Off Your Loan Faster',
+  description: 'Plan your home loan recovery strategy. Calculate prepayment benefits, reduced tenure, and interest savings with our home loan recovery calculator.',
+  keywords: ['home loan recovery', 'loan prepayment calculator', 'mortgage payoff', 'home loan calculator', 'interest savings'],
+  image: '/home-loan-og-image.jpg',
+  type: 'website',
+  path: '/calculators/home-loan-recovery',
+  priority: 0.7,
+  changeFrequency: 'monthly',
+},
+
+'calculator-retirement-corpus': {
+  title: 'Retirement Corpus Calculator - Plan Your Retirement',
+  description: 'Calculate the corpus needed for your retirement. Plan your retirement savings, estimate monthly investments, and secure your golden years.',
+  keywords: ['retirement calculator', 'retirement corpus', 'pension planning', 'retirement savings', 'golden years planning'],
+  image: '/retirement-og-image.jpg',
+  type: 'website',
+  path: '/calculators/retirement-corpus',
+  priority: 0.7,
+  changeFrequency: 'monthly',
+},
   
   // Blog listing page
   blog: {

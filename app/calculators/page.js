@@ -1,14 +1,13 @@
-
-
 import Link from "next/link";
 import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
-import ContactUs from "./component/ContactUs";
+import Calculators from "./component/Calculators";
 
-export default function Calculators() {
+
+export default function Home() {
 
   const { metadata, jsonLdData } = PageSEO({ 
-    pageKey: 'contact',
+    pageKey: 'calculator',
     includeJsonLd: true
   })
 
@@ -20,7 +19,7 @@ export default function Calculators() {
       ))}
 
       <main>
-        <ContactUs />
+        <Calculators />
        
       </main>
 
@@ -29,6 +28,6 @@ export default function Calculators() {
 }
 
 export async function generateMetadata() {
-  const { metadata } = PageSEO({ pageKey: 'contact' })
+  const { metadata } = PageSEO({ pageKey: 'calculator' })
   return metadata
 }

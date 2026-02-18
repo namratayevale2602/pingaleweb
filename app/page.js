@@ -5,6 +5,8 @@ import Hero from "./home/component/Hero";
 import HeroStory from "./home/component/StorySection";
 import ThreeDProtection from "./home/component/ThreeDProtection";
 import WhyTrustUs from "./home/component/WhyTrustUs";
+import YourProcess from "./home/component/YourProcess";
+import CTASection from "./home/component/CTASection";
 
 export default async function Home() {
 
@@ -27,6 +29,8 @@ export default async function Home() {
        <HeroStory />
        <ThreeDProtection />
        <WhyTrustUs />
+       <YourProcess />
+       <CTASection />
       </main>
 
     </>
