@@ -627,39 +627,21 @@ export const insuranceData = {
   ...businessInsurance
 };
 
-// Optimized helper functions with memoization
-const slugCache = null;
-
-// Helper function to get all slugs (memoized)
 export const getAllInsuranceSlugs = () => {
-  // Return cached version if available
-  if (slugCache) return slugCache;
-  
-  const slugs = Object.keys(insuranceData).map(slug => ({
-    params: { slug }
-  }));
-  
-  return slugs;
-};
-
-// Helper function to get insurance data by slug (with fast lookup)
-export const getInsuranceBySlug = (slug) => {
-  return insuranceData[slug] || null;
-};
-
-// Helper function to get all insurance items
-export const getAllInsuranceItems = () => {
   return Object.keys(insuranceData).map(slug => ({
     params: { slug }
   }));
 };
 
-// Group by category (memoized)
-let categoryCache = null;
+export const getInsuranceBySlug = (slug) => {
+  return insuranceData[slug] || null;
+};
+
+export const getAllInsuranceItems = () => {
+  return Object.values(insuranceData); // Returns array of insurance objects, not slugs
+};
 
 export const getInsuranceByCategory = () => {
-  if (categoryCache) return categoryCache;
-  
   const grouped = {};
   Object.values(insuranceData).forEach(item => {
     if (!grouped[item.category]) {
@@ -667,7 +649,5 @@ export const getInsuranceByCategory = () => {
     }
     grouped[item.category].push(item);
   });
-  
-  categoryCache = grouped;
   return grouped;
 };
