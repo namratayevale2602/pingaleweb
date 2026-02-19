@@ -90,16 +90,16 @@ const Calculators = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto mt-20">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl font-semibold text-gray-800">Calculators</h2>
-        </motion.div>
+    <div className="bg-gray-50 py-10 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Calculators<br/>
+            <span className="text-[#0A4D6B]">Calculate Your Profit</span>
+          </h2>
+        </div>
 
         <motion.div
           initial={{ opacity: 0 }}

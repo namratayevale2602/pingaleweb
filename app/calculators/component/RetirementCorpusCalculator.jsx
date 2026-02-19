@@ -308,27 +308,14 @@ const RetirementCorpusCalculator = () => {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 to-gray-50 p-4">
+    <div className="p-4">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <Users className="w-10 h-10 text-blue-600" />
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-800">
-              Retirement Corpus Calculator
-            </h1>
-            <Award className="w-10 h-10 text-green-600" />
-          </div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Plan your retirement savings with inflation-adjusted calculations and build a corpus for a secure future
-          </p>
-        </div>
+       
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Input Section */}
-          <div className="lg:col-span-2 bg-white rounded-2xl shadow-xl p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2">
-              <Calculator className="w-6 h-6 text-blue-600" />
+          <div className="lg:col-span-2 bg-gray-100 rounded-2xl shadow-xl p-6">
+            <h2 className="text-2xl font-bold text-[#074a6b] mb-6 flex items-center gap-2">
               Retirement Parameters
             </h2>
             
@@ -336,7 +323,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <Wallet className="w-4 h-4 text-blue-500" />
                   Current Monthly Expense
                 </label>
                 <div className="flex items-center gap-3">
@@ -350,7 +336,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="Amount"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formatDisplayValue(formData.currentMonthlyExpense, 'currentMonthlyExpense')}
                   </span>
                 </div>
@@ -365,7 +351,7 @@ const RetirementCorpusCalculator = () => {
                 step={1000}
                 value={formData.currentMonthlyExpense}
                 onChange={(e) => handleSliderChange('currentMonthlyExpense', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>₹10K</span>
@@ -377,7 +363,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-orange-500" />
                   Future Inflation Assumed (%)
                 </label>
                 <div className="flex items-center gap-3">
@@ -391,7 +376,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="%"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.futureInflation}%
                   </span>
                 </div>
@@ -406,7 +391,7 @@ const RetirementCorpusCalculator = () => {
                 step={0.5}
                 value={formData.futureInflation}
                 onChange={(e) => handleSliderChange('futureInflation', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>2%</span>
@@ -418,7 +403,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <Users className="w-4 h-4 text-green-500" />
                   Current Age (Years)
                 </label>
                 <div className="flex items-center gap-3">
@@ -432,7 +416,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="Years"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.currentAge} years
                   </span>
                 </div>
@@ -447,7 +431,7 @@ const RetirementCorpusCalculator = () => {
                 step={1}
                 value={formData.currentAge}
                 onChange={(e) => handleSliderChange('currentAge', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>18</span>
@@ -459,7 +443,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-purple-500" />
                   Retirement Age (Years)
                 </label>
                 <div className="flex items-center gap-3">
@@ -473,7 +456,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="Years"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.retirementAge} years
                   </span>
                 </div>
@@ -488,7 +471,7 @@ const RetirementCorpusCalculator = () => {
                 step={1}
                 value={formData.retirementAge}
                 onChange={(e) => handleSliderChange('retirementAge', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>{Math.max(formData.currentAge + 1, limits.retirementAge.min)}</span>
@@ -500,7 +483,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <Award className="w-4 h-4 text-yellow-500" />
                   Life Expectancy (Years)
                 </label>
                 <div className="flex items-center gap-3">
@@ -514,7 +496,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="Years"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.lifeExpectancy} years
                   </span>
                 </div>
@@ -529,7 +511,7 @@ const RetirementCorpusCalculator = () => {
                 step={1}
                 value={formData.lifeExpectancy}
                 onChange={(e) => handleSliderChange('lifeExpectancy', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>{Math.max(formData.retirementAge + 1, limits.lifeExpectancy.min)}</span>
@@ -541,7 +523,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-green-500" />
                   Returns During Earning Years (%)
                 </label>
                 <div className="flex items-center gap-3">
@@ -555,7 +536,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="%"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.earningYearsReturn}%
                   </span>
                 </div>
@@ -570,7 +551,7 @@ const RetirementCorpusCalculator = () => {
                 step={0.5}
                 value={formData.earningYearsReturn}
                 onChange={(e) => handleSliderChange('earningYearsReturn', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>4%</span>
@@ -582,7 +563,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <TrendingUp className="w-4 h-4 text-indigo-500" />
                   Returns During Retirement Years (%)
                 </label>
                 <div className="flex items-center gap-3">
@@ -596,7 +576,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="%"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formData.retirementYearsReturn}%
                   </span>
                 </div>
@@ -611,7 +591,7 @@ const RetirementCorpusCalculator = () => {
                 step={0.5}
                 value={formData.retirementYearsReturn}
                 onChange={(e) => handleSliderChange('retirementYearsReturn', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>4%</span>
@@ -623,7 +603,6 @@ const RetirementCorpusCalculator = () => {
             <div className="mb-6">
               <div className="flex justify-between items-center mb-2">
                 <label className="text-gray-700 font-medium flex items-center gap-2">
-                  <Landmark className="w-4 h-4 text-pink-500" />
                   Current Wealth for Retirement
                 </label>
                 <div className="flex items-center gap-3">
@@ -637,7 +616,7 @@ const RetirementCorpusCalculator = () => {
                     }`}
                     placeholder="Amount"
                   />
-                  <span className="text-blue-600 font-semibold w-20 text-right">
+                  <span className="text-[#1a729e] font-semibold w-20 text-right">
                     {formatDisplayValue(formData.currentWealth, 'currentWealth')}
                   </span>
                 </div>
@@ -652,7 +631,7 @@ const RetirementCorpusCalculator = () => {
                 step={100000}
                 value={formData.currentWealth}
                 onChange={(e) => handleSliderChange('currentWealth', e.target.value)}
-                className="w-full accent-blue-600"
+                className="w-full accent-[#1a729e]"
               />
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>₹0</span>
@@ -662,7 +641,7 @@ const RetirementCorpusCalculator = () => {
 
             <button
               onClick={handleReset}
-              className="w-full py-3 bg-gray-100 text-gray-700 font-semibold rounded-lg hover:bg-gray-200 transition-colors"
+              className="w-full py-3 bg-[#1a729e] text-white font-semibold rounded-lg"
             >
               Reset to Default Values
             </button>
@@ -673,7 +652,7 @@ const RetirementCorpusCalculator = () => {
             {results ? (
               <>
                 {/* Main Result - Corpus Required */}
-                <div className="bg-linear-to-br from-blue-600 to-indigo-600 rounded-2xl shadow-xl p-6 text-white">
+                <div className="bg-[#1a729e] rounded-2xl shadow-xl p-6 text-white">
                   <h3 className="text-lg opacity-90 mb-2 flex items-center gap-2">
                     <Target className="w-5 h-5" />
                     Retirement Corpus Required
@@ -688,7 +667,7 @@ const RetirementCorpusCalculator = () => {
                 </div>
 
                 {/* Monthly Expense at Retirement */}
-                <div className="bg-linear-to-br from-purple-600 to-pink-600 rounded-2xl shadow-xl p-6 text-white">
+                <div className="bg-[#1a729e] rounded-2xl shadow-xl p-6 text-white">
                   <h3 className="text-lg opacity-90 mb-2 flex items-center gap-2">
                     <Wallet className="w-5 h-5" />
                     Monthly Expense at Retirement
@@ -702,7 +681,7 @@ const RetirementCorpusCalculator = () => {
                 {/* Corpus Sufficiency */}
                 <div className={`rounded-2xl shadow-xl p-6 text-white ${
                   results.isCorpusSufficient 
-                    ? 'bg-linear-to-br from-green-600 to-emerald-600' 
+                    ? 'bg-[#1a729e]' 
                     : 'bg-linear-to-br from-orange-600 to-red-600'
                 }`}>
                   <h3 className="text-lg opacity-90 mb-2 flex items-center gap-2">
@@ -728,7 +707,7 @@ const RetirementCorpusCalculator = () => {
 
                 {/* Monthly SIP Required */}
                 {!results.isCorpusSufficient && (
-                  <div className="bg-linear-to-br from-green-600 to-emerald-600 rounded-2xl shadow-xl p-6 text-white">
+                  <div className="bg-[#1a729e] rounded-2xl shadow-xl p-6 text-white">
                     <h3 className="text-lg opacity-90 mb-2 flex items-center gap-2">
                       <ArrowUp className="w-5 h-5" />
                       Monthly SIP Required
@@ -743,7 +722,7 @@ const RetirementCorpusCalculator = () => {
                 {/* Timeline Summary */}
                 <div className="bg-white rounded-2xl shadow-xl p-6">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <Clock className="w-5 h-5 text-blue-600" />
+                    <Clock className="w-5 h-5 text-[#1a729e]" />
                     Retirement Timeline
                   </h3>
                   <div className="space-y-4">
@@ -797,24 +776,6 @@ const RetirementCorpusCalculator = () => {
                   </div>
                 </div>
 
-                {/* Return Assumptions */}
-                <div className="bg-white rounded-2xl shadow-xl p-6">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-4">Return Assumptions</h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="p-3 bg-blue-50 rounded-lg text-center">
-                      <p className="text-xs text-gray-600">Earning Years</p>
-                      <p className="text-lg font-bold text-blue-700">{formData.earningYearsReturn}%</p>
-                    </div>
-                    <div className="p-3 bg-green-50 rounded-lg text-center">
-                      <p className="text-xs text-gray-600">Retirement Years</p>
-                      <p className="text-lg font-bold text-green-700">{formData.retirementYearsReturn}%</p>
-                    </div>
-                    <div className="p-3 bg-orange-50 rounded-lg text-center col-span-2">
-                      <p className="text-xs text-gray-600">Inflation Assumed</p>
-                      <p className="text-lg font-bold text-orange-700">{formData.futureInflation}%</p>
-                    </div>
-                  </div>
-                </div>
               </>
             ) : (
               <div className="bg-white rounded-2xl shadow-xl p-8 flex items-center justify-center min-h-[400px]">
@@ -832,70 +793,9 @@ const RetirementCorpusCalculator = () => {
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="mt-6 bg-white rounded-2xl shadow-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-500 mb-3">Common Retirement Scenarios</h3>
-          <div className="flex flex-wrap gap-2">
-            {[
-              { label: 'Early Starter', age: 25, expense: 50000, retirement: 50 },
-              { label: 'Mid Career', age: 35, expense: 100000, retirement: 60 },
-              { label: 'Late Starter', age: 45, expense: 150000, retirement: 65 },
-            ].map((scenario, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setFormData(prev => ({ 
-                    ...prev, 
-                    currentAge: scenario.age,
-                    currentMonthlyExpense: scenario.expense,
-                    retirementAge: scenario.retirement
-                  }));
-                  setInputFields({
-                    ...inputFields,
-                    currentAge: scenario.age.toString(),
-                    currentMonthlyExpense: scenario.expense.toString(),
-                    retirementAge: scenario.retirement.toString(),
-                  });
-                }}
-                className="px-4 py-2 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors text-sm font-medium"
-              >
-                {scenario.label}
-              </button>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2 mt-3">
-            <h3 className="text-sm font-semibold text-gray-500 w-full mb-2">Lifestyle Options</h3>
-            {[
-              { label: 'Simple Lifestyle', expense: 50000 },
-              { label: 'Comfortable', expense: 100000 },
-              { label: 'Luxury', expense: 200000 },
-              { label: 'Premium', expense: 500000 },
-            ].map((lifestyle, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setFormData(prev => ({ ...prev, currentMonthlyExpense: lifestyle.expense }));
-                  setInputFields(prev => ({ ...prev, currentMonthlyExpense: lifestyle.expense.toString() }));
-                }}
-                className="px-4 py-2 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors text-sm font-medium"
-              >
-                {lifestyle.label}
-              </button>
-            ))}
-          </div>
-        </div>
+    
 
-        {/* Disclaimer */}
-        <div className="mt-6 p-4 bg-yellow-50 rounded-xl border border-yellow-200">
-          <p className="text-xs text-gray-600 flex items-start gap-2">
-            <AlertCircle className="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" />
-            <span>
-              <strong>Note:</strong> All calculations are approximate and for illustration purposes only. 
-              Actual returns may vary based on market conditions. Consider consulting a financial advisor 
-              for personalized retirement planning.
-            </span>
-          </p>
-        </div>
+        
       </div>
     </div>
   );

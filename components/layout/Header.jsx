@@ -15,15 +15,27 @@ const Navbar = () => {
       dropdown: [
         {
           category: 'Auto Insurance',
-          items: ['Car Insurance', 'Motorcycle Insurance', 'RV Insurance']
+          items: [
+            { name: 'Car Insurance', slug: 'insurance/car-insurance' },
+            { name: 'Motorcycle Insurance', slug: 'insurance/motorcycle-insurance' },
+            { name: 'RV Insurance', slug: 'insurance/rv-insurance' }
+          ]
         },
         {
           category: 'Home Insurance',
-          items: ['Homeowners Insurance', 'Renters Insurance', 'Condo Insurance']
+          items: [
+            { name: 'Homeowners Insurance', slug: 'insurance/homeowners-insurance' },
+            { name: 'Renters Insurance', slug: 'insurance/renters-insurance' },
+            { name: 'Condo Insurance', slug: 'insurance/condo-insurance' }
+          ]
         },
         {
           category: 'Life & Health',
-          items: ['Life Insurance', 'Health Insurance', 'Disability Insurance']
+          items: [
+            { name: 'Life Insurance', slug: 'insurance/life-insurance' },
+            { name: 'Health Insurance', slug: 'insurance/health-insurance' },
+            { name: 'Disability Insurance', slug: 'insurance/disability-insurance' }
+          ]
         }
       ]
     },
@@ -32,11 +44,19 @@ const Navbar = () => {
       dropdown: [
         {
           category: 'Small Business',
-          items: ['General Liability', 'Professional Liability', 'Workers Compensation']
+          items: [
+            { name: 'General Liability', slug: 'insurance/general-liability' },
+            { name: 'Professional Liability', slug: 'insurance/professional-liability' },
+            { name: 'Workers Compensation', slug: 'insurance/workers-compensation' }
+          ]
         },
         {
           category: 'Commercial',
-          items: ['Commercial Auto', 'Commercial Property', 'Cyber Liability']
+          items: [
+            { name: 'Commercial Auto', slug: 'insurance/commercial-auto' },
+            { name: 'Commercial Property', slug: 'insurance/commercial-property' },
+            { name: 'Cyber Liability', slug: 'insurance/cyber-liability' }
+          ]
         }
       ]
     },
@@ -45,11 +65,11 @@ const Navbar = () => {
       dropdown: [
         {
           category: 'Learn',
-          items: ['Insurance Guide', 'Blog', 'FAQs']
-        },
-        {
-          category: 'Support',
-          items: ['Claims Center', 'Customer Support', 'Find an Agent']
+          items: [
+            { name: 'Insurance Guide', slug: 'insuranceguide' },
+            // { name: 'Blog', slug: 'blog' },
+            // { name: 'FAQs', slug: 'faqs' }
+          ]
         }
       ]
     },
@@ -82,10 +102,9 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              {/* Replace with your actual exported image */}
               <div className="relative w-20 h-20">
                 <Image
-                  src={pigalelogo} // Update this path to your image
+                  src={pigalelogo}
                   alt="Pingle Insurance"
                   fill={true}
                   sizes="48px"
@@ -118,7 +137,7 @@ const Navbar = () => {
 
                     {/* Mega Dropdown */}
                     {activeDropdown === index && (
-                      <div className="absolute left-0 w-150 bg-white rounded-lg shadow-xl border border-gray-100 py-6 px-4 grid grid-cols-3 gap-6 animate-fadeIn">
+                      <div className="absolute left-0 w-[600px] bg-white rounded-lg shadow-xl border border-gray-100 py-6 px-4 grid grid-cols-2 gap-6 animate-fadeIn">
                         {item.dropdown.map((category, catIndex) => (
                           <div key={catIndex} className="space-y-3">
                             <h3 className="text-sm font-semibold text-[#074a6b] uppercase tracking-wider">
@@ -128,11 +147,11 @@ const Navbar = () => {
                               {category.items.map((subItem, subIndex) => (
                                 <li key={subIndex}>
                                   <Link
-                                    href={`/${subItem.toLowerCase().replace(/\s+/g, '-')}`}
+                                    href={`/${subItem.slug}`}
                                     className="text-gray-600 hover:text-[#2ba5ea] hover:pl-1 transition-all duration-200 flex items-center group"
                                   >
                                     <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 mr-1" />
-                                    {subItem}
+                                    {subItem.name}
                                   </Link>
                                 </li>
                               ))}
@@ -152,9 +171,9 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-          </div>
 
-       
+          
+          </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center">
@@ -176,24 +195,24 @@ const Navbar = () => {
               <div key={index} className="space-y-2">
                 {item.dropdown ? (
                   <>
-                    <div className="font-semibold text-gray-800 text-lg">
+                    <div className="font-semibold text-[#074a6b] text-lg">
                       {item.title}
                     </div>
                     <div className="pl-4 space-y-4">
                       {item.dropdown.map((category, catIndex) => (
                         <div key={catIndex} className="space-y-2">
-                          <h4 className="text-sm font-medium text-gray-500">
+                          <h4 className="text-sm font-medium text-gray-500 uppercase">
                             {category.category}
                           </h4>
                           <ul className="space-y-2 pl-2">
                             {category.items.map((subItem, subIndex) => (
                               <li key={subIndex}>
                                 <Link
-                                  href={`/${subItem.toLowerCase().replace(/\s+/g, '-')}`}
-                                  className="text-gray-600 hover:text-blue-600 block py-1"
+                                  href={`/insurance/${subItem.slug}`}
+                                  className="text-gray-600 hover:text-[#2ba5ea] block py-1"
                                   onClick={() => setIsOpen(false)}
                                 >
-                                  {subItem}
+                                  {subItem.name}
                                 </Link>
                               </li>
                             ))}
@@ -205,7 +224,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={item.link}
-                    className="font-semibold text-gray-800 text-lg block hover:text-blue-600"
+                    className="font-semibold text-[#074a6b] text-lg block hover:text-[#2ba5ea]"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.title}
@@ -214,30 +233,7 @@ const Navbar = () => {
               </div>
             ))}
             
-            {/* Mobile Action Buttons */}
-            <div className="pt-6 space-y-3 border-t border-gray-100">
-              <Link
-                href="/get-quote"
-                className="block w-full bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-blue-700 text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Get a Quote
-              </Link>
-              <Link
-                href="/contact"
-                className="block w-full border border-gray-300 text-gray-700 px-4 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact Us
-              </Link>
-              <Link
-                href="/login"
-                className="block w-full text-gray-600 px-4 py-3 rounded-lg font-semibold hover:text-blue-600 text-center"
-                onClick={() => setIsOpen(false)}
-              >
-                Login
-              </Link>
-            </div>
+          
           </div>
         </div>
       )}

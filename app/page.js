@@ -7,6 +7,7 @@ import ThreeDProtection from "./home/component/ThreeDProtection";
 import WhyTrustUs from "./home/component/WhyTrustUs";
 import YourProcess from "./home/component/YourProcess";
 import CTASection from "./home/component/CTASection";
+import Calculators from "./calculators/component/Calculators"
 
 export default async function Home() {
 
@@ -28,6 +29,7 @@ export default async function Home() {
        <Hero />
        <HeroStory />
        <ThreeDProtection />
+       <Calculators />
        <WhyTrustUs />
        <YourProcess />
        <CTASection />
