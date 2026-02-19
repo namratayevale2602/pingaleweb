@@ -649,7 +649,9 @@ export const getInsuranceBySlug = (slug) => {
 
 // Helper function to get all insurance items
 export const getAllInsuranceItems = () => {
-  return Object.values(insuranceData);
+  return Object.keys(insuranceData).map(slug => ({
+    params: { slug }
+  }));
 };
 
 // Group by category (memoized)

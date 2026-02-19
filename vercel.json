@@ -1,8 +1,14 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/insurance/:slug",
+      "destination": "/insurance/[slug]"
+    }
+  ],
+  "builds": [
+    {
+      "src": "app/**/*.js",
+      "use": "@vercel/next"
     }
   ]
 }
