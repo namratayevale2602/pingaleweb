@@ -9,13 +9,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
-    // Optional: Add more domains if needed
-    domains: ['images.unsplash.com'],
   },
-  // Ensure static generation works
-  output: 'standalone',
-  // Add this for better routing
-  trailingSlash: false,
 };
 
 export default nextConfig;

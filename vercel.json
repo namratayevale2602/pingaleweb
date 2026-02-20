@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "app/**/*.js",
+      "src": "package.json",
       "use": "@vercel/next"
     }
   ],
   "routes": [
     {
-      "src": "/insurance/(.*)",
-      "dest": "/insurance/[slug]"
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
