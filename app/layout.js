@@ -10,6 +10,11 @@ export const metadata = {
   },
   description: 'Your website description for search engines - make it compelling and include keywords',
   keywords: ['next.js', 'react', 'web development', 'your keywords'],
+  icons: {
+    icon: '/favicon.jpeg',
+    apple: '/favicon.jpeg',
+    shortcut: '/favicon.jpeg',
+  },
   authors: [{ name: 'Your Name' }],
   creator: 'Your Name',
   publisher: 'Your Name',
@@ -65,13 +70,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="antialiased" suppressHydrationWarning>
+      <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         <Header />
-          <main>
-            {children}
-            <FloatingActionButtons />
-          </main>
+        <main className="flex-grow">
+          {children}
+        </main>
         <Footer />
+        {/* Floating buttons outside main but inside body for proper positioning */}
+        <FloatingActionButtons />
       </body>
     </html>
   )
