@@ -1,14 +1,14 @@
 {
-  "rewrites": [
-    {
-      "source": "/insurance/:slug",
-      "destination": "/insurance/[slug]"
-    }
-  ],
   "builds": [
     {
       "src": "app/**/*.js",
       "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/insurance/(.*)",
+      "dest": "/insurance/[slug]"
     }
   ]
 }

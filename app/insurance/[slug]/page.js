@@ -2,6 +2,10 @@
 import InsuranceDetail from '../component/InsuranceDetailPage';
 import { getInsuranceBySlug, getAllInsuranceSlugs } from '../data/insuranceData';
 
+// Force static generation
+export const dynamic = 'force-static';
+export const revalidate = false; // or set a revalidation time in seconds
+
 // Generate static paths at build time
 export async function generateStaticParams() {
   const slugs = getAllInsuranceSlugs();
