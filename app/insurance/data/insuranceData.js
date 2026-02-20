@@ -11,7 +11,6 @@ const autoInsurance = {
     iconName: 'Car',
     color: '#074a6b',
     lightColor: '#e6f0f5',
-    gradient: 'from-[#074a6b] to-[#1a729e]',
     tagline: 'Protect your ride, protect your peace of mind',
     description: 'Comprehensive coverage for your car against accidents, theft, natural disasters, and third-party liabilities.',
     coverage: [
@@ -52,7 +51,6 @@ const autoInsurance = {
     iconName: 'Bike',
     color: '#2ba5ea',
     lightColor: '#e8f4fd',
-    gradient: 'from-[#2ba5ea] to-[#0080bf]',
     tagline: 'Two wheels, complete protection',
     description: 'Specialized coverage for motorcycles and scooters against accidents, theft, and third-party liabilities.',
     coverage: [
@@ -91,7 +89,6 @@ const autoInsurance = {
     iconName: 'Bike',
     color: '#2ba5ea',
     lightColor: '#e8f4fd',
-    gradient: 'from-[#2ba5ea] to-[#0080bf]',
     tagline: 'Two wheels, complete protection',
     description: 'Specialized coverage for motorcycles and scooters against accidents, theft, and third-party liabilities.',
     coverage: [
@@ -133,7 +130,6 @@ const homeInsurance = {
     iconName: 'Building',
     color: '#0080bf',
     lightColor: '#e6f3fa',
-    gradient: 'from-[#0080bf] to-[#2ba5ea]',
     tagline: 'Your home deserves the best protection',
     description: 'Complete protection for your home structure and valuable belongings against unforeseen events.',
     coverage: [
@@ -172,7 +168,6 @@ const homeInsurance = {
     iconName: 'Building',
     color: '#0080bf',
     lightColor: '#e6f3fa',
-    gradient: 'from-[#0080bf] to-[#2ba5ea]',
     tagline: 'Your home deserves the best protection',
     description: 'Complete protection for your home structure and valuable belongings against unforeseen events.',
     coverage: [
@@ -211,7 +206,6 @@ const homeInsurance = {
     iconName: 'Building',
     color: '#0080bf',
     lightColor: '#e6f3fa',
-    gradient: 'from-[#0080bf] to-[#2ba5ea]',
     tagline: 'Your home deserves the best protection',
     description: 'Complete protection for your home structure and valuable belongings against unforeseen events.',
     coverage: [
@@ -253,7 +247,6 @@ const lifeHealthInsurance = {
     iconName: 'Heart',
     color: '#1a729e',
     lightColor: '#e3eef7',
-    gradient: 'from-[#1a729e] to-[#074a6b]',
     tagline: 'Ensure your loved ones are always taken care of',
     description: 'Financial protection for your family when you\'re no longer there. Provides lump sum payment to nominees.',
     coverage: [
@@ -293,7 +286,6 @@ const lifeHealthInsurance = {
     iconName: 'HeartPulse',
     color: '#0080bf',
     lightColor: '#e6f3fa',
-    gradient: 'from-[#0080bf] to-[#2ba5ea]',
     tagline: 'Quality healthcare without financial worry',
     description: 'Coverage for medical expenses including hospitalization, surgeries, and treatments.',
     coverage: [
@@ -334,7 +326,6 @@ const lifeHealthInsurance = {
     iconName: 'HeartPulse',
     color: '#0080bf',
     lightColor: '#e6f3fa',
-    gradient: 'from-[#0080bf] to-[#2ba5ea]',
     tagline: 'Quality healthcare without financial worry',
     description: 'Coverage for medical expenses including hospitalization, surgeries, and treatments.',
     coverage: [
@@ -380,7 +371,6 @@ const businessInsurance = {
     iconName: 'Shield',
     color: '#074a6b',
     lightColor: '#e6f0f5',
-    gradient: 'from-[#074a6b] to-[#1a729e]',
     tagline: 'Protect your business from common claims',
     description: 'Comprehensive coverage protecting your business from bodily injury, property damage, and personal injury claims.',
     coverage: [
@@ -421,7 +411,6 @@ const businessInsurance = {
     iconName: 'Briefcase',
     color: '#2ba5ea',
     lightColor: '#e8f4fd',
-    gradient: 'from-[#2ba5ea] to-[#0080bf]',
     tagline: 'Errors and omissions coverage for professionals',
     description: 'Also known as Errors & Omissions (E&O) insurance, this protects against claims of negligence or inadequate work.',
     coverage: [
@@ -462,7 +451,6 @@ const businessInsurance = {
     iconName: 'Users',
     color: '#1a729e',
     lightColor: '#e3eef7',
-    gradient: 'from-[#1a729e] to-[#074a6b]',
     tagline: 'Protect your employees and your business',
     description: 'Mandatory coverage that provides medical benefits and wage replacement to employees injured on the job.',
     coverage: [
@@ -503,7 +491,6 @@ const businessInsurance = {
     iconName: 'Car',
     color: '#0080bf',
     lightColor: '#e6f3fa',
-    gradient: 'from-[#0080bf] to-[#2ba5ea]',
     tagline: 'Protect your business vehicles',
     description: 'Coverage for vehicles used for business purposes, from delivery vans to company cars.',
     coverage: [
@@ -544,7 +531,6 @@ const businessInsurance = {
     iconName: 'Building',
     color: '#074a6b',
     lightColor: '#e6f0f5',
-    gradient: 'from-[#074a6b] to-[#1a729e]',
     tagline: 'Protect your business assets and property',
     description: 'Coverage for your business building, equipment, inventory, and other physical assets.',
     coverage: [
@@ -585,7 +571,6 @@ const businessInsurance = {
     iconName: 'Shield',
     color: '#2ba5ea',
     lightColor: '#e8f4fd',
-    gradient: 'from-[#2ba5ea] to-[#0080bf]',
     tagline: 'Protect your business from digital threats',
     description: 'Coverage against data breaches, cyber attacks, and other digital risks.',
     coverage: [

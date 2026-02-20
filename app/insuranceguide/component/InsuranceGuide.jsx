@@ -132,6 +132,14 @@ const InsuranceGuide = ({ insuranceData }) => {
     }
   ];
 
+  const handleWhatsApp = () => {
+    window.open('https://wa.me/919881063639?text=Hi%20I%20need%20help%20with%20insurance', '_blank');
+  };
+
+  const handleCall = () => {
+    window.location.href = 'tel:+919881063639';
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
@@ -151,17 +159,7 @@ const InsuranceGuide = ({ insuranceData }) => {
               No jargon, just clear answers.
             </p>
             
-            {/* Search Bar */}
-            <div className="relative max-w-xl mx-auto">
-              <input
-                type="text"
-                placeholder="Search your question..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-6 py-4 rounded-full text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-[#2ba5ea]/50"
-              />
-              <Search className="absolute right-6 top-4 w-5 h-5 text-gray-400" />
-            </div>
+          
           </div>
         </div>
       </div>
@@ -255,7 +253,9 @@ const InsuranceGuide = ({ insuranceData }) => {
                 <p className="text-sm text-white/90 mb-4">
                   Our advisors are here to help you understand your options.
                 </p>
-                <button className="w-full bg-white text-[#074a6b] px-4 py-2 rounded-lg font-medium hover:shadow-lg transition">
+                <button
+                onClick={handleCall}
+                 className="w-full bg-white text-[#074a6b] px-4 py-2 rounded-lg font-medium hover:shadow-lg transition">
                   Talk to an Advisor
                 </button>
               </div>
@@ -415,11 +415,15 @@ const InsuranceGuide = ({ insuranceData }) => {
                 Get personalized advice from our licensed advisors. We'll help you find the right coverage for your needs.
               </p>
               <div className="flex flex-wrap gap-4">
-                <button className="bg-white text-[#074a6b] px-6 py-3 rounded-full font-semibold hover:shadow-lg transition inline-flex items-center gap-2">
+                <button
+                onClick={handleCall}
+                 className="bg-white text-[#074a6b] px-6 py-3 rounded-full font-semibold hover:shadow-lg transition inline-flex items-center gap-2">
                   <Phone className="w-4 h-4" />
                   Call an Advisor
                 </button>
-                <button className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[#074a6b] transition inline-flex items-center gap-2">
+                <button 
+                onClick={handleWhatsApp}
+                className="border-2 border-white text-white px-6 py-3 rounded-full font-semibold hover:bg-white hover:text-[#074a6b] transition inline-flex items-center gap-2">
                   <MessageCircle className="w-4 h-4" />
                   Live Chat
                 </button>

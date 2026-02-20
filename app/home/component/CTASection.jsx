@@ -91,13 +91,12 @@ const CTASection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4 mb-8">
-              <button className="group relative px-6 py-2 bg-white text-[#074a6b] rounded-full font-bold hover:shadow-2xl transform hover:scale-105 transition-all overflow-hidden">
+              <button onClick={() => window.location.href = "/calculators"}
+               className="group relative px-6 py-2 bg-white text-[#074a6b] rounded-full font-bold hover:shadow-2xl transform hover:scale-105 transition-all overflow-hidden">
                 <span className="relative z-10">Start Your Financial Journey →</span>
               </button>
               
-              <button className="px-6 py-2 border-2 border-white text-white rounded-full font-bold hover:bg-white hover:text-[#074a6b] transition-all transform hover:scale-105">
-                Book Free Consultation
-              </button>
+            
             </div>
 
             
@@ -105,31 +104,10 @@ const CTASection = () => {
 
           {/* Right Side - Booking Card */}
           <div className="bg-white rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-all duration-500">
-            {/* Timer (Optional Urgency Element) */}
-            <div className="text-center mb-6">
-              <span className="text-sm text-gray-500">Free consultation spots filling fast</span>
-              <div className="flex justify-center space-x-4 mt-2">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[#074a6b]">{timeLeft.days}</div>
-                  <div className="text-xs text-gray-500">Days</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[#074a6b]">{timeLeft.hours}</div>
-                  <div className="text-xs text-gray-500">Hours</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[#074a6b]">{timeLeft.minutes}</div>
-                  <div className="text-xs text-gray-500">Mins</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-[#074a6b]">{timeLeft.seconds}</div>
-                  <div className="text-xs text-gray-500">Secs</div>
-                </div>
-              </div>
-            </div>
+           
 
             {/* Booking Form */}
-            <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: '#074a6b' }}>Claim Your Free Session</h3>
+            <h3 className="text-2xl font-bold mb-4 text-center" style={{ color: '#074a6b' }}>Claim Your Session</h3>
             
             <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <input

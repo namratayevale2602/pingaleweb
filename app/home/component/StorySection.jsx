@@ -12,7 +12,7 @@ const lifeStages = [
     concept: "Income Protection & Future Security",
     description: "Your income is your biggest asset. Protect it while you build your dreams.",
     story: "Rahul, 28, software engineer. Bought term insurance for ₹1Cr at just ₹500/month.",
-    image: "/images/consumption.png",
+    image: "/images/img1.png",
     icon: Briefcase,
     benefit: "Family gets ₹1Cr if something happens to you",
     premium: "As low as ₹500/month"
@@ -24,7 +24,7 @@ const lifeStages = [
     concept: "Family Protection & Children's Future",
     description: "Your family depends on you. Ensure their dreams don't stop if you're not there.",
     story: "Priya & Ajay, both 35, got coverage so their daughter's education is always secure.",
-    image: "/images/creation.png",
+    image: "/images/img2.png",
     icon: Heart,
     benefit: "Children's education fund guaranteed",
     premium: "~₹1,200/month for ₹1Cr cover"
@@ -36,7 +36,7 @@ const lifeStages = [
     concept: "Loan Protection & Asset Security",
     description: "Your home shouldn't become a burden. Insurance pays off your loan if something happens.",
     story: "Vikram, 42, ensured his family can stay in their home no matter what.",
-    image: "/images/conservation.png",
+    image: "/images/img3.jpeg",
     icon: Home,
     benefit: "Home loan gets fully paid off",
     premium: "~₹800/month for ₹50L loan cover"
@@ -48,7 +48,7 @@ const lifeStages = [
     concept: "Retirement Income & Medical Security",
     description: "Enjoy retirement without worrying about medical bills or monthly income.",
     story: "Sharma ji, 58, secured monthly pension and health cover so his savings last forever.",
-    image: "/images/continuation.png",
+    image: "/images/img4.png",
     icon: Umbrella,
     benefit: "Guaranteed monthly income for life",
     premium: "Lumpsum investment, starts at ₹5L"
@@ -60,7 +60,7 @@ const lifeStages = [
     concept: "Leave a Legacy, Not a Burden",
     description: "Pass on wealth to your loved ones without tax or legal hassles.",
     story: "Kapoor family ensured grandchildren's education fund is ready, tax-free.",
-    image: "/images/contribution.png",
+    image: "/images/img5.png",
     icon: Leaf,
     benefit: "Tax-free wealth transfer to family",
     premium: "Customizable, starts at ₹10L"
@@ -124,8 +124,8 @@ const HeroStory = () => {
               </div>
 
               <motion.button 
-                className="mt-10 px-6 py-2 bg-blue-600 text-white rounded-full font-semibold text-lg hover:bg-blue-700 shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2"
-                whileHover={{ scale: 1.05 }}
+               onClick={() => window.location.href = "/calculators"}
+                className="mt-10 px-6 py-2 bg-[#0080bf] text-white rounded-full font-semibold text-lg shadow-lg inline-flex items-center gap-2"
                 whileTap={{ scale: 0.95 }}
               >
                 See How Much Cover You Need

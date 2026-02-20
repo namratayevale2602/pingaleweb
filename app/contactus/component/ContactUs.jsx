@@ -49,47 +49,24 @@ const ContactUs = () => {
 
   const [activeFaq, setActiveFaq] = useState(null);
   const [copied, setCopied] = useState(false);
-  const [selectedOffice, setSelectedOffice] = useState('mumbai');
+  const [selectedOffice, setSelectedOffice] = useState('nashik');
   const [showShareOptions, setShowShareOptions] = useState(false);
 
   // Office Locations
   const offices = [
     {
-      id: 'mumbai',
-      city: 'Mumbai',
-      address: 'Express Towers, 15th Floor, Nariman Point, Mumbai - 400021',
+      id: 'nashik',
+      city: 'Nashik',
+      address: 'Express Towers, 15th Floor, Nariman Point, Nashik - 400021',
       phone: '+91 22 4123 4567',
-      email: 'mumbai@finance.com',
+      email: 'nashik@finance.com',
       coordinates: { lat: 18.9242, lng: 72.8258 },
       hours: 'Mon-Fri: 9:00 AM - 7:00 PM',
       landline: '022-4123-4567',
       emergency: '+91 98765 43210',
-      image: 'https://images.unsplash.com/photo-1577495508326-19a1b3cf65b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
+      image: 'images/contact.jpeg'
     },
-    {
-      id: 'delhi',
-      city: 'Delhi',
-      address: 'DLF Cyber City, Building 8, Tower C, Gurugram - 122002',
-      phone: '+91 124 4123 4567',
-      email: 'delhi@finance.com',
-      coordinates: { lat: 28.4595, lng: 77.0266 },
-      hours: 'Mon-Fri: 9:30 AM - 6:30 PM',
-      landline: '0124-4123-4567',
-      emergency: '+91 98765 43211',
-      image: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 'bangalore',
-      city: 'Bangalore',
-      address: 'Embassy Golf Links, Intermediate Ring Road, Bangalore - 560071',
-      phone: '+91 80 4123 4567',
-      email: 'bangalore@finance.com',
-      coordinates: { lat: 12.9551, lng: 77.6417 },
-      hours: 'Mon-Fri: 9:00 AM - 6:00 PM',
-      landline: '080-4123-4567',
-      emergency: '+91 98765 43212',
-      image: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    }
+    
   ];
 
   // Social Media Links

@@ -26,7 +26,15 @@ import {
   Briefcase,
   GraduationCap,
   PiggyBank,
-  Users
+  Users,
+  ChevronDown,
+  Star,
+  ThumbsUp,
+  Zap,
+  Users as UsersIcon,
+  HeadphonesIcon,
+  Scale,
+  Timer
 } from 'lucide-react';
 
 // Icon mapping - defined outside component to prevent recreation
@@ -50,10 +58,6 @@ const iconMap = {
 const InsuranceDetail = ({ insuranceData, slug }) => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('overview');
-  const [formData, setFormData] = useState({
-    coverage: '1000000',
-    term: '10'
-  });
 
   // Memoize insurance data to prevent unnecessary re-renders
   const insurance = useMemo(() => insuranceData, [insuranceData]);
@@ -62,7 +66,7 @@ const InsuranceDetail = ({ insuranceData, slug }) => {
   if (!insurance) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+        <div className="text-center px-4">
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Insurance Not Found</h2>
           <p className="text-gray-600 mb-4">The insurance type you're looking for doesn't exist.</p>
           <button
@@ -76,23 +80,6 @@ const InsuranceDetail = ({ insuranceData, slug }) => {
     );
   }
 
-  // Memoize callbacks
-  const handleBack = useCallback(() => {
-    router.back();
-  }, [router]);
-
-  const handleCalculatePremium = useCallback(() => {
-    console.log('Calculating premium for:', formData);
-  }, [formData]);
-
-  const handleTabChange = useCallback((tabId) => {
-    setActiveTab(tabId);
-  }, []);
-
-  const handleInputChange = useCallback((e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  }, []);
 
   const tabs = [
     { id: 'overview', label: 'Overview' },
@@ -102,45 +89,52 @@ const InsuranceDetail = ({ insuranceData, slug }) => {
     { id: 'documents', label: 'Documents' }
   ];
 
+  // Benefits/features data
+  const benefits = [
+    { icon: Zap, text: 'Quick Claim Settlement within 7 days' },
+    { icon: UsersIcon, text: 'Coverage for 10+ family members' },
+    { icon: HeadphonesIcon, text: '24/7 Customer Support' },
+    { icon: Scale, text: 'No Claim Bonus available' },
+    { icon: Timer, text: 'Lifetime policy renewal' },
+    { icon: ThumbsUp, text: '98% Claim Settlement Ratio' }
+  ];
+
+  // Key highlights
+  const highlights = [
+    { label: 'Entry Age', value: '18 - 65 years' },
+    { label: 'Policy Term', value: '1 - 30 years' },
+    { label: 'Sum Assured', value: '₹5 Lakhs - ₹1 Crore' },
+    { label: 'Tax Benefit', value: 'U/s 80C & 10(10D)' },
+    { label: 'Claim Ratio', value: '98.5%' },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header with gradient */}
-      <div className={`bg-gradient-to-r ${insurance.gradient} text-white`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <button
-            onClick={handleBack}
-            className="flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to Insurance Types</span>
-          </button>
+      <div className="bg-linear-to-r from-[#1a729e] to-[#074a6b] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+          
 
-          <div className="flex items-start gap-6">
+          <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
-                  {insurance.category}
-                </span>
-                <span className="text-sm bg-white/20 px-3 py-1 rounded-full">
-                  ID: {insurance.id}
-                </span>
-              </div>
-              <h1 className="text-4xl font-bold mb-2">{insurance.title}</h1>
-              <p className="text-xl text-white/90">{insurance.tagline}</p>
+                
+              
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">{insurance.title}</h1>
+              <p className="text-base md:text-lg lg:text-xl text-white/90">{insurance.tagline}</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8 border-b border-gray-200 overflow-x-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8">
+        {/* Desktop Tabs - hidden on mobile */}
+        <div className="hidden md:flex flex-wrap gap-2 mb-8 border-b border-gray-200 overflow-x-auto">
           {tabs.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => handleTabChange(tab.id)}
-              className={`px-6 py-3 font-medium text-sm transition-all relative whitespace-nowrap ${
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 lg:px-6 py-3 font-medium text-sm transition-all relative whitespace-nowrap ${
                 activeTab === tab.id
                   ? 'text-[#074a6b]'
                   : 'text-gray-500 hover:text-gray-700'
@@ -154,245 +148,407 @@ const InsuranceDetail = ({ insuranceData, slug }) => {
           ))}
         </div>
 
-        {/* Tab Content */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Content - Different layouts for mobile and desktop */}
+        <div className="grid lg:grid-cols-3 gap-6 md:gap-8">
           {/* Main Content Area */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Overview Tab */}
-            {activeTab === 'overview' && (
-              <div className="space-y-6">
-                <div className="bg-white rounded-2xl p-8 shadow-sm">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-4">About {insurance.title}</h2>
-                  <p className="text-gray-600 leading-relaxed">{insurance.description}</p>
+            {/* Mobile View - Show all sections stacked */}
+            <div className="block md:hidden space-y-6">
+              {/* Overview Section - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-[#074a6b]" />
+                  About {insurance.title}
+                </h2>
+                <p className="text-sm text-gray-600 leading-relaxed">{insurance.description}</p>
+              </div>
+
+              {/* Quick Stats - Mobile */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="bg-white rounded-xl p-4 shadow-sm">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="p-1.5 rounded-lg bg-[#e6f0f5]">
+                      <Shield className="w-4 h-4 text-[#074a6b]" />
+                    </div>
+                    <span className="text-sm font-semibold text-gray-900">Coverage</span>
+                  </div>
+                  <div className="text-lg font-bold text-gray-900">₹5L - ₹1Cr</div>
+                  <p className="text-xs text-gray-500 mt-1">Typical coverage range</p>
                 </div>
 
-                {/* Quick Stats */}
+                <div className="bg-white rounded-xl p-4 shadow-sm">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="p-1.5 rounded-lg bg-[#e6f0f5]">
+                      <Clock className="w-4 h-4 text-[#074a6b]" />
+                    </div>
+                    <span className="text-sm font-semibold text-gray-900">Term</span>
+                  </div>
+                  <div className="text-lg font-bold text-gray-900">1-30 Years</div>
+                  <p className="text-xs text-gray-500 mt-1">Flexible policy terms</p>
+                </div>
+              </div>
+
+              {/* Key Highlights - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Key Highlights</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg" style={{ backgroundColor: insurance.lightColor }}>
-                        <Shield className="w-5 h-5" style={{ color: insurance.color }} />
-                      </div>
-                      <span className="font-semibold text-gray-900">Coverage</span>
+                  {highlights.map((item, idx) => (
+                    <div key={idx}>
+                      <p className="text-xs text-gray-500">{item.label}</p>
+                      <p className="text-sm font-semibold text-gray-900">{item.value}</p>
                     </div>
-                    <div className="text-2xl font-bold text-gray-900">₹5L - ₹1Cr</div>
-                    <p className="text-sm text-gray-500 mt-1">Typical coverage range</p>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-6 shadow-sm">
-                    <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg" style={{ backgroundColor: insurance.lightColor }}>
-                        <Clock className="w-5 h-5" style={{ color: insurance.color }} />
-                      </div>
-                      <span className="font-semibold text-gray-900">Term</span>
-                    </div>
-                    <div className="text-2xl font-bold text-gray-900">1-30 Years</div>
-                    <p className="text-sm text-gray-500 mt-1">Flexible policy terms</p>
-                  </div>
-                </div>
-
-                {/* Why Choose This */}
-                <div className="bg-white rounded-2xl p-8 shadow-sm">
-                  <h3 className="text-lg font-bold text-gray-900 mb-4">Why choose this plan?</h3>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">Comprehensive protection</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">Flexible payment options</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">Quick claim settlement</span>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-600">Tax benefits available</span>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
-            )}
 
-            {/* Coverage Tab */}
-            {activeTab === 'coverage' && (
-              <div className="space-y-6">
-                <div className="bg-white rounded-2xl p-8 shadow-sm">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Covered</h2>
-                  <div className="space-y-4">
-                    {insurance.coverage.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl p-8 shadow-sm">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Not Covered</h2>
-                  <div className="space-y-4">
-                    {insurance.exclusions.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-700">{item}</span>
-                      </div>
-                    ))}
-                  </div>
+              {/* Benefits - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h3 className="text-lg font-bold text-gray-900 mb-4">Why choose this plan?</h3>
+                <div className="grid grid-cols-1 gap-3">
+                  {benefits.map((benefit, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <benefit.icon className="w-4 h-4 text-[#074a6b] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-600">{benefit.text}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            )}
 
-            {/* Add-ons Tab */}
-            {activeTab === 'addons' && (
-              <div className="bg-white rounded-2xl p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Available Add-ons</h2>
-                <div className="space-y-4">
+              {/* Coverage Section - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-[#074a6b]" />
+                  What's Covered
+                </h2>
+                <div className="space-y-3">
+                  {insurance.coverage.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-[#074a6b] flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Exclusions Section - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-red-500" />
+                  What's Not Covered
+                </h2>
+                <div className="space-y-3">
+                  {insurance.exclusions.map((item, idx) => (
+                    <div key={idx} className="flex items-start gap-2">
+                      <AlertCircle className="w-4 h-4 text-red-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-sm text-gray-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Add-ons Section - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-[#074a6b]" />
+                  Available Add-ons
+                </h2>
+                <div className="space-y-3">
                   {insurance.addons.map((addon, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-4 border border-gray-200 rounded-xl hover:shadow-md transition">
+                    <div key={idx} className="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
                       <div>
-                        <h3 className="font-semibold text-gray-900">{addon.name}</h3>
-                        <p className="text-sm text-gray-500">Enhance your coverage</p>
+                        <h3 className="font-semibold text-sm text-gray-900">{addon.name}</h3>
+                        <p className="text-xs text-gray-500">Enhance your coverage</p>
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-gray-900">{addon.price}</div>
-                        <button className="text-sm text-[#0080bf] hover:underline">Learn more</button>
+                        <div className="font-bold text-sm text-gray-900">{addon.price}</div>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
-            )}
 
-            {/* FAQs Tab */}
-            {activeTab === 'faqs' && (
-              <div className="bg-white rounded-2xl p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+              {/* FAQs Section - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-[#074a6b]" />
+                  Frequently Asked Questions
+                </h2>
                 <div className="space-y-4">
                   {insurance.faqs.map((faq, idx) => (
                     <div key={idx} className="border-b border-gray-200 last:border-0 pb-4 last:pb-0">
-                      <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
-                      <p className="text-gray-600">{faq.a}</p>
+                      <h3 className="font-semibold text-sm text-gray-900 mb-2">{faq.q}</h3>
+                      <p className="text-xs text-gray-600">{faq.a}</p>
                     </div>
                   ))}
                 </div>
               </div>
-            )}
 
-            {/* Documents Tab */}
-            {activeTab === 'documents' && (
-              <div className="bg-white rounded-2xl p-8 shadow-sm">
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Required Documents</h2>
-                <div className="space-y-4">
+              {/* Documents Section - Mobile */}
+              <div className="bg-white rounded-xl p-6 shadow-sm">
+                <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-[#074a6b]" />
+                  Required Documents
+                </h2>
+                <div className="space-y-3">
                   {insurance.documents.map((doc, idx) => (
-                    <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <FileText className="w-5 h-5 text-gray-500" />
-                      <span className="text-gray-700">{doc}</span>
+                    <div key={idx} className="flex items-center gap-2 p-2 bg-gray-50 rounded-lg">
+                      <FileText className="w-4 h-4 text-gray-500" />
+                      <span className="text-xs text-gray-700">{doc}</span>
                     </div>
                   ))}
                 </div>
               </div>
-            )}
+            </div>
+
+            {/* Desktop View - Tabbed content */}
+            <div className="hidden md:block space-y-6">
+              {/* Overview Tab */}
+              {activeTab === 'overview' && (
+                <div className="space-y-6">
+                  <div className="bg-white rounded-2xl p-8 shadow-sm">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-4">About {insurance.title}</h2>
+                    <p className="text-gray-600 leading-relaxed">{insurance.description}</p>
+                  </div>
+
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white rounded-xl p-6 shadow-sm">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 rounded-lg bg-[#e6f0f5]">
+                          <Shield className="w-5 h-5 text-[#074a6b]" />
+                        </div>
+                        <span className="font-semibold text-gray-900">Coverage</span>
+                      </div>
+                      <div className="text-2xl font-bold text-gray-900">₹5L - ₹1Cr</div>
+                      <p className="text-sm text-gray-500 mt-1">Typical coverage range</p>
+                    </div>
+
+                    <div className="bg-white rounded-xl p-6 shadow-sm">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="p-2 rounded-lg bg-[#e6f0f5]">
+                          <Clock className="w-5 h-5 text-[#074a6b]" />
+                        </div>
+                        <span className="font-semibold text-gray-900">Term</span>
+                      </div>
+                      <div className="text-2xl font-bold text-gray-900">1-30 Years</div>
+                      <p className="text-sm text-gray-500 mt-1">Flexible policy terms</p>
+                    </div>
+                  </div>
+
+                  {/* Key Highlights */}
+                  <div className="bg-white rounded-2xl p-8 shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-900 mb-6">Key Highlights</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                      {highlights.map((item, idx) => (
+                        <div key={idx}>
+                          <p className="text-sm text-gray-500">{item.label}</p>
+                          <p className="text-base font-semibold text-gray-900">{item.value}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Benefits */}
+                  <div className="bg-white rounded-2xl p-8 shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-900 mb-6">Why choose this plan?</h3>
+                    <div className="grid grid-cols-2 gap-4">
+                      {benefits.map((benefit, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <benefit.icon className="w-5 h-5 text-[#074a6b] flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-600">{benefit.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Coverage Tab */}
+              {activeTab === 'coverage' && (
+                <div className="space-y-6">
+                  <div className="bg-white rounded-2xl p-8 shadow-sm">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Covered</h2>
+                    <div className="space-y-4">
+                      {insurance.coverage.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <CheckCircle className="w-5 h-5 text-[#074a6b] flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="bg-white rounded-2xl p-8 shadow-sm">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">What's Not Covered</h2>
+                    <div className="space-y-4">
+                      {insurance.exclusions.map((item, idx) => (
+                        <div key={idx} className="flex items-start gap-3">
+                          <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-700">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Add-ons Tab */}
+              {activeTab === 'addons' && (
+                <div className="bg-white rounded-2xl p-8 shadow-sm">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Available Add-ons</h2>
+                  <div className="space-y-4">
+                    {insurance.addons.map((addon, idx) => (
+                      <div key={idx} className="flex items-center justify-between p-4 border border-gray-200 rounded-xl hover:shadow-md transition">
+                        <div>
+                          <h3 className="font-semibold text-gray-900">{addon.name}</h3>
+                          <p className="text-sm text-gray-500">Enhance your coverage</p>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-bold text-gray-900">{addon.price}</div>
+                          <button className="text-sm text-[#0080bf] hover:underline">Learn more</button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* FAQs Tab */}
+              {activeTab === 'faqs' && (
+                <div className="bg-white rounded-2xl p-8 shadow-sm">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Frequently Asked Questions</h2>
+                  <div className="space-y-4">
+                    {insurance.faqs.map((faq, idx) => (
+                      <div key={idx} className="border-b border-gray-200 last:border-0 pb-4 last:pb-0">
+                        <h3 className="font-semibold text-gray-900 mb-2">{faq.q}</h3>
+                        <p className="text-gray-600">{faq.a}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Documents Tab */}
+              {activeTab === 'documents' && (
+                <div className="bg-white rounded-2xl p-8 shadow-sm">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6">Required Documents</h2>
+                  <div className="space-y-4">
+                    {insurance.documents.map((doc, idx) => (
+                      <div key={idx} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                        <FileText className="w-5 h-5 text-gray-500" />
+                        <span className="text-gray-700">{doc}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
-          {/* Sidebar */}
+          {/* Sidebar - Insurance Info Cards */}
           <div className="space-y-6">
-            {/* Get Quote Card */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm sticky top-6">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Get a Free Quote</h3>
+            {/* Policy at a Glance Card */}
+            <div className="bg-white rounded-xl md:rounded-2xl p-5 md:p-6 shadow-sm sticky top-6">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+                <Shield className="w-5 h-5 text-[#074a6b]" />
+                Policy at a Glance
+              </h3>
               
               <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Coverage Amount
-                  </label>
-                  <select 
-                    name="coverage"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0080bf]"
-                    value={formData.coverage}
-                    onChange={handleInputChange}
-                  >
-                    <option value="500000">₹5,00,000</option>
-                    <option value="1000000">₹10,00,000</option>
-                    <option value="2500000">₹25,00,000</option>
-                    <option value="5000000">₹50,00,000</option>
-                    <option value="10000000">₹1,00,00,000</option>
-                  </select>
+                <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                  <span className="text-sm text-gray-600">Policy Type</span>
+                  <span className="text-sm font-semibold text-gray-900">{insurance.category}</span>
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term (Years)
-                  </label>
-                  <select 
-                    name="term"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0080bf]"
-                    value={formData.term}
-                    onChange={handleInputChange}
-                  >
-                    <option value="1">1 Year</option>
-                    <option value="2">2 Years</option>
-                    <option value="5">5 Years</option>
-                    <option value="10">10 Years</option>
-                    <option value="20">20 Years</option>
-                    <option value="30">30 Years</option>
-                  </select>
+                
+                <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                  <span className="text-sm text-gray-600">Entry Age</span>
+                  <span className="text-sm font-semibold text-gray-900">18-65 years</span>
                 </div>
-
-                <button 
-                  onClick={handleCalculatePremium}
-                  className="w-full py-3 bg-gradient-to-r from-[#074a6b] to-[#0080bf] text-white rounded-lg font-semibold hover:shadow-lg transition-all"
-                >
-                  Calculate Premium
-                </button>
+                
+                <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                  <span className="text-sm text-gray-600">Policy Term</span>
+                  <span className="text-sm font-semibold text-gray-900">1-30 years</span>
+                </div>
+                
+                <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                  <span className="text-sm text-gray-600">Sum Assured</span>
+                  <span className="text-sm font-semibold text-gray-900">₹5L - ₹1Cr</span>
+                </div>
+                
+                <div className="flex justify-between items-center pb-2 border-b border-gray-100">
+                  <span className="text-sm text-gray-600">Tax Benefits</span>
+                  <span className="text-sm font-semibold text-green-600">U/s 80C, 10(10D)</span>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-600">Claim Ratio</span>
+                  <span className="text-sm font-semibold text-gray-900">98.5%</span>
+                </div>
               </div>
 
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <p className="text-sm text-gray-600 mb-3">Starting from</p>
-                <div className="flex items-baseline gap-1">
-                  <IndianRupee className="w-5 h-5 text-gray-500" />
-                  <span className="text-3xl font-bold text-gray-900">500</span>
-                  <span className="text-gray-500">/month</span>
+              <div className="mt-6 pt-4 border-t border-gray-200">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-gray-600">Customer Rating</span>
+                  <div className="flex items-center gap-1">
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    <span className="text-sm font-semibold ml-1">4.5</span>
+                  </div>
                 </div>
+                <p className="text-xs text-gray-500">Based on 10,000+ reviews</p>
               </div>
             </div>
 
-            {/* Need Help Card */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Need Help?</h3>
+            {/* Key Benefits Card */}
+            <div className="bg-white rounded-xl md:rounded-2xl p-5 md:p-6 shadow-sm">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-4">Key Benefits</h3>
               <div className="space-y-3">
-                <button className="w-full flex items-center gap-3 p-3 bg-[#074a6b]/5 rounded-lg hover:bg-[#074a6b]/10 transition">
-                  <Phone className="w-5 h-5 text-[#074a6b]" />
-                  <span className="text-gray-700">Call an Advisor</span>
-                </button>
-                <button className="w-full flex items-center gap-3 p-3 bg-[#0080bf]/5 rounded-lg hover:bg-[#0080bf]/10 transition">
-                  <Mail className="w-5 h-5 text-[#0080bf]" />
-                  <span className="text-gray-700">Email Us</span>
-                </button>
-                <button className="w-full flex items-center gap-3 p-3 bg-[#2ba5ea]/5 rounded-lg hover:bg-[#2ba5ea]/10 transition">
-                  <Calendar className="w-5 h-5 text-[#2ba5ea]" />
-                  <span className="text-gray-700">Schedule a Call</span>
-                </button>
+                <div className="flex items-start gap-3">
+                  <div className="p-1.5 bg-green-100 rounded-lg">
+                    <Zap className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Quick Claim Settlement</p>
+                    <p className="text-xs text-gray-500">Within 7 working days</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="p-1.5 bg-blue-100 rounded-lg">
+                    <UsersIcon className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">Family Coverage</p>
+                    <p className="text-xs text-gray-500">Cover spouse, kids & parents</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="p-1.5 bg-purple-100 rounded-lg">
+                    <HeadphonesIcon className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">24/7 Support</p>
+                    <p className="text-xs text-gray-500">Dedicated relationship manager</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-3">
+                  <div className="p-1.5 bg-orange-100 rounded-lg">
+                    <Scale className="w-4 h-4 text-orange-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">No Claim Bonus</p>
+                    <p className="text-xs text-gray-500">5% bonus on sum assured</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Share Card */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h3 className="text-lg font-bold text-gray-900 mb-4">Share</h3>
-              <div className="flex gap-2">
-                <button className="flex-1 py-2 px-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm">
-                  Twitter
-                </button>
-                <button className="flex-1 py-2 px-3 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition text-sm">
-                  Facebook
-                </button>
-                <button className="flex-1 py-2 px-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition text-sm">
-                  WhatsApp
-                </button>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>

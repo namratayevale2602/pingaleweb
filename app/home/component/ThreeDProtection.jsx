@@ -139,11 +139,7 @@ const ThreeDProtection = () => {
                   }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   className="relative bg-white rounded-3xl shadow-xl overflow-hidden"
-                  style={{
-                    boxShadow: isHovered 
-                      ? `0 30px 40px -15px ${layer.color}40` 
-                      : "0 20px 25px -5px rgba(0,0,0,0.1)"
-                  }}
+                  
                 >
                   {/* Top Gradient Bar */}
                   <div 
@@ -153,18 +149,18 @@ const ThreeDProtection = () => {
 
                   {/* Card Header */}
                   <div className="p-6 pb-4">
-                    <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-start justify-between mb-4 ">
                       <div 
-                        className="p-3 rounded-xl"
-                        style={{ backgroundColor: `${layer.color}15` }}
+                        className="p-3 rounded-xl bg-blue-50"
+                       
                       >
-                        <Icon className="w-6 h-6 text-[#1a729e]" />
+                        <Icon className="w-6 h-6 text-[#074a6b]" />
                       </div>
                       
 
                     </div>
 
-                    <h3 className="text-2xl font-bold mb-1 text-[#1a729e]">
+                    <h3 className="text-2xl font-bold mb-1 text-[#074a6b]">
                       {layer.name}
                     </h3>
                     <p className="text-sm text-gray-600">{layer.description}</p>
@@ -172,8 +168,8 @@ const ThreeDProtection = () => {
 
                   {/* Story Card */}
                   <div 
-                    className="mx-6 p-4 rounded-xl mb-4"
-                    style={{ backgroundColor: layer.lightColor }}
+                    className="mx-6 p-4 rounded-xl mb-4 bg-blue-50"
+                    
                   >
                     <p className="text-sm text-gray-700 italic">
                       "{layer.story.text}"
@@ -217,21 +213,12 @@ const ThreeDProtection = () => {
 
                     {/* Emotional Hook */}
                     <div className="flex items-center gap-2">
-                      <Sparkles className="w-4 h-4 text-[#1a729e]"  />
-                      <p className="text-xs font-medium text-[#1a729e]" >
+                      <Sparkles className="w-4 h-4 text-[#074a6b]"  />
+                      <p className="text-xs font-medium text-[#074a6b]" >
                         {layer.emotionalHook}
                       </p>
                     </div>
 
-                    {/* Learn More Link */}
-                    <motion.button 
-                      className="mt-4 text-sm font-medium inline-flex items-center gap-1 group text-[#1a729e]"
-                      
-                      whileHover={{ gap: "0.5rem" }}
-                    >
-                      Learn more about {layer.name} Protection
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </motion.button>
                   </div>
 
                  
@@ -250,7 +237,7 @@ const ThreeDProtection = () => {
         >
           <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-[#1a729e]/10">
+              <div className="p-3 rounded-xl bg-blue-50">
                 <Calendar className="w-6 h-6 text-[#1a729e]" />
               </div>
               <div>
@@ -262,7 +249,7 @@ const ThreeDProtection = () => {
 
           <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-[#1a729e]/10">
+              <div className="p-3 rounded-xl bg-blue-50">
                 <IndianRupee className="w-6 h-6 text-[#1a729e]" />
               </div>
               <div>
@@ -274,7 +261,7 @@ const ThreeDProtection = () => {
 
           <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-xl bg-[#1a729e]/10">
+              <div className="p-3 rounded-xl bg-blue-50">
                 <Shield className="w-6 h-6 text-[#1a729e]" />
               </div>
               <div>
@@ -315,6 +302,7 @@ const ThreeDProtection = () => {
               
               <div className="flex flex-wrap gap-4 justify-center">
                 <motion.button 
+                onClick={() => window.location.href = "/calculators"}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-white text-[#074a6b] px-6 py-2 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2 group"
@@ -324,6 +312,7 @@ const ThreeDProtection = () => {
                 </motion.button>
                 
                 <motion.button 
+                onClick={() => window.location.href = "/contactus"}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="border-2 border-white text-white px-6 py-2 rounded-full font-semibold hover:bg-white hover:text-[#074a6b] transition-all"

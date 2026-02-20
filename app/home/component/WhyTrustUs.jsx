@@ -175,7 +175,7 @@ const WhyTrustUs = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-20 relative"
         >
-          <div className="relative bg-gradient-to-r from-[#074a6b] to-[#0080bf] rounded-3xl p-12 text-white overflow-hidden">
+          <div className="relative bg-linear-to-r from-[#074a6b] to-[#0080bf] rounded-3xl p-12 text-white overflow-hidden">
             <Quote className="absolute top-6 right-6 w-24 h-24 text-white/10" />
             <div className="relative z-10 max-w-3xl">
               <p className="text-2xl md:text-3xl font-light italic leading-relaxed">
@@ -233,16 +233,13 @@ const WhyTrustUs = () => {
                       scale: isHovered ? 1.02 : 1,
                     }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 h-full"
-                    style={{
-                      borderTop: `4px solid ${item.color}`,
-                    }}
+                    className="relative bg-white border-t-4 border-t-[#0080bf] rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 h-full"
+                    
                   >
                     {/* Step Number */}
                     <div className="absolute -top-3 left-6">
                       <div 
-                        className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
-                        style={{ backgroundColor: item.color }}
+                        className="w-8 h-8 rounded-full flex items-center justify-center bg-[#0080bf] text-white text-sm font-bold"
                       >
                         {item.step}
                       </div>
@@ -250,10 +247,9 @@ const WhyTrustUs = () => {
 
                     {/* Icon */}
                     <div 
-                      className="w-16 h-16 rounded-xl flex items-center justify-center mb-4"
-                      style={{ backgroundColor: `${item.color}15` }}
+                      className="w-16 h-16 rounded-xl flex items-center bg-blue-50 justify-center mb-4"
                     >
-                      <Icon className="w-8 h-8" style={{ color: item.color }} />
+                      <Icon className="w-8 h-8 text-[#0080bf]" />
                     </div>
 
                     <h4 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h4>
@@ -314,8 +310,7 @@ const WhyTrustUs = () => {
                     {/* Badge Ribbon */}
                     <div className="absolute -top-2 -right-2">
                       <div 
-                        className="px-3 py-1 rounded-full text-xs font-bold text-white shadow-lg"
-                        style={{ backgroundColor: cert.color }}
+                        className="px-3 py-1 rounded-full text-xs font-bold bg-[#0080bf] text-white shadow-lg"
                       >
                         {cert.badge}
                       </div>
@@ -323,10 +318,9 @@ const WhyTrustUs = () => {
 
                     {/* Icon */}
                     <div 
-                      className="w-14 h-14 rounded-xl flex items-center justify-center mb-4"
-                      style={{ backgroundColor: `${cert.color}15` }}
+                      className="w-14 h-14 rounded-xl flex items-center bg-blue-50 justify-center mb-4"
                     >
-                      <Icon className="w-7 h-7" style={{ color: cert.color }} />
+                      <Icon className="w-7 h-7 text-[#0080bf]" />
                     </div>
 
                     <h4 className="text-lg font-bold text-gray-900 mb-1 pr-16">{cert.name}</h4>
@@ -334,15 +328,7 @@ const WhyTrustUs = () => {
 
                    
 
-                    {/* Learn More Indicator */}
-                    <motion.div 
-                      className="mt-3 flex items-center gap-1 text-xs font-medium"
-                      style={{ color: cert.color }}
-                      animate={{ gap: isActive ? '0.5rem' : '0.25rem' }}
-                    >
-                      <span>{isActive ? 'More details' : 'Hover to learn more'}</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </motion.div>
+               
                   </motion.div>
                 </motion.div>
               );
@@ -357,7 +343,7 @@ const WhyTrustUs = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-20 text-center"
         >
-          <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#074a6b] to-[#0080bf] text-white px-6 py-3 rounded-full">
+          <div className="inline-flex items-center gap-2 bg-[#0080bf] text-white px-6 py-3 rounded-full">
             <Shield className="w-5 h-5" />
             <span className="font-medium">Trusted by 10,000+ families</span>
           </div>

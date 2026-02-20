@@ -9,28 +9,23 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?q=80&w=2070&auto=format&fit=crop',
+      image: '/images/insuarance1.png',
       alt: 'Family protecting their home',
-      title: 'Family Protection'
+     title: 'Health & Wellness'
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop',
+      image: '/images/insuarance2.png',
       alt: 'Business insurance',
-      title: 'Business Security'
+      title: 'Vehicle Security'
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop',
+      image: '/images/insuarance3.png',
       alt: 'Health insurance',
-      title: 'Health & Wellness'
+       title: 'Family Protection'
     },
-    {
-      id: 4,
-      image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2070&auto=format&fit=crop',
-      alt: 'Car insurance',
-      title: 'Auto Protection'
-    }
+    
   ];
 
   const features = [
@@ -56,7 +51,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-[#074a6b] to-[#2ba5ea] overflow-hidden">
+    <section className="relative bg-linear-to-br from-[#074a6b] to-[#2ba5ea] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -80,7 +75,7 @@ const Hero = () => {
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 Protect What
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-100">
+                <span className="block text-transparent bg-clip-text bg-linear-to-r from-yellow-300 to-yellow-100">
                   Matters Most
                 </span>
               </h1>
@@ -92,13 +87,18 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <button className="group bg-white text-[#074a6b] px-8 py-4 rounded-lg font-semibold 
+              <button 
+              onClick={() => window.location.href = "/contactus"}
+              className="group bg-white text-[#074a6b] px-8 py-4 rounded-lg font-semibold 
                 hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300
                 flex items-center space-x-2">
-                <span>Get Free Quote</span>
+                <span>Get Quote</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
-              <button className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold 
+              
+              <button
+              onClick={() => window.location.href = "/calculators"}
+              className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold 
                 hover:bg-white/10 hover:border-white transition-all duration-300
                 backdrop-blur-sm">
                 Learn More
@@ -118,33 +118,13 @@ const Hero = () => {
               ))}
             </div>
 
-            {/* Trust Indicators - FIXED IMAGE */}
-            <div className="flex items-center space-x-6 pt-4">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((item) => (
-                  <div key={item} className="w-8 h-8 rounded-full border-2 border-white overflow-hidden">
-                    <Image
-                      src={`https://images.unsplash.com/photo-${1500000000000 + item}?w=100&h=100&fit=crop`}
-                      alt="Customer"
-                      width={32}
-                      height={32}
-                      sizes="32px"
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="text-sm">
-                <span className="font-bold">10K+</span>{" "}
-                <span className="text-white/80">happy customers</span>
-              </div>
-            </div>
+           
           </div>
 
           {/* Right Side - Image Slider */}
-          <div className="relative lg:h-[600px]">
+          <div className="relative lg:h-125">
             {/* Slider Container */}
-            <div className="relative h-[400px] sm:h-[500px] lg:h-full rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative h-100 sm:h-125 lg:h-full rounded-2xl overflow-hidden">
               {/* Slides - FIXED IMAGE */}
               {slides.map((slide, index) => (
                 <div
@@ -160,38 +140,14 @@ const Hero = () => {
                     alt={slide.alt}
                     fill={true}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover"
+                    className="object-contain"
                     priority={index === 0 ? true : false}
                   />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-                  
-                  {/* Slide Caption */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                    <h3 className="text-xl font-bold">{slide.title}</h3>
-                  </div>
+                
                 </div>
               ))}
 
-              {/* Navigation Arrows */}
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 
-                  bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center
-                  hover:bg-white/30 transition-all duration-300 z-10
-                  border border-white/30 text-white"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 
-                  bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center
-                  hover:bg-white/30 transition-all duration-300 z-10
-                  border border-white/30 text-white"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
+              
 
               {/* Slide Indicators */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
@@ -215,7 +171,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom Wave Divider */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute -bottom-5 left-0 right-0">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" className="w-full h-auto">
           <path 
             fill="#ffffff" 

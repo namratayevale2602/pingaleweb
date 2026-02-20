@@ -1,6 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
+import FloatingActionButtons from "@/components/ui/FloatingActionButtons";
 
 export const metadata = {
   title: {
@@ -68,6 +69,7 @@ export default function RootLayout({ children }) {
         <Header />
           <main>
             {children}
+            <FloatingActionButtons />
           </main>
         <Footer />
       </body>

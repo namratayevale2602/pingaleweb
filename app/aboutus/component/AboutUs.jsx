@@ -160,7 +160,7 @@ const AboutUs = () => {
               {/* Main Image */}
               <div className="col-span-2 rounded-2xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-500">
                 <img 
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
+                  src="images/about2.jpeg" 
                   alt="Team meeting"
                   className="w-full h-64 object-cover"
                 />
@@ -169,14 +169,14 @@ const AboutUs = () => {
               {/* Two smaller images */}
               <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-500">
                 <img 
-                  src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+                  src="images/about1.png" 
                   alt="Client consultation"
                   className="w-full h-48 object-cover"
                 />
               </div>
               <div className="rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-500">
                 <img 
-                  src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" 
+                  src="images/about3.jpeg" 
                   alt="Happy clients"
                   className="w-full h-48 object-cover"
                 />
@@ -302,7 +302,7 @@ const AboutUs = () => {
             <div className="grid lg:grid-cols-2 gap-6">
               {/* Main Testimonial */}
               <div className="lg:col-span-1">
-                <div className="bg-white rounded-3xl shadow-2xl p-8 h-full relative overflow-hidden">
+                <div className="bg-white rounded-3xl shadow-xl p-8 h-full relative overflow-hidden">
                   {/* Quote Background */}
                   <Quote className="absolute top-4 right-4 w-24 h-24 text-gray-100" />
                   
@@ -404,7 +404,9 @@ const AboutUs = () => {
           </p>
           
           <div className="flex flex-wrap justify-center gap-6">
-            <button className="group px-8 py-4 bg-[#0A4D6B] text-white rounded-full font-semibold hover:bg-[#2A9D8F] transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
+            <button
+            onClick={() => window.location.href = "/contactus"}
+             className="group px-8 py-4 bg-[#1a729e] text-white rounded-full font-semibold transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
               Schedule a Meeting
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>

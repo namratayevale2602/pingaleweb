@@ -433,42 +433,7 @@ const HomeLoanRecoveryCalculator = () => {
               Loan & Investment Parameters
             </h2>
 
-            {/* EMI Type Selection (only for EMI calculators) */}
-            {(calculatorType === "emi-loan" || calculatorType === "emi-monthly") && (
-              <div className="mb-8 p-5 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200">
-                <div className="flex items-center justify-between mb-3">
-                  <label className="text-gray-700 font-medium flex items-center gap-2">
-                    <CreditCard className="w-4 h-4 text-blue-500" />
-                    EMI Calculation Method
-                  </label>
-                </div>
-                <div className="flex gap-4">
-                  <button
-                    onClick={() => setEmiSubType("loan-amount")}
-                    className={`flex-1 py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2 ${
-                      emiSubType === "loan-amount" 
-                        ? "bg-[#1a729e] text-white shadow-md" 
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    <Landmark className="w-4 h-4" />
-                    Know Loan Amount
-                  </button>
-                  <button
-                    onClick={() => setEmiSubType("monthly-emi")}
-                    className={`flex-1 py-2 px-4 rounded-lg transition-all flex items-center justify-center gap-2 ${
-                      emiSubType === "monthly-emi" 
-                        ? "bg-[#1a729e] text-white shadow-md" 
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
-                  >
-                    <CreditCard className="w-4 h-4" />
-                    Know Monthly EMI
-                  </button>
-                </div>
-              </div>
-            )}
-            
+         
             {/* Loan Amount (for EMI-loan, Principal, and Interest) */}
             {(calculatorType === "emi-loan" || calculatorType === "principal" || calculatorType === "interest") && (
               <div className="mb-6">
@@ -826,7 +791,7 @@ const HomeLoanRecoveryCalculator = () => {
                
               </>
             ) : (
-              <div className="bg-white rounded-2xl shadow-xl p-8 flex items-center justify-center min-h-[400px]">
+              <div className="bg-white rounded-2xl shadow-xl p-8 flex items-center justify-center min-h-100">
                 <div className="text-center">
                   <Home className="w-16 h-16 mx-auto text-blue-300 mb-4" />
                   <h3 className="text-lg font-medium text-gray-500 mb-2">
