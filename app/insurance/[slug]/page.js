@@ -1,6 +1,6 @@
 // app/insurance/[slug]/page.js
-import InsuranceDetail from '../component/InsuranceDetailPage';
-import { getInsuranceBySlug, getAllInsuranceSlugs } from '../data/insuranceData';
+import InsuranceDetail from '../../../components/insurance/InsuranceDetailPage';
+import { getInsuranceBySlug, getAllInsuranceSlugs } from '../../../data/insuranceData';
 
 // Force static generation
 export const dynamic = 'force-static';

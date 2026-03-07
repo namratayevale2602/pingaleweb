@@ -3,7 +3,7 @@
 import Link from "next/link";
 import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
-import ContactUs from "./component/ContactUs";
+import ContactUs from "../../components/contactus/ContactUs";
 
 export default function Calculators() {
 

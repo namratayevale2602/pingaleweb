@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
-import Calculators from "./component/Calculators";
+import Calculators from "../../components/calculators/Calculators";
 
 
 export default function Home() {

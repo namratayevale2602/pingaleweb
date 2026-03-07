@@ -6,12 +6,12 @@ import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
 
 // Dynamic imports for all calculator components
-const FutureWealthCalculator = dynamic(() => import("../component/FutureWealthCalculator"));
-const SIPCalculator = dynamic(() => import("../component/SIPCalculator"));
-const SIPtoSWPCalculator = dynamic(() => import("../component/SipSwpCalculator"));
-const GoalCalculator = dynamic(() => import("../component/GoalCalculator"));
-const HomeLoanRecoveryCalculator = dynamic(() => import("../component/HomeLoanRecoveryCalculator"));
-const RetirementCorpusCalculator = dynamic(() => import("../component/RetirementCorpusCalculator"));
+const FutureWealthCalculator = dynamic(() => import("../../../components/calculators/FutureWealthCalculator"));
+const SIPCalculator = dynamic(() => import("../../../components/calculators/SIPCalculator"));
+const SIPtoSWPCalculator = dynamic(() => import("../../../components/calculators/SipSwpCalculator"));
+const GoalCalculator = dynamic(() => import("../../../components/calculators/GoalCalculator"));
+const HomeLoanRecoveryCalculator = dynamic(() => import("../../../components/calculators/HomeLoanRecoveryCalculator"));
+const RetirementCorpusCalculator = dynamic(() => import("../../../components/calculators/RetirementCorpusCalculator"));
 
 // Map of slugs to components - only component mapping, no SEO data
 const calculatorComponents = {

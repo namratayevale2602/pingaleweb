@@ -1,7 +1,8 @@
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import Header from "@/components/navbar/Navbar";
+import Footer from "@/components/footer/Footer";
 import "./globals.css";
 import FloatingActionButtons from "@/components/ui/FloatingActionButtons";
+import { dmSerif, urbanist, poppins } from "./fonts";
 
 export const metadata = {
   title: {
@@ -69,7 +70,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en"  className={`${dmSerif.variable} ${urbanist.variable} ${poppins.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         <Header />
         <main className="flex-grow">

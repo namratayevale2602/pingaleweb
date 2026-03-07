@@ -1,13 +1,13 @@
 import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
 import Link from "next/link";
-import Hero from "./home/component/Hero";
-import HeroStory from "./home/component/StorySection";
-import ThreeDProtection from "./home/component/ThreeDProtection";
-import WhyTrustUs from "./home/component/WhyTrustUs";
-import YourProcess from "./home/component/YourProcess";
-import CTASection from "./home/component/CTASection";
-import Calculators from "./calculators/component/Calculators"
+import Hero from "../components/home/Hero";
+import HeroStory from "../components/home/StorySection";
+import ThreeDProtection from "../components/home/ThreeDProtection";
+import WhyTrustUs from "../components/home/WhyTrustUs";
+import YourProcess from "../components/home/YourProcess";
+import CTASection from "../components/home/CTASection";
+import Calculators from "../components/calculators/Calculators"
 
 export default async function Home() {
 
