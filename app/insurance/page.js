@@ -8,7 +8,7 @@ import InsuranceExplainer from "@/components/insurance/insurance";
 export default function Calculators() {
 
   const { metadata, jsonLdData } = PageSEO({ 
-    pageKey: 'contact',
+    pageKey: 'insurance',
     includeJsonLd: true
   })
 
@@ -29,6 +29,6 @@ export default function Calculators() {
 }
 
 export async function generateMetadata() {
-  const { metadata } = PageSEO({ pageKey: 'contact' })
+  const { metadata } = PageSEO({ pageKey: 'insurance' })
   return metadata
 }

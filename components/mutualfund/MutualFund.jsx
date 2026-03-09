@@ -2,6 +2,38 @@
 "use client";
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import {
+  FaQuestionCircle,
+  FaChartPie,
+  FaMoneyBillWave,
+  FaExchangeAlt,
+  FaBolt,
+  FaTag,
+  FaBalanceScale,
+  FaWallet,
+  FaShieldAlt,
+  FaChartLine,
+  FaCoins,
+  FaCalendarAlt,
+  FaPercent,
+  FaGraduationCap,
+  FaPiggyBank,
+  FaUniversity,
+  FaChartBar,
+  FaClock,
+  FaRocket,
+  FaGift,
+  FaLightbulb,
+  FaCheckCircle,
+  FaTimesCircle,
+  FaUsers,
+  FaStar,
+  FaArrowUp,
+  FaArrowDown,
+  FaSyncAlt,
+  FaDownload,
+  FaUpload
+} from 'react-icons/fa';
 
 const MutualFundExplainer = () => {
   const [activeTab, setActiveTab] = useState('why-invest');
@@ -20,14 +52,14 @@ const MutualFundExplainer = () => {
   }, []);
 
   const tabs = [
-    { id: 'why-invest', label: 'Why Invest in MF?', icon: '💭' },
-    { id: 'types', label: 'Types of Mutual Fund', icon: '📊' },
-    { id: 'sip', label: 'What is SIP?', icon: '💰' },
-    { id: 'stp', label: 'STP', icon: '🔄' },
-    { id: 'compounding', label: 'Power of Compounding', icon: '⚡' },
-    { id: 'elss', label: 'What is ELSS?', icon: '🏷️' },
-    { id: 'debt-vs-fd', label: 'Debt MF V/S FD', icon: '⚖️' },
-    { id: 'swp', label: 'SWP', icon: '💵' },
+    { id: 'why-invest', label: 'Why Invest in MF?', icon: <FaQuestionCircle /> },
+    { id: 'types', label: 'Types of Mutual Fund', icon: <FaChartPie /> },
+    { id: 'sip', label: 'What is SIP?', icon: <FaMoneyBillWave /> },
+    { id: 'stp', label: 'STP', icon: <FaExchangeAlt /> },
+    { id: 'compounding', label: 'Power of Compounding', icon: <FaBolt /> },
+    { id: 'elss', label: 'What is ELSS?', icon: <FaTag /> },
+    { id: 'debt-vs-fd', label: 'Debt MF V/S FD', icon: <FaBalanceScale /> },
+    { id: 'swp', label: 'SWP', icon: <FaWallet /> },
   ];
 
   const content = {
@@ -36,42 +68,42 @@ const MutualFundExplainer = () => {
       description: 'Mutual funds offer a powerful way to grow your wealth through professional management and diversification.',
       reasons: [
         {
-          icon: '🎯',
+          icon: <FaShieldAlt />,
           title: 'Professional Management',
           description: 'Expert fund managers with research teams make investment decisions on your behalf'
         },
         {
-          icon: '🛡️',
+          icon: <FaChartPie />,
           title: 'Diversification',
           description: 'Spread risk across multiple stocks/bonds with as little as ₹500 investment'
         },
         {
-          icon: '💪',
+          icon: <FaBolt />,
           title: 'Power of Compounding',
           description: 'Reinvest earnings to generate exponential returns over long term'
         },
         {
-          icon: '📈',
+          icon: <FaChartLine />,
           title: 'Higher Return Potential',
           description: 'Historically, equities have outperformed traditional investments like FD and gold'
         },
         {
-          icon: '💧',
+          icon: <FaWallet />,
           title: 'Liquidity',
           description: 'Open-ended funds allow you to redeem your investment anytime'
         },
         {
-          icon: '💰',
+          icon: <FaCoins />,
           title: 'Low Investment Threshold',
           description: 'Start with as little as ₹500 through SIP or ₹1000 as lump sum'
         },
         {
-          icon: '📋',
+          icon: <FaUniversity />,
           title: 'Regulated & Transparent',
           description: 'SEBI regulated with complete portfolio disclosure and NAV publication daily'
         },
         {
-          icon: '🏦',
+          icon: <FaTag />,
           title: 'Tax Efficiency',
           description: 'ELSS offers tax saving under 80C; equity funds have LTCG tax benefits'
         }
@@ -175,32 +207,32 @@ const MutualFundExplainer = () => {
       description: 'SIP allows you to invest a fixed amount regularly in mutual funds, making investing disciplined and affordable.',
       keyFeatures: [
         {
-          icon: '📅',
+          icon: <FaCalendarAlt />,
           title: 'Regular Investment',
           description: 'Invest fixed amount monthly, quarterly, or weekly'
         },
         {
-          icon: '📉',
+          icon: <FaArrowDown />,
           title: 'Rupee Cost Averaging',
           description: 'Buy more units when markets are low, fewer when high'
         },
         {
-          icon: '✨',
+          icon: <FaBolt />,
           title: 'Power of Compounding',
           description: 'Small regular investments grow significantly over time'
         },
         {
-          icon: '💪',
+          icon: <FaShieldAlt />,
           title: 'Discipline',
           description: 'Automated investments remove emotional decisions'
         },
         {
-          icon: '💰',
+          icon: <FaCoins />,
           title: 'Low Entry Barrier',
           description: 'Start with as little as ₹500 per month'
         },
         {
-          icon: '🔄',
+          icon: <FaSyncAlt />,
           title: 'Flexibility',
           description: 'Increase, decrease, pause or stop anytime'
         }
@@ -240,22 +272,22 @@ const MutualFundExplainer = () => {
       description: 'STP allows you to transfer a fixed amount regularly from one mutual fund scheme to another within the same fund house.',
       features: [
         {
-          icon: '🔄',
+          icon: <FaSyncAlt />,
           title: 'Automatic Transfers',
           description: 'Move money systematically from debt to equity or vice versa'
         },
         {
-          icon: '📉',
+          icon: <FaArrowDown />,
           title: 'Rupee Cost Averaging',
           description: 'Enter equity markets gradually, reducing timing risk'
         },
         {
-          icon: '💰',
+          icon: <FaArrowUp />,
           title: 'Better Returns',
           description: 'Earn higher returns on idle money by keeping in debt funds'
         },
         {
-          icon: '📊',
+          icon: <FaChartBar />,
           title: 'Types of STP',
           description: 'Fixed STP, Capital Appreciation STP, Flexible STP, Variable STP'
         }
@@ -326,22 +358,22 @@ const MutualFundExplainer = () => {
       ],
       keyPoints: [
         {
-          icon: '⏰',
+          icon: <FaClock />,
           title: 'Start Early',
           description: 'A 25-year-old needs to invest only ₹5,000/month to reach ₹2.64 Cr by 60'
         },
         {
-          icon: '📈',
+          icon: <FaChartLine />,
           title: 'Stay Invested',
           description: 'Longer investment periods create exponential growth'
         },
         {
-          icon: '🔄',
+          icon: <FaSyncAlt />,
           title: 'Reinvest Returns',
           description: 'Reinvesting dividends/returns accelerates compounding'
         },
         {
-          icon: '⚡',
+          icon: <FaBolt />,
           title: 'Consistency Matters',
           description: 'Regular investments harness compounding effectively'
         }
@@ -352,32 +384,32 @@ const MutualFundExplainer = () => {
       description: 'ELSS is an equity-oriented mutual fund that offers tax benefits under Section 80C of Income Tax Act, with the shortest lock-in period of 3 years.',
       features: [
         {
-          icon: '💰',
+          icon: <FaTag />,
           title: 'Tax Saving',
           description: 'Deduction up to ₹1.5 lakh under Section 80C'
         },
         {
-          icon: '⏱️',
+          icon: <FaClock />,
           title: 'Shortest Lock-in',
           description: 'Only 3 years lock-in among all 80C options'
         },
         {
-          icon: '📈',
+          icon: <FaChartLine />,
           title: 'Equity Growth',
           description: 'Potential for higher returns compared to traditional tax-saving options'
         },
         {
-          icon: '💧',
+          icon: <FaWallet />,
           title: 'Partial Withdrawal',
           description: 'Not allowed during lock-in, complete liquidity after 3 years'
         },
         {
-          icon: '📊',
+          icon: <FaPercent />,
           title: 'Dividend Option',
           description: 'Option to receive regular dividends (taxable)'
         },
         {
-          icon: '🔄',
+          icon: <FaSyncAlt />,
           title: 'SIP Available',
           description: 'Invest through SIP, each SIP installment has 3-year lock-in'
         }
@@ -511,22 +543,22 @@ const MutualFundExplainer = () => {
       description: 'SWP allows you to withdraw a fixed amount from your mutual fund investment at regular intervals, providing a steady income stream.',
       features: [
         {
-          icon: '💵',
+          icon: <FaWallet />,
           title: 'Regular Income',
           description: 'Create a pension-like income stream from your investments'
         },
         {
-          icon: '📊',
+          icon: <FaShieldAlt />,
           title: 'Capital Preservation',
           description: 'Withdraw only returns or a mix of capital as per need'
         },
         {
-          icon: '💰',
+          icon: <FaTag />,
           title: 'Tax Efficiency',
           description: 'Only capital gains are taxed, not the entire withdrawal'
         },
         {
-          icon: '🔄',
+          icon: <FaSyncAlt />,
           title: 'Flexible Options',
           description: 'Choose amount, frequency (monthly/quarterly), and duration'
         }
@@ -578,20 +610,20 @@ const MutualFundExplainer = () => {
         {/* Why Invest in MF? */}
         <section id="why-invest" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">💭</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[0].icon}</span>
               Why Invest in Mutual Funds?
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content['why-invest'].description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content['why-invest'].description}</p>
             
             <div className="space-y-3 mb-4">
               {content['why-invest'].reasons.map((reason, index) => (
-                <div key={index} className="bg-blue-50 p-3 rounded-lg">
+                <div key={index} className="bg-blue-50 bg-opacity-50 p-3 rounded-lg">
                   <div className="flex items-start">
-                    <span className="text-xl mr-2">{reason.icon}</span>
+                    <span className="text-xl mr-2 text-[#1a729e]">{reason.icon}</span>
                     <div>
-                      <h3 className="font-semibold text-blue-800 text-sm">{reason.title}</h3>
-                      <p className="text-gray-600 text-xs">{reason.description}</p>
+                      <h3 className="font-semibold text-[#074a6b] text-sm">{reason.title}</h3>
+                      <p className="text-gray-800 text-xs">{reason.description}</p>
                     </div>
                   </div>
                 </div>
@@ -601,7 +633,7 @@ const MutualFundExplainer = () => {
             <div className="grid grid-cols-2 gap-2">
               {content['why-invest'].stats.map((stat, index) => (
                 <div key={index} className="bg-white border border-gray-200 p-2 rounded-lg text-center">
-                  <div className="text-sm font-bold text-blue-600">{stat.value}</div>
+                  <div className="text-sm font-bold text-[#0080bf]">{stat.value}</div>
                   <div className="text-[10px] text-gray-500">{stat.label}</div>
                 </div>
               ))}
@@ -612,20 +644,20 @@ const MutualFundExplainer = () => {
         {/* Types of Mutual Fund */}
         <section id="types" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">📊</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[1].icon}</span>
               Types of Mutual Fund
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content.types.description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content.types.description}</p>
             
             <div className="space-y-3">
               {content.types.categories.map((category, index) => (
                 <div key={index} className="border border-gray-200 p-3 rounded-lg">
-                  <h3 className="font-semibold text-blue-700 text-sm mb-1">{category.type}</h3>
-                  <p className="text-gray-600 text-xs mb-2">{category.description}</p>
+                  <h3 className="font-semibold text-[#0080bf] text-sm mb-1">{category.type}</h3>
+                  <p className="text-gray-800 text-xs mb-2">{category.description}</p>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {category.subTypes.map((sub, idx) => (
-                      <span key={idx} className="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full">
+                      <span key={idx} className="bg-[rgb(208,239,255)] text-[#0080bf] text-[10px] px-2 py-0.5 rounded-full">
                         {sub}
                       </span>
                     ))}
@@ -646,27 +678,27 @@ const MutualFundExplainer = () => {
         {/* What is SIP? */}
         <section id="sip" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">💰</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[2].icon}</span>
               What is SIP?
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content.sip.description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content.sip.description}</p>
             
             <div className="space-y-3 mb-4">
               {content.sip.keyFeatures.map((feature, index) => (
-                <div key={index} className="bg-green-50 p-3 rounded-lg">
+                <div key={index} className="bg-blue-50 p-3 rounded-lg">
                   <div className="flex items-start">
-                    <span className="text-xl mr-2">{feature.icon}</span>
+                    <span className="text-xl mr-2 text-[#1a729e]">{feature.icon}</span>
                     <div>
-                      <h3 className="font-semibold text-green-800 text-sm">{feature.title}</h3>
-                      <p className="text-gray-600 text-xs">{feature.description}</p>
+                      <h3 className="font-semibold text-[#074a6b] text-sm">{feature.title}</h3>
+                      <p className="text-gray-800 text-xs">{feature.description}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <h3 className="font-semibold text-gray-700 text-sm mb-2">SIP Growth Examples (12% returns):</h3>
+            <h3 className="font-semibold text-[#074a6b] text-sm mb-2">SIP Growth Examples (12% returns):</h3>
             <div className="space-y-2 mb-4">
               {content.sip.examples.map((example, index) => (
                 <div key={index} className="bg-gray-50 p-2 rounded-lg flex justify-between items-center text-xs">
@@ -675,18 +707,20 @@ const MutualFundExplainer = () => {
                     <span className="text-gray-500 ml-1">for {example.years}y</span>
                   </div>
                   <div className="text-right">
-                    <span className="font-bold text-green-600">{example.total}</span>
+                    <span className="font-bold text-[#0080bf]">{example.total}</span>
                     <span className="text-gray-400 text-[10px] block">Invested: {example.invested}</span>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
-              <h4 className="font-semibold text-yellow-800 text-xs mb-1">💡 Pro Tips</h4>
+            <div className="bg-blue-50 p-3 rounded-lg">
+              <h4 className="font-semibold text-[#0080bf] text-xs mb-1 flex items-center">
+                <FaLightbulb className="mr-1 text-[#0080bf]" /> Pro Tips
+              </h4>
               <ul className="space-y-1">
                 {content.sip.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-[10px] text-yellow-700">
+                  <li key={index} className="flex items-start text-[10px] text-gray-800">
                     <span className="mr-1">•</span>
                     {tip}
                   </li>
@@ -699,41 +733,41 @@ const MutualFundExplainer = () => {
         {/* STP */}
         <section id="stp" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">🔄</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[3].icon}</span>
               STP (Systematic Transfer Plan)
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content.stp.description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content.stp.description}</p>
             
             <div className="space-y-3 mb-4">
               {content.stp.features.map((feature, index) => (
-                <div key={index} className="bg-purple-50 p-3 rounded-lg">
+                <div key={index} className="bg-blue-50 p-3 rounded-lg">
                   <div className="flex items-start">
-                    <span className="text-xl mr-2">{feature.icon}</span>
+                    <span className="text-xl mr-2 text-[#1a729e]">{feature.icon}</span>
                     <div>
-                      <h3 className="font-semibold text-purple-800 text-sm">{feature.title}</h3>
-                      <p className="text-gray-600 text-xs">{feature.description}</p>
+                      <h3 className="font-semibold text-[#074a6b] text-sm">{feature.title}</h3>
+                      <p className="text-gray-800 text-xs">{feature.description}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <h3 className="font-semibold text-gray-700 text-sm mb-2">Types of STP:</h3>
+            <h3 className="font-semibold text-[#074a6b] text-sm mb-2">Types of STP:</h3>
             <div className="grid grid-cols-2 gap-2 mb-4">
               {content.stp.types.map((type, index) => (
                 <div key={index} className="border border-gray-200 p-2 rounded-lg">
-                  <h4 className="font-medium text-xs text-gray-800">{type.name}</h4>
+                  <h4 className="font-medium text-xs text-[#074a6b]">{type.name}</h4>
                   <p className="text-[10px] text-gray-500 mt-1">{type.bestFor}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-blue-50 p-3 rounded-lg">
-              <h4 className="font-semibold text-blue-800 text-xs mb-1">📌 Best Use Cases:</h4>
+            <div className="bg-blue-50 bg-opacity-50 p-3 rounded-lg">
+              <h4 className="font-semibold text-[#074a6b] text-xs mb-1"> Best Use Cases:</h4>
               <ul className="space-y-1">
                 {content.stp.useCases.map((use, index) => (
-                  <li key={index} className="flex items-start text-[10px] text-gray-600">
+                  <li key={index} className="flex items-start text-[10px] text-gray-800">
                     <span className="mr-1">•</span>
                     {use}
                   </li>
@@ -746,18 +780,14 @@ const MutualFundExplainer = () => {
         {/* Power of Compounding */}
         <section id="compounding" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">⚡</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[4].icon}</span>
               Power of Compounding
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content.compounding.description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content.compounding.description}</p>
             
-            <div className="bg-indigo-50 p-3 rounded-lg mb-4">
-              <p className="text-center font-mono text-sm font-bold text-indigo-800">{content.compounding.formula}</p>
-              <p className="text-center text-[10px] text-indigo-600 mt-1">{content.compounding.explanation}</p>
-            </div>
-
-            <h3 className="font-semibold text-gray-700 text-sm mb-2">Start Early Impact (₹5,000/month):</h3>
+            
+            <h3 className="font-semibold text-[#074a6b] text-sm mb-2">Start Early Impact (₹5,000/month):</h3>
             <div className="space-y-2 mb-4">
               {content.compounding.illustration.map((item, index) => (
                 <div key={index} className="bg-gray-50 p-2 rounded-lg flex justify-between items-center text-xs">
@@ -765,7 +795,7 @@ const MutualFundExplainer = () => {
                     <span className="font-medium">Start at {item.age}</span>
                   </div>
                   <div className="text-right">
-                    <span className="font-bold text-indigo-600">{item.total_at_60}</span>
+                    <span className="font-bold text-[#0080bf]">{item.total_at_60}</span>
                     <span className="text-gray-400 text-[10px] block">Gain: {item.gain}</span>
                   </div>
                 </div>
@@ -775,8 +805,8 @@ const MutualFundExplainer = () => {
             <div className="grid grid-cols-2 gap-2">
               {content.compounding.keyPoints.map((point, index) => (
                 <div key={index} className="bg-white border border-gray-200 p-2 rounded-lg">
-                  <span className="text-lg block mb-1">{point.icon}</span>
-                  <h4 className="font-medium text-xs text-gray-800">{point.title}</h4>
+                  <span className="text-lg block mb-1 text-[#1a729e]">{point.icon}</span>
+                  <h4 className="font-medium text-xs text-[#074a6b]">{point.title}</h4>
                   <p className="text-[10px] text-gray-500 mt-1">{point.description}</p>
                 </div>
               ))}
@@ -787,27 +817,27 @@ const MutualFundExplainer = () => {
         {/* What is ELSS? */}
         <section id="elss" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">🏷️</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[5].icon}</span>
               What is ELSS?
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content.elss.description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content.elss.description}</p>
             
             <div className="space-y-3 mb-4">
               {content.elss.features.map((feature, index) => (
-                <div key={index} className="bg-orange-50 p-3 rounded-lg">
+                <div key={index} className="bg-blue-50 p-3 rounded-lg">
                   <div className="flex items-start">
-                    <span className="text-xl mr-2">{feature.icon}</span>
+                    <span className="text-xl mr-2 text-[#1a729e]">{feature.icon}</span>
                     <div>
-                      <h3 className="font-semibold text-orange-800 text-sm">{feature.title}</h3>
-                      <p className="text-gray-600 text-xs">{feature.description}</p>
+                      <h3 className="font-semibold text-[#074a6b] text-sm">{feature.title}</h3>
+                      <p className="text-gray-800 text-xs">{feature.description}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <h3 className="font-semibold text-gray-700 text-sm mb-2">VS Other Tax Options:</h3>
+            <h3 className="font-semibold text-[#074a6b] text-sm mb-2">VS Other Tax Options:</h3>
             <div className="overflow-x-auto mb-4">
               <table className="min-w-full text-[10px]">
                 <thead className="bg-gray-50">
@@ -820,7 +850,7 @@ const MutualFundExplainer = () => {
                 <tbody>
                   {content.elss.comparison.slice(0, 3).map((item, index) => (
                     <tr key={index} className="border-t">
-                      <td className="px-2 py-1 font-medium">{item.option}</td>
+                      <td className="px-2 py-1 font-medium text-[#074a6b]">{item.option}</td>
                       <td className="px-2 py-1">{item.lockIn}</td>
                       <td className="px-2 py-1">{item.returns}</td>
                     </tr>
@@ -829,11 +859,13 @@ const MutualFundExplainer = () => {
               </table>
             </div>
 
-            <div className="bg-yellow-50 p-3 rounded-lg">
-              <h4 className="font-semibold text-yellow-800 text-xs mb-1">💡 Tips</h4>
+            <div className="bg-blue-50 p-3 rounded-lg">
+              <h4 className="font-semibold text-[#0080bf] text-xs mb-1 flex items-center">
+                <FaLightbulb className="mr-1 text-[#0080bf]" /> Tips
+              </h4>
               <ul className="space-y-1">
                 {content.elss.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-[10px] text-yellow-700">
+                  <li key={index} className="flex items-start text-[10px] text-gray-800">
                     <span className="mr-1">•</span>
                     {tip}
                   </li>
@@ -846,19 +878,19 @@ const MutualFundExplainer = () => {
         {/* Debt MF V/S FD */}
         <section id="debt-vs-fd" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">⚖️</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[6].icon}</span>
               Debt MF V/S FD
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content['debt-vs-fd'].description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content['debt-vs-fd'].description}</p>
             
             <div className="space-y-3 mb-4">
               {content['debt-vs-fd'].comparison.slice(0, 4).map((item, index) => (
                 <div key={index} className="border-b border-gray-100 pb-2">
-                  <h4 className="font-medium text-xs text-gray-700 mb-1">{item.aspect}</h4>
+                  <h4 className="font-medium text-xs text-[#074a6b] mb-1">{item.aspect}</h4>
                   <div className="grid grid-cols-2 gap-2 text-[10px]">
-                    <div className="bg-blue-50 p-2 rounded">📊 Debt: {item.debt}</div>
-                    <div className="bg-green-50 p-2 rounded">🏦 FD: {item.fd}</div>
+                    <div className="bg-blue-50 p-2 rounded"> Debt: {item.debt}</div>
+                    <div className="bg-blue-50 p-2 rounded"> FD: {item.fd}</div>
                   </div>
                 </div>
               ))}
@@ -866,25 +898,35 @@ const MutualFundExplainer = () => {
 
             <div className="grid grid-cols-2 gap-2 mb-3">
               <div className="bg-blue-50 p-2 rounded-lg">
-                <h4 className="font-semibold text-blue-800 text-xs mb-1">✅ Debt MF Pros</h4>
+                <h4 className="font-semibold text-blue-800 text-xs mb-1 flex items-center">
+                  <FaCheckCircle className="mr-1 text-blue-600" /> Debt MF Pros
+                </h4>
                 <ul className="space-y-1">
                   {content['debt-vs-fd'].prosCons.debt.pros.slice(0, 2).map((pro, idx) => (
-                    <li key={idx} className="text-[10px]">• {pro}</li>
+                    <li key={idx} className="text-[10px] flex items-start">
+                      <span className="text-green-500 mr-1">✓</span>
+                      {pro}
+                    </li>
                   ))}
                 </ul>
               </div>
               <div className="bg-green-50 p-2 rounded-lg">
-                <h4 className="font-semibold text-green-800 text-xs mb-1">✅ FD Pros</h4>
+                <h4 className="font-semibold text-green-800 text-xs mb-1 flex items-center">
+                  <FaCheckCircle className="mr-1 text-green-600" /> FD Pros
+                </h4>
                 <ul className="space-y-1">
                   {content['debt-vs-fd'].prosCons.fd.pros.slice(0, 2).map((pro, idx) => (
-                    <li key={idx} className="text-[10px]">• {pro}</li>
+                    <li key={idx} className="text-[10px] flex items-start">
+                      <span className="text-green-500 mr-1">✓</span>
+                      {pro}
+                    </li>
                   ))}
                 </ul>
               </div>
             </div>
 
-            <div className="bg-gray-50 p-2 rounded-lg">
-              <p className="text-[10px] text-gray-700"><span className="font-semibold">📌 Recommendation:</span> {content['debt-vs-fd'].recommendation.debt}</p>
+            <div className="bg-blue-50 p-2 rounded-lg">
+              <p className="text-[10px] text-gray-700"><span className="font-semibold text-[#074a6b]">Recommendation:</span> {content['debt-vs-fd'].recommendation.debt}</p>
             </div>
           </div>
         </section>
@@ -892,44 +934,42 @@ const MutualFundExplainer = () => {
         {/* SWP */}
         <section id="swp" className="scroll-mt-20">
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
-            <h2 className="text-xl font-bold text-gray-800 mb-3 flex items-center">
-              <span className="text-2xl mr-2">💵</span>
+            <h2 className="text-xl font-bold text-[#074a6b] mb-3 flex items-center">
+              <span className="text-2xl mr-2 text-[#1a729e]">{tabs[7].icon}</span>
               SWP (Systematic Withdrawal Plan)
             </h2>
-            <p className="text-sm text-gray-600 mb-4">{content.swp.description}</p>
+            <p className="text-sm text-gray-800 mb-4">{content.swp.description}</p>
             
             <div className="space-y-3 mb-4">
               {content.swp.features.map((feature, index) => (
-                <div key={index} className="bg-teal-50 p-3 rounded-lg">
+                <div key={index} className="bg-blue-50 p-3 rounded-lg">
                   <div className="flex items-start">
-                    <span className="text-xl mr-2">{feature.icon}</span>
+                    <span className="text-xl mr-2 text-[#1a729e]">{feature.icon}</span>
                     <div>
-                      <h3 className="font-semibold text-teal-800 text-sm">{feature.title}</h3>
-                      <p className="text-gray-600 text-xs">{feature.description}</p>
+                      <h3 className="font-semibold text-[#074a6b] text-sm">{feature.title}</h3>
+                      <p className="text-gray-800 text-xs">{feature.description}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="bg-blue-50 p-3 rounded-lg mb-4">
-              <h4 className="font-semibold text-blue-800 text-xs mb-1">📊 Example</h4>
+            <div className="bg-blue-50 bg-opacity-50 p-3 rounded-lg mb-4">
+              <h4 className="font-semibold text-[#074a6b] text-xs mb-1"> Example</h4>
               <p className="text-[10px]">₹50L investment → ₹25,000/month for 20 years</p>
               <p className="text-[10px]">Total withdrawn: ₹60L, Remaining: ~₹45L</p>
             </div>
 
-            <h3 className="font-semibold text-gray-700 text-sm mb-2">Best Use Cases:</h3>
+            <h3 className="font-semibold text-[#074a6b] text-sm mb-2">Best Use Cases:</h3>
             <div className="flex flex-wrap gap-1 mb-3">
               {content.swp.useCases.map((use, index) => (
-                <span key={index} className="bg-gray-100 text-gray-700 text-[10px] px-2 py-1 rounded-full">
+                <span key={index} className="bg-gray-100 text-[#074a6b] text-[10px] px-2 py-1 rounded-full">
                   {use}
                 </span>
               ))}
             </div>
 
-            <div className="bg-yellow-50 p-2 rounded-lg">
-              <p className="text-[10px] text-yellow-800"><span className="font-semibold">💡 Tip:</span> {content.swp.tips[0]}</p>
-            </div>
+           
           </div>
         </section>
       </div>
@@ -945,16 +985,16 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.reasons.map((reason, index) => (
-                <div key={index} className="bg-blue-50 p-5 rounded-lg hover:shadow-md transition">
-                  <div className="text-3xl mb-3">{reason.icon}</div>
-                  <h3 className="font-semibold text-blue-800 mb-2">{reason.title}</h3>
-                  <p className="text-gray-600 text-sm">{reason.description}</p>
+                <div key={index} className="bg-blue-50 bg-opacity-50 p-5 rounded-lg hover:shadow-md transition">
+                  <div className="text-3xl mb-3 text-[#1a729e]">{reason.icon}</div>
+                  <h3 className="font-semibold text-[#0080bf] mb-2">{reason.title}</h3>
+                  <p className="text-gray-800 text-sm">{reason.description}</p>
                 </div>
               ))}
             </div>
@@ -962,7 +1002,7 @@ const MutualFundExplainer = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {currentContent.stats.map((stat, index) => (
                 <div key={index} className="bg-white border border-gray-200 p-4 rounded-lg text-center">
-                  <div className="text-2xl font-bold text-blue-600">{stat.value}</div>
+                  <div className="text-2xl font-bold text-[#0080bf]">{stat.value}</div>
                   <div className="text-sm text-gray-500">{stat.label}</div>
                 </div>
               ))}
@@ -974,19 +1014,19 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="space-y-6">
               {currentContent.categories.map((category, index) => (
-                <div key={index} className="bg-white border border-gray-200 p-6 rounded-lg hover:border-blue-300 transition">
-                  <h3 className="text-xl font-semibold text-blue-700 mb-2">{category.type}</h3>
-                  <p className="text-gray-600 mb-4">{category.description}</p>
+                <div key={index} className="bg-white border border-gray-200 p-6 rounded-lg hover:border-[#0080bf] transition">
+                  <h3 className="text-xl font-semibold text-[#0080bf] mb-2">{category.type}</h3>
+                  <p className="text-gray-800 mb-4">{category.description}</p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
                     {category.subTypes.map((sub, idx) => (
-                      <span key={idx} className="bg-blue-100 text-blue-700 text-sm px-3 py-1 rounded-full">
+                      <span key={idx} className="bg-[rgb(208,239,255)] text-[#0080bf] text-sm px-3 py-1 rounded-full">
                         {sub}
                       </span>
                     ))}
@@ -995,15 +1035,15 @@ const MutualFundExplainer = () => {
                   <div className="grid grid-cols-3 gap-4 text-sm bg-gray-50 p-4 rounded-lg">
                     <div>
                       <span className="text-gray-500 block">Risk Level</span>
-                      <span className="font-medium text-gray-800">{category.risk}</span>
+                      <span className="font-medium text-[#074a6b]">{category.risk}</span>
                     </div>
                     <div>
                       <span className="text-gray-500 block">Investment Horizon</span>
-                      <span className="font-medium text-gray-800">{category.horizon}</span>
+                      <span className="font-medium text-[#074a6b]">{category.horizon}</span>
                     </div>
                     <div>
                       <span className="text-gray-500 block">Suitable For</span>
-                      <span className="font-medium text-gray-800">{category.suitableFor}</span>
+                      <span className="font-medium text-[#074a6b]">{category.suitableFor}</span>
                     </div>
                   </div>
                 </div>
@@ -1016,41 +1056,27 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.keyFeatures.map((feature, index) => (
-                <div key={index} className="bg-green-50 p-5 rounded-lg">
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="font-semibold text-green-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                <div key={index} className="bg-blue-50 p-5 rounded-lg">
+                  <div className="text-3xl mb-3 text-[#1a729e]">{feature.icon}</div>
+                  <h3 className="font-semibold text-[#0080bf] mb-2">{feature.title}</h3>
+                  <p className="text-gray-800 text-sm">{feature.description}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">SIP Growth Calculator (12% returns)</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {currentContent.examples.map((example, index) => (
-                  <div key={index} className="bg-white bg-opacity-20 rounded-lg p-4 backdrop-blur">
-                    <p className="text-2xl font-bold">{example.amount}</p>
-                    <p className="text-sm opacity-90">for {example.years} years</p>
-                    <div className="mt-3 pt-3 border-t border-white border-opacity-30">
-                      <p className="text-lg font-bold">{example.total}</p>
-                      <p className="text-xs opacity-75">Invested: {example.invested}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-yellow-50 border border-yellow-200 p-5 rounded-lg">
-              <h4 className="font-semibold text-yellow-800 mb-3">💡 Pro Tips for SIP</h4>
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h4 className="font-semibold text-[#0080bf] mb-3 flex items-center">
+                <FaLightbulb className="mr-2 text-[#0080bf]" /> Pro Tips for SIP
+              </h4>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {currentContent.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-sm text-yellow-700">
+                  <li key={index} className="flex items-start text-sm text-gray-800">
                     <span className="mr-2">•</span>
                     {tip}
                   </li>
@@ -1064,38 +1090,38 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.features.map((feature, index) => (
-                <div key={index} className="bg-purple-50 p-5 rounded-lg">
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="font-semibold text-purple-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                <div key={index} className="bg-blue-50 p-5 rounded-lg">
+                  <div className="text-3xl mb-3 text-[#1a729e]">{feature.icon}</div>
+                  <h3 className="font-semibold text-[#0080bf] mb-2">{feature.title}</h3>
+                  <p className="text-gray-800 text-sm">{feature.description}</p>
                 </div>
               ))}
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Types of STP</h3>
+              <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Types of STP</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {currentContent.types.map((type, index) => (
                   <div key={index} className="border border-gray-200 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">{type.name}</h4>
-                    <p className="text-sm text-gray-600 mb-2">{type.description}</p>
-                    <p className="text-xs text-blue-600">Best for: {type.bestFor}</p>
+                    <h4 className="font-semibold text-[#074a6b] mb-2">{type.name}</h4>
+                    <p className="text-sm text-gray-800 mb-2">{type.description}</p>
+                    <p className="text-xs text-[#0080bf]">Best for: {type.bestFor}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-blue-50 p-5 rounded-lg">
-              <h4 className="font-semibold text-blue-800 mb-3">📌 Best Use Cases</h4>
+            <div className="bg-blue-50 bg-opacity-50 p-5 rounded-lg">
+              <h4 className="font-semibold text-[#074a6b] mb-3">Best Use Cases</h4>
               <div className="flex flex-wrap gap-2">
                 {currentContent.useCases.map((use, index) => (
-                  <span key={index} className="bg-white text-blue-700 text-sm px-3 py-1 rounded-full border border-blue-200">
+                  <span key={index} className="bg-white text-[#0080bf] text-sm px-3 py-1 rounded-full border border-[#0080bf]">
                     {use}
                   </span>
                 ))}
@@ -1108,26 +1134,21 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
-            <div className="bg-indigo-50 p-6 rounded-lg text-center">
-              <p className="text-3xl font-mono font-bold text-indigo-800 mb-2">{currentContent.formula}</p>
-              <p className="text-sm text-indigo-600">{currentContent.explanation}</p>
-            </div>
-
             <div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Start Early - See the Difference!</h3>
+              <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Start Early - See the Difference!</h3>
               <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                   <thead className="bg-indigo-50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Start Age</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Monthly SIP</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">At Age 60</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Total Invested</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Gain</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Start Age</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Monthly SIP</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">At Age 60</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Total Invested</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Gain</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -1135,7 +1156,7 @@ const MutualFundExplainer = () => {
                       <tr key={index} className="hover:bg-gray-50">
                         <td className="px-4 py-3 text-sm font-medium">{item.age}</td>
                         <td className="px-4 py-3 text-sm">{item.monthly}</td>
-                        <td className="px-4 py-3 text-sm font-bold text-indigo-600">{item.total_at_60}</td>
+                        <td className="px-4 py-3 text-sm font-bold text-[#0080bf]">{item.total_at_60}</td>
                         <td className="px-4 py-3 text-sm">{item.invested}</td>
                         <td className="px-4 py-3 text-sm text-green-600">{item.gain}</td>
                       </tr>
@@ -1148,9 +1169,9 @@ const MutualFundExplainer = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.keyPoints.map((point, index) => (
                 <div key={index} className="bg-white border border-gray-200 p-5 rounded-lg">
-                  <span className="text-3xl mb-3 block">{point.icon}</span>
-                  <h4 className="font-semibold text-gray-800 mb-2">{point.title}</h4>
-                  <p className="text-gray-600 text-sm">{point.description}</p>
+                  <span className="text-3xl mb-3 block text-[#1a729e]">{point.icon}</span>
+                  <h4 className="font-semibold text-[#074a6b] mb-2">{point.title}</h4>
+                  <p className="text-gray-800 text-sm">{point.description}</p>
                 </div>
               ))}
             </div>
@@ -1161,37 +1182,37 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#0080bf] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.features.map((feature, index) => (
-                <div key={index} className="bg-orange-50 p-5 rounded-lg">
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="font-semibold text-orange-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                <div key={index} className="bg-blue-50 p-5 rounded-lg">
+                  <div className="text-3xl mb-3 text-[#1a729e]">{feature.icon}</div>
+                  <h3 className="font-semibold text-[#0080bf] mb-2">{feature.title}</h3>
+                  <p className="text-gray-800 text-sm">{feature.description}</p>
                 </div>
               ))}
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">ELSS vs Other Tax Saving Options</h3>
+              <h3 className="text-xl font-semibold text-[#074a6b] mb-4">ELSS vs Other Tax Saving Options</h3>
               <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Option</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Lock-in</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Returns</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Tax Treatment</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Risk</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Option</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Lock-in</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Returns</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Tax Treatment</th>
+                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Risk</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {currentContent.comparison.map((item, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-sm font-medium">{item.option}</td>
+                        <td className="px-4 py-3 text-sm font-medium text-[#074a6b]">{item.option}</td>
                         <td className="px-4 py-3 text-sm">{item.lockIn}</td>
                         <td className="px-4 py-3 text-sm">{item.returns}</td>
                         <td className="px-4 py-3 text-sm">{item.taxTreatment}</td>
@@ -1212,11 +1233,13 @@ const MutualFundExplainer = () => {
               </div>
             </div>
 
-            <div className="bg-yellow-50 border border-yellow-200 p-5 rounded-lg">
-              <h4 className="font-semibold text-yellow-800 mb-3">💡 Key Tips for ELSS</h4>
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h4 className="font-semibold text-[#0080bf] mb-3 flex items-center">
+                <FaLightbulb className="mr-2 text-[#0080bf]" /> Key Tips for ELSS
+              </h4>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {currentContent.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-sm text-yellow-700">
+                  <li key={index} className="flex items-start text-sm text-gray-800">
                     <span className="mr-2">•</span>
                     {tip}
                   </li>
@@ -1230,16 +1253,16 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="overflow-x-auto">
               <table className="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-600">Aspect</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-blue-600">Debt Mutual Funds</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Aspect</th>
+                    <th className="px-4 py-3 text-left text-sm font-semibold text-[#0080bf]">Debt Mutual Funds</th>
                     <th className="px-4 py-3 text-left text-sm font-semibold text-green-600">Fixed Deposits</th>
                   </tr>
                 </thead>
@@ -1247,8 +1270,8 @@ const MutualFundExplainer = () => {
                   {currentContent.comparison.map((item, index) => (
                     <tr key={index} className="hover:bg-gray-50">
                       <td className="px-4 py-3 text-sm font-medium text-gray-800">{item.aspect}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">{item.debt}</td>
-                      <td className="px-4 py-3 text-sm text-gray-600">{item.fd}</td>
+                      <td className="px-4 py-3 text-sm text-gray-800">{item.debt}</td>
+                      <td className="px-4 py-3 text-sm text-gray-800">{item.fd}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -1257,13 +1280,15 @@ const MutualFundExplainer = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-blue-50 p-5 rounded-lg">
-                <h3 className="text-lg font-semibold text-blue-800 mb-3">✅ Debt Mutual Funds</h3>
+                <h3 className="text-lg font-semibold text-blue-800 mb-3 flex items-center">
+                  <FaCheckCircle className="mr-2 text-blue-600" /> Debt Mutual Funds
+                </h3>
                 <div className="mb-3">
                   <h4 className="font-medium text-blue-700 mb-2">Pros:</h4>
                   <ul className="space-y-1">
                     {currentContent.prosCons.debt.pros.map((pro, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-start">
-                        <span className="text-blue-500 mr-2">✓</span>
+                      <li key={idx} className="text-sm text-gray-800 flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
                         {pro}
                       </li>
                     ))}
@@ -1273,7 +1298,7 @@ const MutualFundExplainer = () => {
                   <h4 className="font-medium text-red-600 mb-2">Cons:</h4>
                   <ul className="space-y-1">
                     {currentContent.prosCons.debt.cons.map((con, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-start">
+                      <li key={idx} className="text-sm text-gray-800 flex items-start">
                         <span className="text-red-500 mr-2">✗</span>
                         {con}
                       </li>
@@ -1283,12 +1308,14 @@ const MutualFundExplainer = () => {
               </div>
 
               <div className="bg-green-50 p-5 rounded-lg">
-                <h3 className="text-lg font-semibold text-green-800 mb-3">✅ Fixed Deposits</h3>
+                <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
+                  <FaCheckCircle className="mr-2 text-green-600" /> Fixed Deposits
+                </h3>
                 <div className="mb-3">
                   <h4 className="font-medium text-green-700 mb-2">Pros:</h4>
                   <ul className="space-y-1">
                     {currentContent.prosCons.fd.pros.map((pro, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-start">
+                      <li key={idx} className="text-sm text-gray-800 flex items-start">
                         <span className="text-green-500 mr-2">✓</span>
                         {pro}
                       </li>
@@ -1299,7 +1326,7 @@ const MutualFundExplainer = () => {
                   <h4 className="font-medium text-red-600 mb-2">Cons:</h4>
                   <ul className="space-y-1">
                     {currentContent.prosCons.fd.cons.map((con, idx) => (
-                      <li key={idx} className="text-sm text-gray-600 flex items-start">
+                      <li key={idx} className="text-sm text-gray-800 flex items-start">
                         <span className="text-red-500 mr-2">✗</span>
                         {con}
                       </li>
@@ -1309,8 +1336,8 @@ const MutualFundExplainer = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-r from-blue-600 to-green-600 text-white p-6 rounded-lg">
-              <p className="text-lg font-semibold mb-2">📌 Recommendation</p>
+            <div className="bg-gradient-to-r from-[#074a6b] to-[#1a729e] text-white p-6 rounded-lg">
+              <p className="text-lg font-semibold mb-2">Recommendation</p>
               <p className="text-sm opacity-90">{currentContent.recommendation.debt}</p>
               <p className="text-sm opacity-90 mt-2">{currentContent.recommendation.fd}</p>
             </div>
@@ -1321,16 +1348,16 @@ const MutualFundExplainer = () => {
         return (
           <div className="space-y-8">
             <div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-600">{currentContent.description}</p>
+              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
+              <p className="text-lg text-gray-800">{currentContent.description}</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.features.map((feature, index) => (
                 <div key={index} className="bg-teal-50 p-5 rounded-lg">
-                  <div className="text-3xl mb-3">{feature.icon}</div>
-                  <h3 className="font-semibold text-teal-800 mb-2">{feature.title}</h3>
-                  <p className="text-gray-600 text-sm">{feature.description}</p>
+                  <div className="text-3xl mb-3 text-[#1a729e]">{feature.icon}</div>
+                  <h3 className="font-semibold text-[#0080bf] mb-2">{feature.title}</h3>
+                  <p className="text-gray-800 text-sm">{feature.description}</p>
                 </div>
               ))}
             </div>
@@ -1338,44 +1365,21 @@ const MutualFundExplainer = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {currentContent.types.map((type, index) => (
                 <div key={index} className="border border-gray-200 p-4 rounded-lg">
-                  <h4 className="font-semibold text-gray-800 mb-2">{type.name}</h4>
-                  <p className="text-sm text-gray-600 mb-2">{type.description}</p>
-                  <p className="text-xs text-teal-600">Best for: {type.bestFor}</p>
+                  <h4 className="font-semibold text-[#074a6b] mb-2">{type.name}</h4>
+                  <p className="text-sm text-gray-800 mb-2">{type.description}</p>
+                  <p className="text-xs text-[#0080bf]">Best for: {type.bestFor}</p>
                 </div>
               ))}
             </div>
 
-            <div className="bg-teal-50 border border-teal-200 p-6 rounded-lg">
-              <h3 className="text-xl font-semibold text-teal-800 mb-4">📊 SWP Example</h3>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div className="bg-white p-3 rounded-lg text-center">
-                  <p className="text-xs text-gray-500">Investment</p>
-                  <p className="text-lg font-bold text-teal-600">{currentContent.example.investment}</p>
-                </div>
-                <div className="bg-white p-3 rounded-lg text-center">
-                  <p className="text-xs text-gray-500">Monthly SWP</p>
-                  <p className="text-lg font-bold text-teal-600">{currentContent.example.swpAmount}</p>
-                </div>
-                <div className="bg-white p-3 rounded-lg text-center">
-                  <p className="text-xs text-gray-500">Period</p>
-                  <p className="text-lg font-bold text-teal-600">{currentContent.example.withdrawalPeriod}</p>
-                </div>
-                <div className="bg-white p-3 rounded-lg text-center">
-                  <p className="text-xs text-gray-500">Total Withdrawn</p>
-                  <p className="text-lg font-bold text-teal-600">{currentContent.example.totalWithdrawn}</p>
-                </div>
-                <div className="bg-white p-3 rounded-lg text-center">
-                  <p className="text-xs text-gray-500">Remaining</p>
-                  <p className="text-lg font-bold text-teal-600">{currentContent.example.remainingValue}</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="bg-yellow-50 border border-yellow-200 p-5 rounded-lg">
-              <h4 className="font-semibold text-yellow-800 mb-3">💡 Key Tips for SWP</h4>
+            <div className="bg-blue-50 p-5 rounded-lg">
+              <h4 className="font-semibold text-[#0080bf] mb-3 flex items-center">
+                <FaLightbulb className="mr-2 text-[#0080bf]" /> Key Tips for SWP
+              </h4>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                 {currentContent.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-sm text-yellow-700">
+                  <li key={index} className="flex items-start text-sm text-gray-800">
                     <span className="mr-2">•</span>
                     {tip}
                   </li>
@@ -1392,18 +1396,14 @@ const MutualFundExplainer = () => {
 
   return (
     <>
-      <Head>
-        <title>Mutual Fund Explained | Complete Guide to Mutual Funds</title>
-        <meta name="description" content="Comprehensive guide to understanding mutual funds, SIP, STP, SWP, ELSS, power of compounding, and comparing debt funds vs FDs." />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
+     
 
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
         <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">Mutual Fund Explained</h1>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 mt-1 sm:mt-2">Your complete guide to understanding mutual funds</p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#074a6b]">Mutual Fund</h1>
+            <p className="text-sm sm:text-base md:text-lg text-gray-800 mt-1 sm:mt-2">Your complete guide to understanding mutual funds</p>
           </div>
         </header>
 
@@ -1415,13 +1415,13 @@ const MutualFundExplainer = () => {
                 <a
                   key={tab.id}
                   href={`#${tab.id}`}
-                  className="flex-shrink-0 flex items-center px-3 py-2 bg-gray-100 rounded-full text-sm"
+                  className="flex-shrink-0 flex items-center px-3 py-2 bg-[rgb(208,239,255)] rounded-full text-sm text-[#074a6b] hover:bg-[rgb(180,220,240)] transition"
                   onClick={(e) => {
                     e.preventDefault();
                     document.getElementById(tab.id)?.scrollIntoView({ behavior: 'smooth' });
                   }}
                 >
-                  <span className="mr-1">{tab.icon}</span>
+                  <span className="mr-1 text-[#1a729e]">{tab.icon}</span>
                   <span className="whitespace-nowrap">{tab.label}</span>
                 </a>
               ))}
@@ -1447,11 +1447,11 @@ const MutualFundExplainer = () => {
                         onClick={() => setActiveTab(tab.id)}
                         className={`flex items-center px-6 py-4 text-left transition-all ${
                           activeTab === tab.id
-                            ? 'bg-blue-50 border-l-4 border-blue-600 text-blue-700'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                            ? 'bg-[rgb(208,239,255)] border-l-4 border-[#074a6b] text-[#074a6b]'
+                            : 'text-[#1a729e] hover:bg-[rgb(208,239,255)] hover:text-[#074a6b]'
                         }`}
                       >
-                        <span className="text-xl mr-3">{tab.icon}</span>
+                        <span className="text-xl mr-3 text-[#1a729e]">{tab.icon}</span>
                         <span className="font-medium">{tab.label}</span>
                       </button>
                     ))}
@@ -1468,19 +1468,6 @@ const MutualFundExplainer = () => {
             </div>
           )}
         </main>
-
-        {/* Footer */}
-        <footer className="bg-white border-t border-gray-200 mt-8 sm:mt-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-            <p className="text-center text-gray-500 text-xs sm:text-sm">
-              © 2024 Mutual Fund Explained. This information is for educational purposes only. 
-              Consult with a certified financial advisor before making investment decisions.
-            </p>
-            <p className="text-center text-gray-400 text-[10px] sm:text-xs mt-2">
-              Mutual fund investments are subject to market risks. Read all scheme related documents carefully.
-            </p>
-          </div>
-        </footer>
       </div>
     </>
   );

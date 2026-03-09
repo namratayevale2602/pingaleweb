@@ -11,66 +11,65 @@ const Navbar = () => {
 
   const navItems = [
     {
-      title: 'Personal Insurance',
+      title: 'Life Insurance',
       dropdown: [
         {
-          category: 'Auto Insurance',
+          // category: 'Auto Insurance',
           items: [
-            { name: 'Car Insurance', slug: 'insurance/car-insurance' },
-            { name: 'Motorcycle Insurance', slug: 'insurance/motorcycle-insurance' },
-            { name: 'RV Insurance', slug: 'insurance/rv-insurance' }
+            { name: 'Why Life Insurance?', slug: 'insurance' },
+            { name: 'Life Insurance Product', slug: 'insurance/insurance-product' },
+            // { name: 'RV Insurance', slug: 'insurance/rv-insurance' }
           ]
         },
-        {
-          category: 'Home Insurance',
-          items: [
-            { name: 'Homeowners Insurance', slug: 'insurance/homeowners-insurance' },
-            { name: 'Renters Insurance', slug: 'insurance/renters-insurance' },
-            { name: 'Condo Insurance', slug: 'insurance/condo-insurance' }
-          ]
-        },
-        {
-          category: 'Life & Health',
-          items: [
-            { name: 'Life Insurance', slug: 'insurance/life-insurance' },
-            { name: 'Health Insurance', slug: 'insurance/health-insurance' },
-            { name: 'Disability Insurance', slug: 'insurance/disability-insurance' }
-          ]
-        }
+        // {
+        //   category: 'Home Insurance',
+        //   items: [
+        //     { name: 'Homeowners Insurance', slug: 'insurance/homeowners-insurance' },
+        //     { name: 'Renters Insurance', slug: 'insurance/renters-insurance' },
+        //     { name: 'Condo Insurance', slug: 'insurance/condo-insurance' }
+        //   ]
+        // },
+        // {
+        //   category: 'Life & Health',
+        //   items: [
+        //     { name: 'Life Insurance', slug: 'insurance/life-insurance' },
+        //     { name: 'Health Insurance', slug: 'insurance/health-insurance' },
+        //     { name: 'Disability Insurance', slug: 'insurance/disability-insurance' }
+        //   ]
+        // }
       ]
     },
     {
-      title: 'Business Insurance',
+      title: 'Mutual Fund',
       dropdown: [
         {
-          category: 'Small Business',
+          // category: 'Small Business',
           items: [
-            { name: 'General Liability', slug: 'insurance/general-liability' },
-            { name: 'Professional Liability', slug: 'insurance/professional-liability' },
-            { name: 'Workers Compensation', slug: 'insurance/workers-compensation' }
+            { name: 'Why Mutual Fund?', slug: 'mutual-fund' },
+            { name: 'Mutual Fund Product', slug: 'mutual-fund/mutualfund-product' },
           ]
         },
-        {
-          category: 'Commercial',
-          items: [
-            { name: 'Commercial Auto', slug: 'insurance/commercial-auto' },
-            { name: 'Commercial Property', slug: 'insurance/commercial-property' },
-            { name: 'Cyber Liability', slug: 'insurance/cyber-liability' }
-          ]
-        }
+        // {
+        //   category: 'Commercial',
+        //   items: [
+        //     { name: 'Commercial Auto', slug: 'insurance/commercial-auto' },
+        //     { name: 'Commercial Property', slug: 'insurance/commercial-property' },
+        //     { name: 'Cyber Liability', slug: 'insurance/cyber-liability' }
+        //   ]
+        // }
       ]
     },
-    {
-      title: 'Resources',
-      dropdown: [
-        {
-          category: 'Learn',
-          items: [
-            { name: 'Insurance Guide', slug: 'insuranceguide' },
-          ]
-        }
-      ]
-    },
+    // {
+    //   title: 'Resources',
+    //   dropdown: [
+    //     {
+    //       category: 'Learn',
+    //       items: [
+    //         { name: 'Insurance Guide', slug: 'insuranceguide' },
+    //       ]
+    //     }
+    //   ]
+    // },
     {
       title: 'About Us',
       link: '/aboutus'
@@ -134,11 +133,11 @@ const Navbar = () => {
 
                     {/* Mega Dropdown - Without grid cols */}
                     {activeDropdown === index && (
-                      <div className="absolute left-0 w-[300px] bg-white rounded-lg shadow-xl border border-gray-100 py-6 px-6 animate-fadeIn">
+                      <div className="absolute left-0 w-[300px] bg-white rounded-lg shadow-xl border border-gray-100 px-6 animate-fadeIn">
                         <div className="space-y-6">
                           {item.dropdown.map((category, catIndex) => (
                             <div key={catIndex} className="space-y-2">
-                              <h3 className="text-sm font-semibold text-[#074a6b] uppercase tracking-wider border-b border-gray-200 pb-1">
+                              <h3 className="text-sm font-semibold text-[#074a6b] uppercase tracking-wider pb-1">
                                 {category.category}
                               </h3>
                               <ul className="space-y-1">

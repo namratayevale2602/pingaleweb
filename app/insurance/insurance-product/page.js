@@ -1,13 +1,12 @@
-
 import Link from "next/link";
 import PageSEO from "@/components/seo/PageSEO";
 import JsonLd from "@/components/seo/JsonLd";
-import MutualFundExplainer from "@/components/mutualfund/MutualFund";
+import LifeInsuranceProducts from "@/components/insurance/life-insurance-products";
 
 export default function Calculators() {
 
   const { metadata, jsonLdData } = PageSEO({ 
-    pageKey: 'mutualFund',
+    pageKey: 'insuranceProduct',
     includeJsonLd: true
   })
 
@@ -19,7 +18,7 @@ export default function Calculators() {
       ))}
 
       <main>
-        <MutualFundExplainer />
+        <LifeInsuranceProducts />
        
       </main>
 
@@ -28,6 +27,6 @@ export default function Calculators() {
 }
 
 export async function generateMetadata() {
-  const { metadata } = PageSEO({ pageKey: 'mutualFund' })
+  const { metadata } = PageSEO({ pageKey: 'insuranceProduct' })
   return metadata
 }
