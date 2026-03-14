@@ -134,7 +134,7 @@ const WhyTrustUs = () => {
             <span className="text-sm font-medium">Why Trust Us</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl mb-6">
+          <h2 className="text-4xl md:text-5xl mb-6">
             <span className="text-gray-800">We don't sell products.</span>
             <br />
             <span className="bg-[#074a6b] bg-clip-text text-transparent">

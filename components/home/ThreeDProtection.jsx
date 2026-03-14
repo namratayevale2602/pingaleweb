@@ -98,10 +98,10 @@ const ThreeDProtection = () => {
           </div>
           
           <h2 className="text-4xl md:text-5xl mb-4">
-            <span className="text-[#074a6b]">Protecting Your
+            <span className="text-gray-800">Protecting Your </span>
             <br />
             
-              Life's Greatest Stories</span>
+              <span className="text-[#074a6b]">Life's Greatest Stories</span>
            
           </h2>
           

@@ -9,19 +9,19 @@ const Hero = () => {
   const slides = [
     {
       id: 1,
-      image: '/images/insuarance1.png',
+      image: '/hero/familyinsurance.jpg',
       alt: 'Family protecting their home',
      title: 'Health & Wellness'
     },
     {
       id: 2,
-      image: '/images/insuarance2.png',
+      image: '/hero/invesment.jpg',
       alt: 'Business insurance',
       title: 'Vehicle Security'
     },
     {
       id: 3,
-      image: '/images/insuarance3.png',
+      image: '/hero/carinsurance.jpg',
       alt: 'Health insurance',
        title: 'Family Protection'
     },
@@ -31,8 +31,8 @@ const Hero = () => {
   const features = [
     { icon: Shield, text: '100% Secure Coverage' },
     { icon: Heart, text: 'Care & Support' },
-    { icon: Users, text: '1M+ Happy Clients' },
-    { icon: Clock, text: '24/7 Claim Support' }
+    // { icon: Users, text: '1M+ Happy Clients' },
+    { icon: Clock, text: 'Claims Support' }
   ];
 
   useEffect(() => {
@@ -68,16 +68,14 @@ const Hero = () => {
             {/* Badge */}
             <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2">
               <Shield className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium">Trusted Insurance Partner Since 1995</span>
+              <span className="text-sm font-medium">Securing 39000+ customers since 1993</span>
             </div>
 
             {/* Main Heading */}
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl leading-tight">
-                Protect What
-                <span className="block text-transparent bg-clip-text bg-linear-to-r from-yellow-300 to-yellow-100">
+                Protect What <br />
                   Matters Most
-                </span>
               </h1>
               <p className="text-lg sm:text-xl text-white/90 max-w-lg">
                 Comprehensive insurance solutions tailored to your needs. 
@@ -101,7 +99,7 @@ const Hero = () => {
               className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold 
                 hover:bg-white/10 hover:border-white transition-all duration-300
                 backdrop-blur-sm">
-                Learn More
+                Talk To An Adviser
               </button>
             </div>
 

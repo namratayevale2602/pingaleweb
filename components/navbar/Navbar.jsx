@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
@@ -8,68 +8,56 @@ import pigalelogo from "../../public/pinglelogo.jpeg"
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled]);
 
   const navItems = [
     {
       title: 'Life Insurance',
       dropdown: [
         {
-          // category: 'Auto Insurance',
           items: [
             { name: 'Why Life Insurance?', slug: 'insurance' },
             { name: 'Life Insurance Product', slug: 'insurance/insurance-product' },
-            // { name: 'RV Insurance', slug: 'insurance/rv-insurance' }
           ]
         },
-        // {
-        //   category: 'Home Insurance',
-        //   items: [
-        //     { name: 'Homeowners Insurance', slug: 'insurance/homeowners-insurance' },
-        //     { name: 'Renters Insurance', slug: 'insurance/renters-insurance' },
-        //     { name: 'Condo Insurance', slug: 'insurance/condo-insurance' }
-        //   ]
-        // },
-        // {
-        //   category: 'Life & Health',
-        //   items: [
-        //     { name: 'Life Insurance', slug: 'insurance/life-insurance' },
-        //     { name: 'Health Insurance', slug: 'insurance/health-insurance' },
-        //     { name: 'Disability Insurance', slug: 'insurance/disability-insurance' }
-        //   ]
-        // }
       ]
     },
     {
       title: 'Mutual Fund',
       dropdown: [
         {
-          // category: 'Small Business',
           items: [
             { name: 'Why Mutual Fund?', slug: 'mutual-fund' },
             { name: 'Mutual Fund Product', slug: 'mutual-fund/mutualfund-product' },
           ]
         },
-        // {
-        //   category: 'Commercial',
-        //   items: [
-        //     { name: 'Commercial Auto', slug: 'insurance/commercial-auto' },
-        //     { name: 'Commercial Property', slug: 'insurance/commercial-property' },
-        //     { name: 'Cyber Liability', slug: 'insurance/cyber-liability' }
-        //   ]
-        // }
       ]
     },
-    // {
-    //   title: 'Resources',
-    //   dropdown: [
-    //     {
-    //       category: 'Learn',
-    //       items: [
-    //         { name: 'Insurance Guide', slug: 'insuranceguide' },
-    //       ]
-    //     }
-    //   ]
-    // },
+    {
+      title: 'Genral Insurance',
+      dropdown: [
+        {
+          items: [
+            { name: 'Why Genral Insurance?', slug: 'general-insurance' },
+            { name: 'Genral Insurance Product', slug: 'general-insurance/genralinsurance-product' },
+          ]
+        },
+      ]
+    },
     {
       title: 'About Us',
       link: '/aboutus'
@@ -93,13 +81,19 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className={`bg-white sticky top-0 z-50 transition-all duration-300 ${
+      scrolled ? 'py-0' : 'py-0'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20 md:h-30">
+        <div className={`flex justify-between items-center transition-all duration-300 ${
+          scrolled ? 'h-16 md:h-16' : 'h-20 md:h-20'
+        }`}>
           {/* Logo Section */}
           <div className="shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="relative w-20 h-20 md:w-30 md:h-30">
+              <div className={`relative transition-all duration-300 ${
+                scrolled ? 'w-16 h-16 md:w-16 md:h-16' : 'w-20 h-20 md:w-20 md:h-20'
+              }`}>
                 <Image
                   src={pigalelogo}
                   alt="Pingle Insurance"
@@ -123,7 +117,9 @@ const Navbar = () => {
                 {item.dropdown ? (
                   <>
                     <button
-                      className="flex items-center space-x-1 text-[#074a6b] hover:text-[#2ba5ea] font-medium py-2 px-3 rounded-md transition-colors duration-200 whitespace-nowrap"
+                      className={`flex items-center space-x-1 text-[#074a6b] hover:text-[#2ba5ea] font-medium rounded-md transition-all duration-200 whitespace-nowrap ${
+                        scrolled ? 'py-1.5 px-2 text-sm' : 'py-2 px-3 text-base'
+                      }`}
                     >
                       <span>{item.title}</span>
                       <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${
@@ -131,7 +127,7 @@ const Navbar = () => {
                       }`} />
                     </button>
 
-                    {/* Mega Dropdown - Without grid cols */}
+                    {/* Mega Dropdown */}
                     {activeDropdown === index && (
                       <div className="absolute left-0 w-[300px] bg-white rounded-lg shadow-xl border border-gray-100 px-6 animate-fadeIn">
                         <div className="space-y-6">
@@ -146,6 +142,7 @@ const Navbar = () => {
                                     <Link
                                       href={`/${subItem.slug}`}
                                       className="text-gray-600 hover:text-[#2ba5ea] hover:pl-2 transition-all duration-200 flex items-center group py-1"
+                                      onClick={() => setActiveDropdown(null)}
                                     >
                                       <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100 mr-1 transition-opacity" />
                                       {subItem.name}
@@ -162,7 +159,9 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href={item.link}
-                    className="inline-block text-[#074a6b] hover:text-[#2ba5ea] font-medium py-2 px-3 rounded-md transition-colors duration-200 whitespace-nowrap"
+                    className={`inline-block text-[#074a6b] hover:text-[#2ba5ea] font-medium rounded-md transition-colors duration-200 whitespace-nowrap ${
+                      scrolled ? 'py-1.5 px-2 text-sm' : 'py-2 px-3 text-base'
+                    }`}
                   >
                     {item.title}
                   </Link>

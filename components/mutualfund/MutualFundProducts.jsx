@@ -797,8 +797,8 @@ const MutualFundProducts = () => {
                 <tr>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Fund Type</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Risk</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns (p.a.)</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Horizon</th>
+                  {/* <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns (p.a.)</th> */}
+                  {/* <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Horizon</th> */}
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Suitable For</th>
                 </tr>
               </thead>
@@ -815,8 +815,8 @@ const MutualFundProducts = () => {
                         {cat.risk}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm font-semibold text-green-600">{cat.return}</td>
-                    <td className="px-4 py-3 text-sm">{cat.horizon}</td>
+                    {/* <td className="px-4 py-3 text-sm font-semibold text-green-600">{cat.return}</td>
+                    <td className="px-4 py-3 text-sm">{cat.horizon}</td> */}
                     <td className="px-4 py-3 text-sm text-gray-600">{cat.suitableFor}</td>
                   </tr>
                 ))}
@@ -896,8 +896,8 @@ const MutualFundProducts = () => {
                 <tr>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Fund Type</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Risk</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Horizon</th>
+                  {/* <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns</th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Horizon</th> */}
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Best For</th>
                 </tr>
               </thead>
@@ -914,8 +914,8 @@ const MutualFundProducts = () => {
                         {cat.risk}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm font-semibold text-[#0080bf]">{cat.return}</td>
-                    <td className="px-4 py-3 text-sm">{cat.horizon}</td>
+                    {/* <td className="px-4 py-3 text-sm font-semibold text-[#0080bf]">{cat.return}</td>
+                    <td className="px-4 py-3 text-sm">{cat.horizon}</td> */}
                     <td className="px-4 py-3 text-sm text-gray-600">{cat.suitableFor}</td>
                   </tr>
                 ))}
@@ -995,8 +995,8 @@ const MutualFundProducts = () => {
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Fund Type</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Allocation</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Risk</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Horizon</th>
+                  {/* <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns</th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Horizon</th> */}
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
@@ -1016,8 +1016,8 @@ const MutualFundProducts = () => {
                         {cat.risk}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-sm font-semibold text-green-600">{cat.return}</td>
-                    <td className="px-4 py-3 text-sm">{cat.horizon}</td>
+                    {/* <td className="px-4 py-3 text-sm font-semibold text-green-600">{cat.return}</td>
+                    <td className="px-4 py-3 text-sm">{cat.horizon}</td> */}
                   </tr>
                 ))}
               </tbody>
@@ -1242,9 +1242,9 @@ const MutualFundProducts = () => {
                   <p className="font-semibold text-[#074a6b]">{fund.fund}</p>
                   <p className="text-sm text-gray-500">AUM: {fund.aum}</p>
                 </div>
-                <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                {/* <div className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
                   {fund.returns}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
@@ -1258,7 +1258,7 @@ const MutualFundProducts = () => {
                 <tr>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Option</th>
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Lock-in</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns</th>
+                  {/* <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Returns</th> */}
                   <th className="px-4 py-3 text-left text-sm font-semibold text-[#074a6b]">Tax Treatment</th>
                 </tr>
               </thead>
@@ -1267,7 +1267,7 @@ const MutualFundProducts = () => {
                   <tr key={index} className="hover:bg-gray-50">
                     <td className="px-4 py-3 text-sm font-medium text-[#074a6b]">{item.option}</td>
                     <td className="px-4 py-3 text-sm">{item.lockIn}</td>
-                    <td className="px-4 py-3 text-sm">{item.returns}</td>
+                    {/* <td className="px-4 py-3 text-sm">{item.returns}</td> */}
                     <td className="px-4 py-3 text-sm text-[#0080bf]">{item.tax}</td>
                   </tr>
                 ))}
@@ -1346,7 +1346,7 @@ const MutualFundProducts = () => {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-[#074a6b] to-[#1a729e] text-white p-6 rounded-lg">
+        {/* <div className="bg-gradient-to-r from-[#074a6b] to-[#1a729e] text-white p-6 rounded-lg">
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FaMoneyBillWave className="mr-2" /> Savings Account vs Liquid Fund (Annual Returns)
           </h3>
@@ -1372,7 +1372,7 @@ const MutualFundProducts = () => {
               </tbody>
             </table>
           </div>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
@@ -1443,14 +1443,14 @@ const MutualFundProducts = () => {
               <div key={index} className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition">
                 <h4 className="font-semibold text-[#074a6b] mb-2">{cat.name}</h4>
                 <p className="text-sm text-gray-600 mb-2">Exposure: {cat.exposure}</p>
-                <div className="flex justify-between text-xs">
+                {/* <div className="flex justify-between text-xs">
                   <span className="bg-[rgb(208,239,255)] text-[#0080bf] px-2 py-1 rounded">Returns: {cat.returns}</span>
                   <span className={`px-2 py-1 rounded ${
                     cat.risk === 'High' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'
                   }`}>
                     Risk: {cat.risk}
                   </span>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
@@ -1536,7 +1536,7 @@ const MutualFundProducts = () => {
                 </div>
                 <p className="text-sm text-gray-600 mb-2">Focus: {cat.focus}</p>
                 <div className="flex justify-between items-center mt-2">
-                  <span className="text-sm font-semibold text-green-600">{cat.returns}</span>
+                  {/* <span className="text-sm font-semibold text-green-600">{cat.returns}</span> */}
                   <span className={`text-xs px-2 py-1 rounded-full ${
                     cat.risk === 'High' ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
                   }`}>

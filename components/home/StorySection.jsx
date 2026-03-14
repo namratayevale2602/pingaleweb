@@ -76,7 +76,7 @@ const insuranceTypes = [
   { icon: Users, label: "Family Floater", desc: "Cover entire family in one plan" },
 ];
 
-const HeroStory = () => {
+const   HeroStory = () => {
   const [activeStage, setActiveStage] = React.useState(0);
 
   return (
@@ -100,9 +100,16 @@ const HeroStory = () => {
                 Life is Full of{" "}
                 <span className="text-[#074a6b]">Surprises</span>
                 <br />
-                <span className="bg-[#0080bf] bg-clip-text text-transparent">
-                  Be Prepared, Not Scared
+                <span className=" bg-clip-text text-gray-800">
+                  Be{" "}
                 </span>
+                 <span className=" bg-clip-text text-[#074a6b]">
+                   Prepared,
+                </span>
+                <span className=" bg-clip-text text-gray-800">
+                   Not
+                </span>
+                <span className="text-[#074a6b]"> Scared</span>
               </h1>
               
               <p className="mt-6 text-xl text-gray-800 max-w-lg">
@@ -142,7 +149,7 @@ const HeroStory = () => {
             >
               <div className="relative rounded-2xl overflow-hidden ">
                 <img 
-                  src="/images/insurancewomen.png"
+                  src="/images/insurance.jpg"
                   alt="Family protection"
                   className="w-full h-[500px] object-cover"
                 />
@@ -186,7 +193,7 @@ const HeroStory = () => {
                   </div>
 
                   {/* Main Headline */}
-                  <h2 className={`text-3xl md:text-4xl lg:text-5xl text-[#074a6b] leading-tight`}>
+                  <h2 className={`text-3xl md:text-4xl text-[#074a6b] leading-tight`}>
                     {stage.concept}
                   </h2>
 
@@ -196,7 +203,7 @@ const HeroStory = () => {
                   </p>
 
                   {/* Key Numbers Card */}
-                  <div className={`mt-6 bg-[rgb(208,239,255)] rounded-xl p-5`}>
+                  <div className={`mt-6 rounded-xl p-5`}>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <div className=" text-gray-800">What you get</div>
@@ -210,7 +217,7 @@ const HeroStory = () => {
                   </div>
 
                   {/* Real Story */}
-                  <div className="mt-6 flex items-start gap-3 bg-[rgb(208,239,255)] rounded-xl p-4">
+                  <div className="mt-6 flex items-start gap-3 rounded-xl p-4">
                     <Users className="w-5 h-5 text-[#0080bf] flex-shrink-0 mt-1" />
                     <p className="text-gray-800">{stage.story}</p>
                   </div>

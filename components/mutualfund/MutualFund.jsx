@@ -108,12 +108,6 @@ const MutualFundExplainer = () => {
           description: 'ELSS offers tax saving under 80C; equity funds have LTCG tax benefits'
         }
       ],
-      stats: [
-        { value: '₹41L Cr+', label: 'Industry AUM (Dec 2023)' },
-        { value: '14.5 Cr+', label: 'Folio Count' },
-        { value: '15-18%', label: 'Long-term equity returns' },
-        { value: '7-9%', label: 'Debt fund returns' }
-      ]
     },
     types: {
       title: 'Types of Mutual Funds',
@@ -630,14 +624,7 @@ const MutualFundExplainer = () => {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
-              {content['why-invest'].stats.map((stat, index) => (
-                <div key={index} className="bg-white border border-gray-200 p-2 rounded-lg text-center">
-                  <div className="text-sm font-bold text-[#0080bf]">{stat.value}</div>
-                  <div className="text-[10px] text-gray-500">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+           
           </div>
         </section>
 
@@ -763,17 +750,7 @@ const MutualFundExplainer = () => {
               ))}
             </div>
 
-            <div className="bg-blue-50 bg-opacity-50 p-3 rounded-lg">
-              <h4 className="font-semibold text-[#074a6b] text-xs mb-1"> Best Use Cases:</h4>
-              <ul className="space-y-1">
-                {content.stp.useCases.map((use, index) => (
-                  <li key={index} className="flex items-start text-[10px] text-gray-800">
-                    <span className="mr-1">•</span>
-                    {use}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            
           </div>
         </section>
 
@@ -960,14 +937,7 @@ const MutualFundExplainer = () => {
               <p className="text-[10px]">Total withdrawn: ₹60L, Remaining: ~₹45L</p>
             </div>
 
-            <h3 className="font-semibold text-[#074a6b] text-sm mb-2">Best Use Cases:</h3>
-            <div className="flex flex-wrap gap-1 mb-3">
-              {content.swp.useCases.map((use, index) => (
-                <span key={index} className="bg-gray-100 text-[#074a6b] text-[10px] px-2 py-1 rounded-full">
-                  {use}
-                </span>
-              ))}
-            </div>
+            
 
            
           </div>
@@ -999,14 +969,7 @@ const MutualFundExplainer = () => {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {currentContent.stats.map((stat, index) => (
-                <div key={index} className="bg-white border border-gray-200 p-4 rounded-lg text-center">
-                  <div className="text-2xl font-bold text-[#0080bf]">{stat.value}</div>
-                  <div className="text-sm text-gray-500">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            
           </div>
         );
 
@@ -1117,16 +1080,7 @@ const MutualFundExplainer = () => {
               </div>
             </div>
 
-            <div className="bg-blue-50 bg-opacity-50 p-5 rounded-lg">
-              <h4 className="font-semibold text-[#074a6b] mb-3">Best Use Cases</h4>
-              <div className="flex flex-wrap gap-2">
-                {currentContent.useCases.map((use, index) => (
-                  <span key={index} className="bg-white text-[#0080bf] text-sm px-3 py-1 rounded-full border border-[#0080bf]">
-                    {use}
-                  </span>
-                ))}
-              </div>
-            </div>
+            
           </div>
         );
 
@@ -1196,42 +1150,7 @@ const MutualFundExplainer = () => {
               ))}
             </div>
 
-            <div>
-              <h3 className="text-xl font-semibold text-[#074a6b] mb-4">ELSS vs Other Tax Saving Options</h3>
-              <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-                  <thead className="bg-gray-50">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Option</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Lock-in</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Returns</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Tax Treatment</th>
-                      <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Risk</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-200">
-                    {currentContent.comparison.map((item, index) => (
-                      <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-sm font-medium text-[#074a6b]">{item.option}</td>
-                        <td className="px-4 py-3 text-sm">{item.lockIn}</td>
-                        <td className="px-4 py-3 text-sm">{item.returns}</td>
-                        <td className="px-4 py-3 text-sm">{item.taxTreatment}</td>
-                        <td className="px-4 py-3 text-sm">
-                          <span className={`px-2 py-1 rounded-full text-xs ${
-                            item.risk === 'High' ? 'bg-red-100 text-red-700' :
-                            item.risk === 'Moderate-High' ? 'bg-orange-100 text-orange-700' :
-                            item.risk === 'Moderate' ? 'bg-yellow-100 text-yellow-700' :
-                            'bg-green-100 text-green-700'
-                          }`}>
-                            {item.risk}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+           
 
             <div className="bg-blue-50 p-5 rounded-lg">
               <h4 className="font-semibold text-[#0080bf] mb-3 flex items-center">
@@ -1307,7 +1226,7 @@ const MutualFundExplainer = () => {
                 </div>
               </div>
 
-              <div className="bg-green-50 p-5 rounded-lg">
+              <div className="bg-blue-50 p-5 rounded-lg">
                 <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
                   <FaCheckCircle className="mr-2 text-green-600" /> Fixed Deposits
                 </h3>
@@ -1354,7 +1273,7 @@ const MutualFundExplainer = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {currentContent.features.map((feature, index) => (
-                <div key={index} className="bg-teal-50 p-5 rounded-lg">
+                <div key={index} className="bg-blue-50 p-5 rounded-lg">
                   <div className="text-3xl mb-3 text-[#1a729e]">{feature.icon}</div>
                   <h3 className="font-semibold text-[#0080bf] mb-2">{feature.title}</h3>
                   <p className="text-gray-800 text-sm">{feature.description}</p>

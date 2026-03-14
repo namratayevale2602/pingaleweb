@@ -48,7 +48,6 @@ const InsuranceExplainer = () => {
   { id: "types", label: "Types Of Insurance", icon: <FaListAlt /> },
   { id: "benefits", label: "Benefits Of Insurance", icon: <FaStar /> },
   { id: "importance", label: "Why Is It Important?", icon: <FaShieldAlt /> },
-  { id: "buy", label: "What To Buy", icon: <FaShoppingCart /> },
 ];
 
   const content = {
@@ -73,10 +72,6 @@ const InsuranceExplainer = () => {
           description: 'Create a lasting legacy and provide tax-efficient wealth transfer'
         }
       ],
-      stats: [
-        { value: '54%', label: 'of Americans have life insurance' },
-        { value: '40%', label: 'would struggle financially within 6 months' }
-      ]
     },
     offer: {
   title: "What Does It Offer?",
@@ -132,19 +127,7 @@ const InsuranceExplainer = () => {
           bestFor: 'Estate planning, guaranteed growth seekers'
         },
         {
-          type: 'Universal Life Insurance',
-          description: 'Flexible premiums with adjustable coverage',
-          features: ['Flexible payments', 'Adjustable death benefit', 'Interest-account growth'],
-          bestFor: 'Those needing flexibility in payments'
-        },
-        {
-          type: 'Variable Life Insurance',
-          description: 'Investment component with market participation',
-          features: ['Market-linked returns', 'Investment control', 'Potential higher growth'],
-          bestFor: 'Experienced investors seeking growth'
-        },
-        {
-          type: 'Indexed Universal Life',
+          type: 'ULIP',
           description: 'Growth tied to market indexes with downside protection',
           features: ['Index-linked returns', 'Principal protection', 'Floor guarantees'],
           bestFor: 'Growth seekers wanting protection'
@@ -188,7 +171,7 @@ const InsuranceExplainer = () => {
     },
     {
       icon: <FaUniversity />,
-      title: "Creditor Protection",
+      title: "Credit Protection",
       description:
         "Life insurance often has protection from creditors in many states",
     },
@@ -210,7 +193,19 @@ importance: {
       icon: <FaUsers />,
       title: "Family Protection",
       description:
-        "47% of U.S. adults would have trouble covering unexpected $400 expense without insurance",
+        "adults would have trouble covering unexpected expense without insurance",
+    },
+    {
+      icon: <FaCreditCard />,
+      title: "Loan Options",
+      description:
+        "Borrow against cash value at competitive rates without credit checks",
+    },
+    {
+      icon: <FaCreditCard />,
+      title: "Best Support After Retirement",
+      description:
+        "After Retirement gives financial support",
     },
     {
       icon: <FaHome />,
@@ -247,49 +242,7 @@ importance: {
     text: "Life insurance isn't for the people who die. It's for the people they leave behind.",
     author: "Dave Ramsey",
   },
-},
-    buy: {
-      title: 'What To Buy',
-      description: 'Selecting the right insurance depends on your unique situation, goals, and stage of life.',
-      guides: [
-        {
-          stage: 'Young & Single (20s-30s)',
-          recommendation: 'Term Life Insurance',
-          coverage: '10-15x annual income',
-          reasoning: 'Low-cost protection while building career, covering student loans, and starting savings'
-        },
-        {
-          stage: 'New Families (30s-40s)',
-          recommendation: 'Term Life + Small Permanent Policy',
-          coverage: '15-20x annual income',
-          reasoning: 'Protect growing family needs, start building cash value for future goals'
-        },
-        {
-          stage: 'Established Families (40s-50s)',
-          recommendation: 'Permanent Insurance Mix',
-          coverage: '10-15x annual income',
-          reasoning: 'Lock in insurability, maximize cash value accumulation, estate planning begins'
-        },
-        {
-          stage: 'Pre-Retirement (50s-60s)',
-          recommendation: 'Universal/Indexed Universal Life',
-          coverage: '5-10x annual income',
-          reasoning: 'Catch-up savings, tax-efficient retirement income, long-term care options'
-        },
-        {
-          stage: 'Retired (60s+)',
-          recommendation: 'Final Expense + Existing Coverage',
-          coverage: 'Cover final expenses + leave legacy',
-          reasoning: 'Cover burial costs, leave tax-free inheritance, charitable giving'
-        }
-      ],
-      tips: [
-        'Buy sooner rather than later - premiums increase with age',
-        'Consider your debt, income, and future obligations',
-        'Look beyond employer coverage - it often ends when you leave',
-        'Work with an independent agent to compare multiple carriers'
-      ]
-    }
+}
   };
 
   // Render all sections for mobile view
@@ -314,14 +267,7 @@ importance: {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              {content.why.stats.map((stat, index) => (
-                <div key={index} className="bg-white border border-gray-200 p-3 rounded-lg text-center">
-                  <div className="text-2xl font-bold text-[#0080bf]">{stat.value}</div>
-                  <div className="text-xs text-gray-500">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            
           </div>
         </section>
 
@@ -432,39 +378,7 @@ importance: {
           </div>
         </section>
 
-        {/* What To Buy */}
-        <section id="buy" className="scroll-mt-4">
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-2xl font-bold text-[#074a6b] mb-4 flex items-center">
-              <span className="text-3xl mr-3"><FaShoppingCart /></span>
-              What To Buy
-            </h2>
-            <p className="text-gray-800 mb-6">{content.buy.description}</p>
-            
-            <div className="space-y-4 mb-6">
-              {content.buy.guides.map((guide, index) => (
-                <div key={index} className="border border-gray-200 p-4 rounded-lg">
-                  <h3 className="font-semibold text-[#0080bf] mb-2">{guide.stage}</h3>
-                  <p className="text-gray-800 font-medium text-sm mb-1">{guide.recommendation}</p>
-                  <p className="text-gray-800 text-xs mb-2">Coverage: {guide.coverage}</p>
-                  <p className="text-gray-500 text-xs">{guide.reasoning}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h3 className="font-semibold text-[#0080bf] mb-2 text-sm">Pro Tips</h3>
-              <ul className="space-y-2">
-                {content.buy.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-xs text-gray-800">
-                    <span className="mr-2">•</span>
-                    {tip}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
+       
       </div>
     );
   };
@@ -491,14 +405,7 @@ importance: {
               ))}
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mt-6">
-              {currentContent.stats.map((stat, index) => (
-                <div key={index} className="bg-white border border-gray-200 p-4 rounded-lg text-center">
-                  <div className="text-3xl font-bold text-[#0080bf]">{stat.value}</div>
-                  <div className="text-sm text-gray-800">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+            
           </div>
         );
 
@@ -597,50 +504,7 @@ importance: {
           </div>
         );
 
-      case 'buy':
-        return (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-3xl font-bold text-[#074a6b] mb-4">{currentContent.title}</h2>
-              <p className="text-lg text-gray-800">{currentContent.description}</p>
-            </div>
-            
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Life Stage</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Recommendation</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Coverage</th>
-                    <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Why</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {currentContent.guides.map((guide, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
-                      <td className="px-4 py-3 text-sm font-medium text-gray-900">{guide.stage}</td>
-                      <td className="px-4 py-3 text-sm text-[#0080bf]">{guide.recommendation}</td>
-                      <td className="px-4 py-3 text-sm text-gray-800">{guide.coverage}</td>
-                      <td className="px-4 py-3 text-sm text-gray-500">{guide.reasoning}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="bg-yellow-50 border border-yellow-200 p-5 rounded-lg">
-              <h3 className="font-semibold text-yellow-800 mb-3">💡 Pro Tips</h3>
-              <ul className="space-y-2">
-                {currentContent.tips.map((tip, index) => (
-                  <li key={index} className="flex items-start text-sm text-yellow-700">
-                    <span className="mr-2">•</span>
-                    {tip}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        );
+     
 
       default:
         return null;

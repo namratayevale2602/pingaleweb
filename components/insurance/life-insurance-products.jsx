@@ -515,7 +515,7 @@ const LifeInsuranceProducts = () => {
         { type: 'Life Annuity', description: 'Pension for life, stops after death', payout: 'Highest' },
         { type: 'Joint Life', description: 'Pension for you and spouse', payout: 'Medium' },
         { type: 'With Return of Purchase Price', description: 'Purchase price returned to nominee after death', payout: 'Lower' },
-        { type: 'Increasing Annuity', description: 'Pension increases by 3% annually', payout: 'Starts lower, grows' }
+        { type: 'Increasing Annuity', description: 'Pension increases annually', payout: 'Starts lower, grows' }
       ],
       pros: [
         'Regular post-retirement income',
@@ -816,29 +816,7 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Term vs Whole Life</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Feature</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Term Insurance</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Whole Life</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {product.comparison.map((item, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-sm font-medium text-gray-800">{item.feature}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{item.term}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{item.wholeLife}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+      
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
@@ -910,33 +888,6 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-[#074a6b] to-[#1a729e] text-white p-6 rounded-lg">
-          <h3 className="text-xl font-semibold mb-4 flex items-center">
-            <FaPiggyBank className="mr-2" /> Example Illustration
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <div className="text-center">
-              <p className="text-xs opacity-75">Age</p>
-              <p className="text-lg font-bold">{product.example.age}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs opacity-75">Term</p>
-              <p className="text-lg font-bold">{product.example.term}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs opacity-75">Premium</p>
-              <p className="text-lg font-bold">{product.example.premium}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs opacity-75">Sum Assured</p>
-              <p className="text-lg font-bold">{product.example.sumAssured}</p>
-            </div>
-            <div className="text-center">
-              <p className="text-xs opacity-75">Maturity</p>
-              <p className="text-lg font-bold">{product.example.maturityAmount}</p>
-            </div>
-          </div>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
@@ -1008,78 +959,6 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Fund Options</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {product.fundOptions.map((fund, index) => (
-              <div key={index} className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition">
-                <h4 className="font-semibold text-[#074a6b] mb-2">{fund.type}</h4>
-                <div className="space-y-2 text-sm">
-                  <p><span className="text-gray-500">Risk:</span> 
-                    <span className={`ml-1 ${
-                      fund.risk === 'High' ? 'text-red-600' : 
-                      fund.risk === 'Moderate' ? 'text-orange-600' : 'text-green-600'
-                    }`}>{fund.risk}</span>
-                  </p>
-                  <p><span className="text-gray-500">Potential:</span> <span className="text-green-600">{fund.potential}</span></p>
-                  <p><span className="text-gray-500">Suitable:</span> {fund.suitable}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className='bg-blue-50 p-4 rounded-lg'>
-            <h3 className="text-lg font-semibold text-[#074a6b] mb-3">Charges in ULIP</h3>
-            <ul className=" p-4 rounded-lg space-y-2">
-              {product.charges.map((charge, idx) => (
-                <li key={idx} className="text-sm text-gray-800 flex items-start">
-                  <span className="text-red-500 mr-2">•</span>
-                  {charge}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-blue-50 p-4 rounded-lg">
-            <h3 className="text-lg font-semibold text-[#074a6b] mb-3">Tax Benefits</h3>
-            <p className="text-sm text-gray-700 mb-2 flex items-center">
-              <FaCheckCircle className="text-green-600 mr-2" /> Premium paid: Deduction u/s 80C
-            </p>
-            <p className="text-sm text-gray-700 flex items-center">
-              <FaCheckCircle className="text-green-600 mr-2" /> Maturity proceeds: Tax-free u/s 10(10D)
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-green-50 p-5 rounded-lg">
-            <h3 className="text-lg font-semibold text-green-800 mb-3 flex items-center">
-              <FaCheckCircle className="mr-2 text-green-600" /> Pros
-            </h3>
-            <ul className="space-y-2">
-              {product.pros.map((pro, idx) => (
-                <li key={idx} className="flex items-start text-sm text-gray-700">
-                  <span className="text-green-500 mr-2">✓</span>
-                  {pro}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-red-50 p-5 rounded-lg">
-            <h3 className="text-lg font-semibold text-red-800 mb-3 flex items-center">
-              <FaTimesCircle className="mr-2 text-red-600" /> Cons
-            </h3>
-            <ul className="space-y-2">
-              {product.cons.map((con, idx) => (
-                <li key={idx} className="flex items-start text-sm text-gray-700">
-                  <span className="text-red-500 mr-2">✗</span>
-                  {con}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
 
         <div className="bg-blue-50 p-5 rounded-lg">
           <h3 className="text-lg font-semibold text-[#0080bf] mb-2 flex items-center">
@@ -1122,7 +1001,7 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-[#074a6b] to-[#1a729e] text-white p-6 rounded-lg">
+        {/* <div className="bg-gradient-to-r from-[#074a6b] to-[#1a729e] text-white p-6 rounded-lg">
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FaMoneyBillWave className="mr-2" /> Payout Structure Example
           </h3>
@@ -1144,7 +1023,7 @@ const LifeInsuranceProducts = () => {
               <p className="text-sm font-bold">{product.payoutExample.maturity}</p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
@@ -1216,18 +1095,6 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Choose the Right Child Plan</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {product.planComparison.map((plan, index) => (
-              <div key={index} className="border border-gray-200 p-4 rounded-lg hover:shadow-md transition">
-                <h4 className="font-semibold text-[#074a6b] mb-2">{plan.type}</h4>
-                <p className="text-sm text-gray-800 mb-2">{plan.features}</p>
-                <p className="text-xs text-[#0080bf]">{plan.suitability}</p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
@@ -1299,29 +1166,7 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Annuity Options</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Option</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Description</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Payout</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {product.annuityOptions.map((option, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-sm font-medium text-[#074a6b]">{option.type}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{option.description}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{option.payout}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+       
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
@@ -1393,31 +1238,6 @@ const LifeInsuranceProducts = () => {
           ))}
         </div>
 
-        <div>
-          <h3 className="text-xl font-semibold text-[#074a6b] mb-4">Popular Riders</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full bg-white border border-gray-200 rounded-lg">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Rider Name</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Coverage</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Features</th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-gray-800">Cost</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200">
-                {product.riderDetails.map((rider, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 text-sm font-medium text-[#074a6b]">{rider.name}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{rider.coverage}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{rider.features}</td>
-                    <td className="px-4 py-3 text-sm text-gray-800">{rider.cost}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-green-50 p-5 rounded-lg">
