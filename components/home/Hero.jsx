@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Shield, Heart, Users, Clock } from 'lucide-react';
+import PopupForm from '../popup/PopupForm';
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+   const [isPopupOpen, setIsPopupOpen] = useState(false);
   
   const slides = [
     {
@@ -50,7 +52,16 @@ const Hero = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
+   <>
     <section className="relative bg-linear-to-br from-[#074a6b] to-[#2ba5ea] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
@@ -84,27 +95,29 @@ const Hero = () => {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <button 
-              onClick={() => window.location.href = "/contactus"}
-              className="group bg-white text-[#074a6b] px-8 py-4 rounded-lg font-semibold 
-                hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300
-                flex items-center space-x-2">
+                onClick={() => window.location.href = "/contactus"}
+                className="group bg-white text-[#074a6b] px-8 py-2 md:px-8 md:py-4 rounded-lg font-semibold 
+                  hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300
+                  flex items-center justify-center space-x-2 w-full sm:w-auto"
+              >
                 <span>Get Quote</span>
                 <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </button>
               
               <button
-              onClick={() => window.location.href = "/calculators"}
-              className="border-2 border-white/30 text-white px-8 py-4 rounded-lg font-semibold 
-                hover:bg-white/10 hover:border-white transition-all duration-300
-                backdrop-blur-sm">
+                onClick={openPopup}
+                className="border-2 border-white/30 text-white px-8 py-2 md:px-8 md:py-4 rounded-lg font-semibold 
+                  hover:bg-white/10 hover:border-white transition-all duration-300
+                  backdrop-blur-sm flex items-center justify-center w-full sm:w-auto"
+              >
                 Talk To An Adviser
               </button>
             </div>
 
             {/* Features Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
+            <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 md:pt-8">
               {features.map((feature, index) => (
                 <div key={index} className="text-center">
                   <div className="inline-flex items-center justify-center w-12 h-12 
@@ -179,6 +192,9 @@ const Hero = () => {
         </svg>
       </div>
     </section>
+    {/* Popup Form */}
+      <PopupForm isOpen={isPopupOpen} onClose={closePopup} />
+   </>
   );
 };
 

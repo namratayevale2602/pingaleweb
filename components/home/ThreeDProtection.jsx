@@ -15,7 +15,6 @@ const protectionLayers = [
       name: "Sarah's Story",
       text: "When Sarah lost her husband at 42, his ₹1Cr life insurance became the bridge that kept their children's dreams alive.",
       age: 42,
-      cover: "₹1 Cr"
     },
     stat: {
       value: "63%",
@@ -37,7 +36,6 @@ const protectionLayers = [
       name: "Raj's Story",
       text: "A car accident changed Raj's life, but his disability cover ensured his family's lifestyle didn't.",
       age: 35,
-      cover: "₹75 L"
     },
     stat: {
       value: "1 in 4",
@@ -59,7 +57,6 @@ const protectionLayers = [
       name: "Meera's Story",
       text: "Cancer didn't ask for permission, but Meera's health insurance meant she could fight without financial worry.",
       age: 48,
-      cover: "₹50 L"
     },
     stat: {
       value: "14%",
@@ -178,8 +175,7 @@ const ThreeDProtection = () => {
                       <span className="font-medium">{layer.story.name}</span>
                       <span>•</span>
                       <span>Age {layer.story.age}</span>
-                      <span>•</span>
-                      <span className='text-[#074a6b]'>{layer.story.cover}</span>
+                     
                     </div>
                   </div>
 

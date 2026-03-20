@@ -25,38 +25,42 @@ const Navbar = () => {
   }, [scrolled]);
 
   const navItems = [
+    // {
+    //   title: 'Life Insurance',
+    //   dropdown: [
+    //     {
+    //       items: [
+    //         { name: 'Why Life Insurance?', slug: 'insurance' },
+    //         { name: 'Life Insurance Product', slug: 'insurance/insurance-product' },
+    //       ]
+    //     },
+    //   ]
+    // },
+    // {
+    //   title: 'Mutual Fund',
+    //   dropdown: [
+    //     {
+    //       items: [
+    //         { name: 'Why Mutual Fund?', slug: 'mutual-fund' },
+    //         { name: 'Mutual Fund Product', slug: 'mutual-fund/mutualfund-product' },
+    //       ]
+    //     },
+    //   ]
+    // },
+    // {
+    //   title: 'Genral Insurance',
+    //   dropdown: [
+    //     {
+    //       items: [
+    //         { name: 'Why Genral Insurance?', slug: 'general-insurance' },
+    //         { name: 'Genral Insurance Product', slug: 'general-insurance/genralinsurance-product' },
+    //       ]
+    //     },
+    //   ]
+    // },
     {
-      title: 'Life Insurance',
-      dropdown: [
-        {
-          items: [
-            { name: 'Why Life Insurance?', slug: 'insurance' },
-            { name: 'Life Insurance Product', slug: 'insurance/insurance-product' },
-          ]
-        },
-      ]
-    },
-    {
-      title: 'Mutual Fund',
-      dropdown: [
-        {
-          items: [
-            { name: 'Why Mutual Fund?', slug: 'mutual-fund' },
-            { name: 'Mutual Fund Product', slug: 'mutual-fund/mutualfund-product' },
-          ]
-        },
-      ]
-    },
-    {
-      title: 'Genral Insurance',
-      dropdown: [
-        {
-          items: [
-            { name: 'Why Genral Insurance?', slug: 'general-insurance' },
-            { name: 'Genral Insurance Product', slug: 'general-insurance/genralinsurance-product' },
-          ]
-        },
-      ]
+      title: 'Services',
+      link: '/services'
     },
     {
       title: 'About Us',

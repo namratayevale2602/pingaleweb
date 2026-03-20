@@ -17,6 +17,7 @@ import {
   CheckCircle,
   ArrowRight
 } from 'lucide-react';
+import Testimonials from './Testimonials';
 
 const AboutUs = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -85,50 +86,6 @@ const AboutUs = () => {
     { number: "₹500Cr+", label: "Wealth Managed", icon: TrendingUp }
   ];
 
-  // Testimonials
-  const testimonials = [
-    {
-      id: 1,
-      name: "Vikram Singh",
-      role: "Business Owner",
-      location: "Mumbai",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400&q=80",
-      content: "The team didn't just manage my money; they understood my business goals and personal dreams. My portfolio grew 40% in 2 years, but more importantly, I sleep peacefully knowing my family's future is secure.",
-      rating: 5,
-      highlight: "40% portfolio growth"
-    },
-    {
-      id: 2,
-      name: "Anita Desai",
-      role: "Doctor",
-      location: "Delhi",
-      image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400&q=80",
-      content: "As a doctor, I never had time for finances. They created a plan that protected my income, insured my practice, and still helped me save for my children's education. Truly life-changing advice.",
-      rating: 5,
-      highlight: "Complete financial security"
-    },
-    {
-      id: 3,
-      name: "Suresh Patel",
-      role: "IT Professional",
-      location: "Bangalore",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400&q=80",
-      content: "From confused investor to confident planner - that's my journey with them. They explained everything in plain English, no jargon. My only regret? Not starting earlier!",
-      rating: 5,
-      highlight: "Financial clarity achieved"
-    },
-    {
-      id: 4,
-      name: "Meera Krishnan",
-      role: "Homemaker & Investor",
-      location: "Chennai",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&h=400&q=80",
-      content: "They empowered me to take control of our family finances. Now I make informed decisions alongside my husband. The workshops they conducted were incredibly helpful.",
-      rating: 5,
-      highlight: "Financial independence"
-    }
-  ];
-
   // Awards
   const awards = [
     { name: "Best Financial Advisory 2023", issuer: "Economic Times", year: "2023" },
@@ -137,7 +94,10 @@ const AboutUs = () => {
   ];
 
   return (
-    <section className="about-us-section py-10 bg-white">
+    
+  <>
+
+  <section className="about-us-section py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -287,145 +247,15 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Testimonials Section */}
-        <div className="mb-20">
-          <div className="text-center mb-12">
-           
-            <h3 className="text-3xl text-gray-900 mb-4">What Our Clients Say</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Real stories from real people whose lives we've helped transform.
-            </p>
-          </div>
-
-          {/* Testimonial Carousel */}
-          <div className="relative">
-            <div className="grid lg:grid-cols-2 gap-6">
-              {/* Main Testimonial */}
-              <div className="lg:col-span-1">
-                <div className="bg-white rounded-3xl shadow-xl p-8 h-full relative overflow-hidden">
-                  {/* Quote Background */}
-                  <Quote className="absolute top-4 right-4 w-24 h-24 text-gray-100" />
-                  
-                  <div className="relative z-10">
-                    {/* Rating */}
-                    <div className="flex gap-1 mb-6">
-                      {[...Array(testimonials[activeTestimonial].rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-
-                    {/* Testimonial Content */}
-                    <p className="text-xl text-gray-700 mb-6 italic">
-                      "{testimonials[activeTestimonial].content}"
-                    </p>
-
-                    {/* Highlight Badge */}
-                    <div className="inline-block bg-[#0A4D6B]/10 px-4 py-2 rounded-full mb-6">
-                      <span className="text-sm text-[#0A4D6B]">
-                        ✦ {testimonials[activeTestimonial].highlight}
-                      </span>
-                    </div>
-
-                    {/* Author Info */}
-                    <div className="flex items-center gap-4">
-                      <img 
-                        src={testimonials[activeTestimonial].image}
-                        alt={testimonials[activeTestimonial].name}
-                        className="w-16 h-16 rounded-full object-cover border-4 border-white shadow-lg"
-                      />
-                      <div>
-                        <h4 className="text-lg text-gray-900">{testimonials[activeTestimonial].name}</h4>
-                        <p className="text-sm text-gray-500">{testimonials[activeTestimonial].role}</p>
-                        <p className="text-xs text-gray-400 flex items-center gap-1 mt-1">
-                          <MapPin className="w-3 h-3" /> {testimonials[activeTestimonial].location}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Testimonial Thumbnails */}
-              <div className="lg:col-span-1">
-                <div className="grid grid-cols-2 gap-4">
-                  {testimonials.map((testimonial, idx) => (
-                    <div
-                      key={testimonial.id}
-                      onClick={() => setActiveTestimonial(idx)}
-                      className={`bg-white rounded-xl p-4 shadow-md cursor-pointer transition-all duration-300 hover:shadow-xl ${
-                        activeTestimonial === idx ? 'ring-2 ring-[#0A4D6B] transform scale-105' : ''
-                      }`}
-                    >
-                      <div className="flex items-center gap-3 mb-2">
-                        <img 
-                          src={testimonial.image}
-                          alt={testimonial.name}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
-                        <div>
-                          <h5 className="font-semibold text-sm text-gray-900">{testimonial.name}</h5>
-                          <p className="text-xs text-gray-500">{testimonial.location}</p>
-                        </div>
-                      </div>
-                      <div className="flex gap-0.5 mb-2">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <Star key={i} className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                        ))}
-                      </div>
-                      <p className="text-xs text-gray-600 line-clamp-2">{testimonial.content.substring(0, 60)}...</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Navigation Dots */}
-            <div className="flex justify-center gap-2 mt-8">
-              {testimonials.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveTestimonial(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    activeTestimonial === idx ? 'w-8 bg-[#0A4D6B]' : 'bg-gray-300'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
+      
 
        
 
-        {/* Contact CTA */}
-        <div className="bg-white rounded-3xl border border-gray-200 p-8 text-center">
-          <h3 className="text-2xl text-gray-900 mb-4">Ready to Start Your Financial Journey?</h3>
-          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-            Meet our team of expert advisors and discover how we can help you achieve your financial goals.
-          </p>
-          
-          <div className="flex flex-wrap justify-center gap-6">
-            <button
-            onClick={() => window.location.href = "/contactus"}
-             className="group px-8 py-4 bg-[#1a729e] text-white rounded-full transition-all duration-300 flex items-center gap-2 shadow-lg hover:shadow-xl">
-              Schedule a Meeting
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2 text-gray-600">
-                <Phone className="w-4 h-4" />
-                <span>+91 12345 67890</span>
-              </div>
-              <div className="w-px h-6 bg-gray-300"></div>
-              <div className="flex items-center gap-2 text-gray-600">
-                <Mail className="w-4 h-4" />
-                <span>hello@finance.com</span>
-              </div>
-            </div>
-          </div>
-        </div>
+     
       </div>
     </section>
+    <Testimonials />
+    </>
   );
 };
 
