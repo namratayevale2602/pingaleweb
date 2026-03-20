@@ -98,7 +98,7 @@ export default function Services() {
       tagline: "Because their dreams don't end with you",
       icon: <FaShieldAlt className="text-4xl" />,
       description: "Protect your loved ones' financial future with comprehensive life coverage, ensuring they maintain their lifestyle even in your absence.",
-      image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/images/lifeinsurance.jpg",
       benefits: [
         { text: "Income replacement for family", icon: <FaUsers /> },
         { text: "Children's education secured", icon: <FaGraduationCap /> },
@@ -112,7 +112,7 @@ export default function Services() {
       tagline: "Grow your wealth, fulfill your dreams",
       icon: <FaChartLine className="text-4xl" />,
       description: "Grow your wealth through professionally managed diversified portfolios, tailored to your risk appetite and financial goals.",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/images/mutualfund.jpg",
       benefits: [
         { text: "Start with as low as ₹500", icon: <FaRupeeSign /> },
         { text: "Beat inflation over time", icon: <FaChartLine /> },
@@ -126,7 +126,7 @@ export default function Services() {
       tagline: "Life is unpredictable, we'll prepare you",
       icon: <FaUmbrella className="text-4xl" />,
       description: "Safeguard your assets - health, property, and vehicles - against unexpected events with comprehensive coverage plans.",
-      image: "https://images.unsplash.com/photo-1632833232459-5c6c3d7c0b0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image: "/images/genralinsurance.jpg",
       benefits: [
         { text: "Comprehensive health coverage", icon: <FaHospital /> },
         { text: "Critical illness protection", icon: <FaHeart /> },
@@ -214,16 +214,12 @@ export default function Services() {
 
           <div className="space-y-12">
             {services.map((service, index) => (
-              <Link 
-                href={`/services/${service.id}`} 
-                key={service.id}  // Use service.id instead of index
-                className="block"  // Add this to make the link take full width
-              >
                 <div 
+                key={service.id || index}
                   className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 bg-white rounded-2xl overflow-hidden transition-shadow cursor-pointer`}
                 >
                   {/* Image Side */}
-                  <div className="lg:w-1/2 relative h-64 lg:h-auto">
+                  <div className="lg:w-1/2 relative h-64 lg:h-95">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -262,7 +258,6 @@ export default function Services() {
                     </div>
                   </div>
                 </div>
-              </Link>
             ))}
           </div>
         </div>
